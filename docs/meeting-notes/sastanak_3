@@ -1,0 +1,54 @@
+STAVKE SASTANKA
+- ispuniti datoteke 1-Projekt.md i 2-Analiza-zahtjeva.md do predviđenog za 3. i 4. tjedan
+- ispuniti datoteku 3-Obrasci-uporabe dijagramima i popratnim opisima za pojedinačni dijagram
+
+## Točke za odluku
+- [ ] koji su obrasci uporabe ključni (popis UC-ova)
+- [ ] jesu li zahtjevi dobro podijeljeni: ima li suvišnih, treba li neke spojiti, nedostaju li neki
+- [ ] prioriteti zahtjeva
+- [ ] je li svaka pretpostavka u 2.4 ograničenje ili pretpostavka
+- [ ] tko piše koji dokument i koje obrasce uporabe
+
+
+## Predviđeno za tjedan 3 – početni zahtjevi, granice sustava, obrasci uporabe
+
+**1-Projekt.md**
+- [ ] 1.1 Problem i cilj: napisati problem i očekivanu korist (od nule)
+- [ ] 1.2 Ciljani korisnici i dionici: dodati dionike izvan sustava
+- [ ] 1.3 Granice projekta: obrazloženja za izuzeća (iznajmljivanje po satu, više tvrtki)
+- [ ] 1.4 Postojeći pristupi i opravdanost projekta (od nule)
+
+**2-Analiza-zahtjeva.md**
+- [ ] Pregledati sve funkcijske i nefunkcijske zahtjeve: odrediti jesu li neki suvišni, mogu li neki biti grupirani u jedan složeniji zahtjev te nedostaju li neki (prvo, prije prioriteta i sljedivosti)
+- [ ] 2.1 Funkcijski zahtjevi: prioritet i izvor za sve zahtjeve (po grupama)
+- [ ] 2.2 Nefunkcijski zahtjevi: prioritet i izvor za NF-01 do NF-08
+- [ ] 2.3 Dionici i akteri: dodati dionike izvan sustava (isti popis kao u 1.2)
+- [ ] 2.4 Ograničenja i pretpostavke: ID, tip (ograničenje ili pretpostavka) i izvor
+
+**3-Obrasci-uporabe.md**
+- [ ] 3.1 Pregledni dijagram obrazaca uporabe umetnut u dokument (slika i PlantUML izvor)
+- [ ] 3.2 Popis ključnih obrazaca uporabe (UC-ID, naziv, primarni akter, povezani zahtjevi)
+- [ ] 3.2 Za svaki ključni obrazac započeta tablica specifikacije
+- [ ] Primjeri iz predloška (CrisisMap) uklonjeni ili zamijenjeni vlastitima
+
+## Predviđeno za tjedan 4 – razrada i dorada
+
+**3-Obrasci-uporabe.md**
+- [ ] Razraditi ključne obrasce uporabe: glavni tijek i važni alternativni scenariji
+  - [ ] 3.2 Tablica specifikacije popunjena za svaki ključni obrazac uporabe
+  - [ ] 3.3 Provjera dosljednosti popunjena (zaključak za svaku provjeru)
+  - [ ] Dijagram, specifikacije i sljedivost (2.6) međusobno usklađeni
+
+**1-Projekt.md**
+- [ ] 1.3 Vanjske ovisnosti: konkretni pružatelj identiteta, meteorološki i kartografski servis
+
+**2-Analiza-zahtjeva.md**
+- [ ] 2.1 Kriteriji prihvaćanja za ključne zahtjeve
+- [ ] 2.2 Način provjere za NF-01 do NF-08
+- [ ] 2.4 Inženjerska posljedica / provjera
+- [ ] 2.6 Sljedivost: u stupac "Obrazac uporabe / modul" upisati ID-eve obrazaca uporabe
+- [ ] 2.5 Značajne promjene zahtjeva: zapisati promjene nakon rasprave s asistentom
+
+## Stavke preostale u dokumentima predviđene za kasnije nadopunjavanje (ne sada)
+- [ ] 2.6 Arhitekturna realizacija i ispitivanje (nakon oblikovanja i testiranja)
+- [ ] 2.7 Pregled zahtjeva (kontrolne točke u 7. i 14. tjednu)
