@@ -31,38 +31,38 @@
 | **Alternativni tokovi / Iznimke** | **2a — Broj osoba:** Klijent upisuje broj osoba veći od kapaciteta plovila, stoga odabirom „Nastavi“ dobiva obavijest u aplikaciji da broj osoba nadmašuje kapacitet plovila. Ne dobiva privremenu blokadu termina (privremenu rezervaciju) – termin se nastavlja prikazivati kao slobodan ostalim klijentima. Isti klijent ima mogućnost ispraviti broj osoba i pokušati ponovno kliknuti „Nastavi“.<br>**2b — Termin u međuvremenu blokiran:** Drugi klijent je prije kliknuo „Nastavi“ za isto plovilo i isti termin. Klijentu se javlja da je termin zauzet (jer je započela privremena blokada za drugog klijenta) te ne dobiva privremenu blokadu. Klijent može i dalje odabrati drugi termin ili drugo plovilo.<br>**4a — Potvrda rezervacije nakon isteka blokade:** Prošlo je više od 10 min od klika „Nastavi“ bez potvrde rezervacije. Sustav briše privremenu rezervaciju i oslobađa termin. Javlja klijentu da je privremena blokada istekla. Klijent mora ponovno započeti rezervaciju – termin može u međuvremenu postati zauzet. |
 | **Posljedice (ishod)**            | • U bazi podataka postoji nova rezervacija sa statusom „potvrđena“.<br>• Termin je zauzet za ostale klijente.<br>• Klijent je dobio potvrdu e-poštom i može rezervaciju vidjeti među svojim rezervacijama.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
-### UC-002: [naziv usmjeren na cilj]
+### UC-002: Pregled svih rezervacija
 
 | Element specifikacije             | Opis |
 | :-------------------------------- | :--- |
-| **Primarni akter**                |      |
-| **Povezani zahtjevi**             |      |
-| **Preduvjeti**                    |      |
-| **Glavni uspješni tok**           |      |
-| **Alternativni tokovi / Iznimke** |      |
-| **Posljedice (ishod)**            |      |
+| **Primarni akter**                | Administator |
+| **Povezani zahtjevi**             | F-8.1 |
+| **Preduvjeti**                    | Korisnik mora biti prijavljen u sustav i dodijeljena mu je uloga administratora. |
+| **Glavni uspješni tok**           | 1. Administrator otvara stranicu s popisom svih rezervacija.<br>2. Aplikacija dohvaća i prikazuje sve rezervacije osim onih označenih kao u tijeku.<br>3. Administrator odabire rezervaciju za koju želi vidjeti pojedinosti.<br>4. Aplikacija prikazuje pojedinosti o odabranoj rezervaciji i dostupne radnje za upravljanje istom. |
+| **Alternativni tokovi / Iznimke** | **2a — Nema zabilježenih rezervacija:** Aplikacija prikazuje poruku kako trenutačno nema zabilježenih rezervacija. |
+| **Posljedice (ishod)**            | Administrator može pregledati rezervacije i njihove pojedinosti. |
 
-### UC-003: [naziv usmjeren na cilj]
-
-| Element specifikacije             | Opis |
-| :-------------------------------- | :--- |
-| **Primarni akter**                |      |
-| **Povezani zahtjevi**             |      |
-| **Preduvjeti**                    |      |
-| **Glavni uspješni tok**           |      |
-| **Alternativni tokovi / Iznimke** |      |
-| **Posljedice (ishod)**            |      |
-
-### UC-004: [naziv usmjeren na cilj]
+### UC-003: Otkazivanje rezervacije
 
 | Element specifikacije             | Opis |
 | :-------------------------------- | :--- |
-| **Primarni akter**                |      |
-| **Povezani zahtjevi**             |      |
-| **Preduvjeti**                    |      |
-| **Glavni uspješni tok**           |      |
-| **Alternativni tokovi / Iznimke** |      |
-| **Posljedice (ishod)**            |      |
+| **Primarni akter**                | Administator     |
+| **Povezani zahtjevi**             | F-6.5, F-8.2, F-8.3     |
+| **Preduvjeti**                    | Korisnik mora biti prijavljen u sustav, dodijeljena mu je uloga administratora i postoji rezervacija koju je moguće otkazati.     |
+| **Glavni uspješni tok**           | 1. Administrator otvara stranicu s popisom svih rezervacija.<br>2. Aplikacija dohvaća i prikazuje sve rezervacije osim onih označenih kao u tijeku.<br>3. Administrator odabire rezervaciju koju želi otkazati.<br>4. Aplikacija prikazuje pojedinosti o odabranoj rezervaciji i dostupne radnje za upravljanje istom.<br>5. Administrator odabire radnju otkazivanja rezervacije.<br>6. Aplikacija traži potvrdu radnje otkazivanja.<br>7. Administrator potvrđuje otkazivanje.<br>8. Aplikacija provjerava ovlasti, mijenja status rezervacije, obavještava korisnika o novom statusu i prikazuje novi status.     |
+| **Alternativni tokovi / Iznimke** | **2a — Nema zabilježenih rezervacija:** Aplikacija prikazuje poruku kako trenutačno nema zabilježenih rezervacija.<br>**4a — Odabranu rezervaciju nije moguće otkazati:** Odabrana rezervacija već je otkazana ili završena te za nju nije ponuđena radnja otkazivanja.<br>**7a — Administrator nije potvrdio otkazivanje:** Rezervacija zadržava svoj početni status.<br>**8a — Nedovoljne ovlasti:** Aplikacija ne otkazuje rezervaciju i prikazuje poruku o grešci.     |
+| **Posljedice (ishod)**            | Aplikacija mijenja status rezervacije u otkazana i obavještava korisnika o otkazivanju njegove rezervacije.     |
+
+### UC-004: Uređivanje rezervacije
+
+| Element specifikacije             | Opis |
+| :-------------------------------- | :--- |
+| **Primarni akter**                | Administator     |
+| **Povezani zahtjevi**             | F-8.4, F-8.5     |
+| **Preduvjeti**                    | Korisnik mora biti prijavljen u sustav, dodijeljena mu je uloga administratora i postoji rezervacija koju je moguće urediti.     |
+| **Glavni uspješni tok**           | 1. Administrator otvara stranicu s popisom svih rezervacija.<br>2. Aplikacija dohvaća i prikazuje sve rezervacije osim onih označenih kao u tijeku.<br>3. Administrator odabire rezervaciju koju želi urediti.<br>4. Aplikacija prikazuje pojedinosti o odabranoj rezervaciji i dostupne radnje za upravljanje istom.<br>5. Administrator odabire radnju uređivanja.<br>6. Aplikacija prikazuje formu s podatcima o rezervaciji.<br>7. Administrator mijenja podatke o rezervaciji (datum preuzimanja, završetka najma, broj osoba...) i potvrđuje izmjene.<br>8. Aplikacija provjerava ovlasti, jesu li podatci u skladu s pravilima izrade rezervacije, mijenja podatke o rezervaciji i prikazuje poruku o potvrdi izmjena.     |
+| **Alternativni tokovi / Iznimke** | **2a — Nema zabilježenih rezervacija:** Aplikacija prikazuje poruku kako trenutačno nema zabilježenih rezervacija.<br>**4a — Rezervaciju nije moguće urediti:** Odabrana rezervacija već je otkazana ili završena te za nju nije ponuđena radnja uređivanja.<br>**7a — Administrator nije potvrdio izmjene:** Podatci o rezervaciji ostaju nepromijenjeni.<br>**8a — Nedovoljne ovlasti:** Aplikacija ne mijenja podatke o rezervaciji i prikazuje poruku o grešci.<br>**8b — Plovilo iz rezervacije nije dostupno u odabranom razdoblju:** Aplikacija prikazuje poruku o nedostupnosti plovila.<br>**8c — Uneseni podatci ne slijede pravila izrade rezervacije:** Aplikacija prikazuje poruku o grešci.     |
+| **Posljedice (ishod)**            | Aplikacija mijenja podatke o rezervaciji i prikazuje poruku o potvrdi izmjena.     |
 
 ### UC-005: [naziv usmjeren na cilj]
 
