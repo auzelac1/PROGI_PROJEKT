@@ -6,10 +6,9 @@
 
 **Cilj:** Jasno razgraničiti problem koji se rješava od predloženog rješenja i stvarne koristi za korisnika.
 
-**Problem:** [nadopuniti]
+**Problem:** Poslovanje charter kompanija idalje se često oslanja na ručne procese, telefonske pozive i neusklađene tablice, što troši znatno vrijeme i povećava rizik od pogrešaka poput dvostrukih rezervacija. Klijentima istovremeno nedostaje brz i jednostavan uvid u raspoloživost, specifikacije i cijene plovila u realnom vremenu, što usporava cjelokupni proces prodaje.
 
-**Cilj projekta:** Sustav podržava charter poslovanje za plovila: klijenti pretražuju i rezerviraju plovila, a tvrtka upravlja flotom, rezervacijama i korisnicima, svatko u skladu sa svojom ulogom.
-
+**Cilj projekta:** Razviti web sustav koji modernizira i digitalizira charter poslovanje pružajući klijentima jednostavan uvid u ponudu, pretraživanje i rezervaciju plovila u realnom vremenu. Sustav istovremeno omogućuje zaposlenicima tvrtke centralizirano upravljanje flotom, rezervacijama i korisničkim ulogama, čime se automatiziraju poslovni procesi i smanjuje administrativno opterećenje.
 **Očekivana korist:** [nadopuniti]
 
 ## 1.2 Ciljani korisnici i dionici
