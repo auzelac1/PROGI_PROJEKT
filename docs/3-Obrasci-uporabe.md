@@ -64,16 +64,25 @@
 | **Alternativni tokovi / Iznimke** | **2a — Nema zabilježenih rezervacija:** Aplikacija prikazuje poruku kako trenutačno nema zabilježenih rezervacija.<br>**4a — Rezervaciju nije moguće urediti:** Odabrana rezervacija već je otkazana ili završena te za nju nije ponuđena radnja uređivanja.<br>**7a — Administrator nije potvrdio izmjene:** Podatci o rezervaciji ostaju nepromijenjeni.<br>**8a — Nedovoljne ovlasti:** Aplikacija ne mijenja podatke o rezervaciji i prikazuje poruku o grešci.<br>**8b — Plovilo iz rezervacije nije dostupno u odabranom razdoblju:** Aplikacija prikazuje poruku o nedostupnosti plovila.<br>**8c — Uneseni podatci ne slijede pravila izrade rezervacije:** Aplikacija prikazuje poruku o grešci.     |
 | **Posljedice (ishod)**            | Aplikacija mijenja podatke o rezervaciji i prikazuje poruku o potvrdi izmjena.     |
 
-### UC-005: [naziv usmjeren na cilj]
+### UC-005: Evidentiranje razdoblja nedostupnosti plovila
 
 | Element specifikacije             | Opis |
 | :-------------------------------- | :--- |
-| **Primarni akter**                |      |
-| **Povezani zahtjevi**             |      |
-| **Preduvjeti**                    |      |
-| **Glavni uspješni tok**           |      |
-| **Alternativni tokovi / Iznimke** |      |
-| **Posljedice (ishod)**            |      |
+| **Primarni akter**                |  Administrator    |
+| **Povezani zahtjevi**             |  F-9.7, F-5.1, F-5.2, NF-01, NF-08   |
+| **Preduvjeti**                    |  Administrator je prijavljen i ima ovlast upravljanja flotom (P5). Plovilo postoji u floti.    |
+| **Glavni uspješni tok**           |  1. Administrator na stranici „Upravljanje flotom“ odabire plovilo i „Evidentiraj nedostupnost“.
+2. Aplikacija prikazuje obrazac (datum od, datum do, razlog).
+3. Administrator unosi podatke i potvrđuje.
+4. Aplikacija na poslužitelju provjerava ovlasti i valjanost datuma (početak prije kraja, ne u prošlosti).
+5. Aplikacija provjerava zauzetost plovila u razdoblju (potvrđene rezervacije, blokade u tijeku, druga razdoblja nedostupnosti).
+6. Aplikacija trajno sprema razdoblje i prikazuje potvrdu.    |
+| **Alternativni tokovi / Iznimke** | 4a — Nedovoljne ovlasti: aplikacija odbija zahtjev i ništa ne sprema.
+4b — Nevaljani datumi: aplikacija objašnjava problem i zadržava unos; administrator ispravlja i ponavlja korak 3.
+5a — Preklapanje s potvrđenom rezervacijom: aplikacija odbija unos i prikazuje koja rezervacija smeta; administrator odustaje ili prvo otkaže rezervaciju (UC-07) pa ponavlja unos.
+5b — Preklapanje s blokadom u tijeku ili drugim razdobljem: aplikacija odbija unos i navodi razlog; administrator mijenja razdoblje ili pokušava kasnije.
+6a — Spremanje nije uspjelo: aplikacija javlja pogrešku i ne prikazuje lažnu potvrdu.     |
+| **Posljedice (ishod)**            | Razdoblje nedostupnosti je pohranjeno. U tom razdoblju plovilo se ne prikazuje kao slobodno (F-2.1, F-3.5) i ne može se rezervirati (F-5.1).     |
 
 ### UC-006: [naziv usmjeren na cilj]
 
