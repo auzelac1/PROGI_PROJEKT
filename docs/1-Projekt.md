@@ -55,7 +55,11 @@
 
 **Cilj:** Objasniti kako korisnici trenutačno rješavaju problem i koja preostala potreba opravdava odobreni projekt.
 
-[nadopuniti]
+Manje i srednje charter tvrtke većinom sve rade ručno. Klijent pošalje upit e-poštom ili nazove, pa čeka odgovor satima, nekad i danima. Termini se vode u tablicama ili na papiru, pa se lako dogodi dvostruka rezervacija. Prognozu i lokaciju klijenti trebaju tražiti sami.
+
+Svi podaci u tvrtki su raspršeni. Rasporedi radnika se rade ručno te se trebaju uskladiti s rezervacijama, a vlasnik gubi vrijeme skupljajući podatke o prihodima i popunjenosti iz nekoliko različitih izvora.
+
+Rješenje je jedinstven sustav za upravljanje charterom. Klijent sam pretražuje slobodne termine, vidi točne cijene i dodatne usluge te odmah dobiva potvrdu rezervacije. Zauzetost se promijeni automatski te dvostruke rezervacije postaju nemoguće, a integrirane karte i vremenska prognoza omogućuju klijentu sve informacije na jednom mjestu. Zaposlenici lakše vode flotu, dok vlasnik ima jasne izvještaje i statistiku.
 
 ---
 
