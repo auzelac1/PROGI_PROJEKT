@@ -6,11 +6,11 @@
 
 **Cilj:** Prikazati granicu sustava, relevantne aktere i njihove glavne ciljeve u **preglednom UML dijagramu obrazaca uporabe**. Ako je za razumijevanje pojedinog dijela sustava potrebno prikazati više detalja, taj dio izdvojite u dodatni usmjereni dijagram. Dodatni dijagrami trebaju produbiti dio preglednog modela, a ne stvarati nepovezane ili duplicirane prikaze istog sustava.
 
-[Ovdje umetnuti sliku dijagrama]
+![Dijagram obrazaca uporabe](./assets/diagrams/3-1-UC-diagram.svg)
 
-**Slika 3.1.** [naziv slike]
+**Slika 3.1.** Dijagram obrazaca uporabe
 
-**PlantUML izvor:** [poveznica na .puml datoteku]
+**PlantUML izvor:** [izvor](./puml/3-1-UC.puml)
 
 **Provjera dijagrama:** Prikažite prepoznate uloge koje **komuniciraju s aplikacijom**, a ne dionike koji s njom nemaju interakciju. Svaki glavni korisnički cilj mora imati pridruženog aktera; uključeni obrazac uporabe može se dosegnuti preko drugog obrasca uporabe bez vlastite izravne veze s akterom. `<<include>>` i `<<extend>>` koristite samo kada odnos odgovara stvarnom ponašanju.
 
