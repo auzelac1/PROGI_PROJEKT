@@ -75,16 +75,16 @@
 | **Alternativni tokovi / Iznimke** | **4a — Nedovoljne ovlasti:** aplikacija odbija zahtjev i ništa ne sprema.<br>**4b — Nevaljani datumi:** aplikacija objašnjava problem i zadržava unos; administrator ispravlja i ponavlja korak 3.<br>**5a — Preklapanje s potvrđenom rezervacijom:** aplikacija odbija unos i prikazuje koja rezervacija smeta; administrator odustaje ili prvo otkaže rezervaciju (UC-07) pa ponavlja unos.<br>**5b — Preklapanje s blokadom u tijeku ili drugim razdobljem:** aplikacija odbija unos i navodi razlog; administrator mijenja razdoblje ili pokušava kasnije.<br>**6a — Spremanje nije uspjelo:** aplikacija javlja pogrešku i ne prikazuje lažnu potvrdu. |
 | **Posljedice (ishod)** | Razdoblje nedostupnosti je pohranjeno. U tom razdoblju plovilo se ne prikazuje kao slobodno (F-2.1, F-3.5) i ne može se rezervirati (F-5.1). |
 
-### UC-006: [naziv usmjeren na cilj]
+### UC-006: Pregled rasporeda preuzimanja i povrata
 
 | Element specifikacije             | Opis |
 | :-------------------------------- | :--- |
-| **Primarni akter**                |      |
-| **Povezani zahtjevi**             |      |
-| **Preduvjeti**                    |      |
-| **Glavni uspješni tok**           |      |
-| **Alternativni tokovi / Iznimke** |      |
-| **Posljedice (ishod)**            |      |
+| **Primarni akter**                | Djelatnik     |
+| **Povezani zahtjevi**             | F-7.1, F-7.2, F-7.3     |
+| **Preduvjeti**                    | Korisnik mora biti prijavljen u sustav i dodijeljena mu je uloga djelatnika ili administratora.     |
+| **Glavni uspješni tok**           | 1. Djelatnik otvara stranicu namijenjenu za pregled rasporeda preuzimanja i povrata plovila. <br>2. Aplikacija dohvaća sve potvrđene rezervacije i prikazuje njihov raspored.<br>3. Djelatnik odabire pojedinu rezervaciju koju želi detaljnije pregledati.<br>4. Aplikacija prikazuje jedinstveni identifikator, plovilo, matičnu luku, datum i vrijeme preuzimanja i povrata, odabrane dodatne usluge, cijenu i broj osoba, te osnovne podatke o klijentu (ime i prezime, broj telefona, adresa e-pošte).|
+| **Alternativni tokovi / Iznimke** | **2a - Nema potvrđenih rezervacija:** Aplikacija prikazuje poruku da trenutačno nema što prikazati.   |
+| **Posljedice (ishod)**            | Djelatnik pregledava raspored preuzimanja i povrata s odgovarajućim podacima svakog najma, te pri tome podaci u sustavu ostaju nepromijenjeni.     |
 
 ### UC-007: [naziv usmjeren na cilj]
 
