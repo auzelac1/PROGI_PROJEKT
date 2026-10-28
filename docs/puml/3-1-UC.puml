@@ -21,7 +21,7 @@ skinparam usecase {
 
 ' Primarni akteri
 
-actor Korisnik as "Korisnik"
+actor Neprijavljeni as "Neprijavljeni korisnik"
 actor Klijent as "Klijent"
 actor Djelatnik as "Djelatnik"
 actor Voditelj as "Voditelj"
@@ -33,13 +33,13 @@ actor "Meteorološki servis" as meteo <<external system>>
 actor "Kartografski servis" as map <<external system>>
 
 ' Specijalizacije
-Klijent -|> Korisnik
+Klijent -|> Neprijavljeni
 Admin -|> Djelatnik
-Djelatnik -|> Korisnik
-Voditelj -|> Korisnik
+Djelatnik -|> Neprijavljeni
+Voditelj -|> Neprijavljeni
 
 ' Raspored na dijagramu
-Korisnik -[hidden]down-> Klijent
+Neprijavljeni-[hidden]down-> Klijent
 Djelatnik -[hidden]down-> Klijent
 Djelatnik -[hidden]down-> Voditelj
 Admin -[hidden]down-> Djelatnik
@@ -63,6 +63,15 @@ rectangle "Charter poslovanje" as Charter {
     ' Pretraga i pregled plovila
     (UC-007:\nPretraga i pregled plovila) as pregledPlovila
 
+    ' Upravljanje plovilima i dodatnim uslugama
+    (UC-008:\nUpravljanje plovilima i dodatnim uslugama) as upravljanjePlovilima
+    together {
+        ' Statistika i izvoz
+        (UC-009:\nStatistika i izvoz) as statistika
+
+        ' Prijava korisnika
+        (UC-010:\nPrijava korisnika) as prijava
+    }
 }
 
 ' Asocijacije aktera i slučajeva uporabe
@@ -78,7 +87,15 @@ Admin -- nedostupnost
 
 Djelatnik -- preuzimanjePovrat
 
-Klijent -- pregledPlovila
+Neprijavljeni -- pregledPlovila
+
+Neprijavljeni -- pregledPlovila
+
+Admin -- upravljanjePlovilima
+
+Voditelj -- statistika
+
+Neprijavljeni -- prijava
 
 ' Slanje poruke klijentu da mu je rezervacija otkazana
 otkazivanjeRezervacije --> Klijent
@@ -90,13 +107,13 @@ uredjivanjeRezervacije ..> pregledRezervacije : <<include>>
 ' Opcionalno ponašanje
 izradaRezervacije ..> pregledPlovila : <<extend>>\n[odabrana izrada rezervacije]
 
-' Interakcije sa sakundarnim akterima
+' Interakcije sa sekundarnim akterima
 pregledPlovila -- meteo
 pregledPlovila -- map
+prijava -- idp
 
-
-map -[hidden]left-> idp
-map -[hidden]down-> meteo
+meteo -[hidden]left-> map
+idp -[hidden]down-> meteo
 
 
 @enduml
