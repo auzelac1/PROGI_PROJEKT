@@ -1,0 +1,102 @@
+@startuml
+left to right direction
+title "Charter poslovanje - Dijagram obrazaca uporabe"
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam ArrowColor #212529
+skinparam FontColor #748cab
+
+skinparam actor {
+    BackgroundColor #F8F9FA
+    BorderColor #212529
+    BackgroundColor<<external system>> #FFF3CD
+    BorderColor<<external system>> #856404
+}
+
+skinparam usecase {
+    BackgroundColor #E7F1FF
+    BorderColor #0D6EFD
+}
+
+' Primarni akteri
+
+actor Korisnik as "Korisnik"
+actor Klijent as "Klijent"
+actor Djelatnik as "Djelatnik"
+actor Voditelj as "Voditelj"
+actor Admin as "Administrator"
+
+' Sekundarni akteri
+actor "Vanjski pružatelj identiteta" as idp <<external system>>
+actor "Meteorološki servis" as meteo <<external system>>
+actor "Kartografski servis" as map <<external system>>
+
+' Specijalizacije
+Klijent -|> Korisnik
+Admin -|> Djelatnik
+Djelatnik -|> Korisnik
+Voditelj -|> Korisnik
+
+' Raspored na dijagramu
+Korisnik -[hidden]down-> Klijent
+Djelatnik -[hidden]down-> Klijent
+Djelatnik -[hidden]down-> Voditelj
+Admin -[hidden]down-> Djelatnik
+
+rectangle "Charter poslovanje" as Charter {
+
+    ' Izrada rezervacije
+    (UC-001:\nIzrada rezervacije) as izradaRezervacije
+    
+    ' Uređivanje i otkazivanje rezervacija
+    (UC-002:\nPregled svih rezervacija) as pregledRezervacije
+    (UC-003:\nOtkazivanje rezervacije) as otkazivanjeRezervacije
+    (UC-004:\nUređivanje rezervacije) as uredjivanjeRezervacije
+
+    ' Evidentiranje razdoblja nedostupnosti plovila
+    (UC-005:\nEvidentiranje razdoblja nedostupnosti plovila) as nedostupnost
+    
+    ' Pregled rasporeda preuzimanja i povrata
+    (UC-006:\nPregled rasporeda preuzimanja i povrata) as preuzimanjePovrat
+
+    ' Pretraga i pregled plovila
+    (UC-007:\nPretraga i pregled plovila) as pregledPlovila
+
+}
+
+' Asocijacije aktera i slučajeva uporabe
+Klijent -- izradaRezervacije
+
+Admin -- pregledRezervacije
+
+Admin -- otkazivanjeRezervacije
+
+Admin -- uredjivanjeRezervacije
+
+Admin -- nedostupnost
+
+Djelatnik -- preuzimanjePovrat
+
+Klijent -- pregledPlovila
+
+' Slanje poruke klijentu da mu je rezervacija otkazana
+otkazivanjeRezervacije --> Klijent
+
+' Obavezno ponašanje
+otkazivanjeRezervacije ..> pregledRezervacije : <<include>>
+uredjivanjeRezervacije ..> pregledRezervacije : <<include>>
+
+' Opcionalno ponašanje
+izradaRezervacije ..> pregledPlovila : <<extend>>\n[odabrana izrada rezervacije]
+
+' Interakcije sa sakundarnim akterima
+pregledPlovila -- meteo
+pregledPlovila -- map
+
+
+map -[hidden]left-> idp
+map -[hidden]down-> meteo
+
+
+@enduml
