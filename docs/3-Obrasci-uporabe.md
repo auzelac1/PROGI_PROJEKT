@@ -123,6 +123,18 @@
 | **Alternativni tokovi / Iznimke** | **4a — Nema podataka za odabrano razdoblje:** Aplikacija prikazuje poruku da za odabrane kriterije nema podataka.<br>**4b — Pogreška pri dohvaćanju podataka:** Aplikacija prikazuje poruku o pogrešci i statistika se ne prikazuje dok podaci nisu uspješno dohvaćeni.<br>**7a — Nije odabran format izvoza:** Aplikacija traži od voditelja da odabere jedan od podržanih formata prije izvoza.<br>**8a — Izvoz nije uspio:** Aplikacija prikazuje poruku o pogrešci i ne prikazuje lažnu potvrdu uspješnog izvoza.<br>**8b — Nedovoljne ovlasti:** Aplikacija odbija pristup funkcionalnosti statistike i izvoza. |
 | **Posljedice (ishod)**            | Voditelj je pregledao statističke podatke poslovanja. Ako je odabran izvoz, generirana je datoteka s odabranim podacima u podržanom standardnom formatu. |
 
+### UC-010: Prijava korisnika
+
+| Element specifikacije             | Opis |
+| :-------------------------------- | :--- |
+| **Primarni akter**                | Neprijavljeni korisnik |
+| **Povezani zahtjevi**             | F-1.1, F-1.2, NF-03, NF-08 |
+| **Preduvjeti**                    | Korisnik nije prijavljen u sustav. Vanjski pružatelj identiteta dostupan je za provođenje prijave. |
+| **Glavni uspješni tok**           | 1. Neprijavljeni korisnik odabire prijavu u aplikaciju.<br>2. Aplikacija preusmjerava korisnika vanjskom pružatelju identiteta.<br>3. Korisnik se prijavljuje kod vanjskog pružatelja identiteta.<br>4. Nakon uspješne prijave vanjski pružatelj identiteta vraća korisnika u aplikaciju s podacima potrebnima za potvrdu identiteta.<br>5. Aplikacija provjerava valjanost prijave i utvrđuje postoji li korisnički račun.<br>6. Ako se korisnik prijavljuje prvi put, aplikacija izrađuje korisnički račun i automatski mu dodjeljuje ulogu klijenta.<br>7. Aplikacija prijavljuje korisnika i omogućuje mu funkcionalnosti dostupne njegovoj ulozi. |
+| **Alternativni tokovi / Iznimke** | **3a — Neuspješna prijava kod vanjskog pružatelja identiteta:** Korisnik nije uspješno potvrdio identitet ili je odustao od prijave. Aplikacija ga ne prijavljuje i vraća ga u neprijavljeno stanje.<br>**4a — Vanjski pružatelj identiteta nije dostupan:** Prijava se ne može dovršiti. Aplikacija korisniku prikazuje poruku da prijava trenutačno nije dostupna.<br>**5a — Podaci prijave nisu valjani:** Aplikacija odbija prijavu i ne otvara korisničku sesiju.<br>**6a — Izrada korisničkog računa nije uspjela:** Aplikacija ne prijavljuje novog korisnika i prikazuje poruku o pogrešci. |
+| **Posljedice (ishod)**            | Korisnik je uspješno prijavljen. Ako se prijavio prvi put, u sustavu postoji novi korisnički račun s ulogom klijenta. Aplikacija prikazuje funkcionalnosti dopuštene njegovoj ulozi. |
+
+
 ---
 
 ## 3.3 Provjera dosljednosti obrazaca uporabe
