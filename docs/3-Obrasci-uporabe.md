@@ -110,6 +110,10 @@
 
 ### UC-009: Statistika i izvoz
 
+![Dijagram obrasca uporabe – Statistika i izvoz](./assets/diagrams/3-9-UC-statistika-izvoz.svg)
+
+**Slika 3.9.** Dijagram obrasca uporabe „Statistika i izvoz“
+
 | Element specifikacije             | Opis |
 | :-------------------------------- | :--- |
 | **Primarni akter**                | Voditelj |
