@@ -1,0 +1,30 @@
+Potrebno urediti dokumente 2-Analiza_zahtjeva i 3-Obrasci_uporabe
+
+## 2-Analiza_zahtjeva
+2.1.1. Ostaviti i razdvojiti
+2.1.2. Sažeti
+2.1.3. Sažeti
+2.1.4. Sažeti
+2.1.5. Maknuti
+2.1.6. Odvojiti s e-poštom
+2.1.7. Sažeti
+2.1.8. Sažeti
+2.1.9. Sažeti
+2.1.10 Sažeti
+2.1.11 Odvojiti
+2.1.12 Ostaviti
+
+
+-NF prvih 4 ostaviti 
+-u NF dodati zahtjeve koje smo smatrali FZ, a zapravo su NF, npr. provjera za istodobni pristup, 2.1.5 (još jednom provjeriti ima li ih)
+
+2.3 formulirati s novim FZ
+
+2.4 ok
+
+2.6. Maknuti duplikate
+
+## 3-Obrasci_uporabe
+UC-007 - sažeti + razmisliti o alternativnim tokovima, postoje li uopće na način na koji postoje kod primjerice UC-001.
+Svaki UC zasebno popratiti UML dijagramom
+*Ukoliko dođe do dodavanja/izbacivanja postojećih UC, potrebno je promijeniti glavni dijagram 
