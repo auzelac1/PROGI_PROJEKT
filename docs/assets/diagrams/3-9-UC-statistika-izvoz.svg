@@ -1,80 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620" preserveAspectRatio="xMidYMid meet">
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L8,3 z" fill="#111"/>
     </marker>
   </defs>
   <style>
     text { font-family: Arial, Helvetica, sans-serif; fill:#111; }
-    .title { font-size: 26px; font-weight: 700; }
-    .label { font-size: 18px; }
-    .small { font-size: 15px; }
+    .title { font-size: 22px; font-weight: 700; }
+    .label { font-size: 16px; }
+    .small { font-size: 13px; }
     .box { fill:#fff; stroke:#111; stroke-width:2; }
     .uc { fill:#fff; stroke:#111; stroke-width:2; }
     .line { stroke:#111; stroke-width:2; fill:none; }
-    .dash { stroke:#111; stroke-width:2; fill:none; stroke-dasharray:8 6; }
-    .note { fill:#fffde7; stroke:#777; stroke-width:1.5; }
+    .dash { stroke:#111; stroke-width:1.8; fill:none; stroke-dasharray:7 5; }
+    .note { fill:#fffde7; stroke:#777; stroke-width:1.2; }
   </style>
 
-  <text x="700" y="42" text-anchor="middle" class="title">UC-009: Statistika i izvoz</text>
+  <text x="450" y="34" text-anchor="middle" class="title">UC-009: Statistika i izvoz</text>
 
   <!-- Actor -->
-  <circle cx="135" cy="235" r="30" class="line"/>
-  <line x1="135" y1="265" x2="135" y2="350" class="line"/>
-  <line x1="90" y1="300" x2="180" y2="300" class="line"/>
-  <line x1="135" y1="350" x2="95" y2="410" class="line"/>
-  <line x1="135" y1="350" x2="175" y2="410" class="line"/>
-  <text x="135" y="450" text-anchor="middle" class="label">Voditelj</text>
+  <circle cx="70" cy="205" r="22" class="line"/>
+  <line x1="70" y1="227" x2="70" y2="290" class="line"/>
+  <line x1="40" y1="252" x2="100" y2="252" class="line"/>
+  <line x1="70" y1="290" x2="45" y2="330" class="line"/>
+  <line x1="70" y1="290" x2="95" y2="330" class="line"/>
+  <text x="70" y="360" text-anchor="middle" class="label">Voditelj</text>
 
-  <!-- System boundary -->
-  <rect x="275" y="95" width="1020" height="590" rx="6" class="box"/>
-  <text x="300" y="130" class="label" font-weight="700">Charter sustav</text>
+  <!-- System -->
+  <rect x="140" y="70" width="720" height="500" rx="5" class="box"/>
+  <text x="160" y="100" class="label" font-weight="700">Charter sustav</text>
 
-  <!-- Main use case -->
-  <ellipse cx="575" cy="315" rx="165" ry="78" class="uc"/>
-  <text x="575" y="305" text-anchor="middle" class="label" font-weight="700">UC-009</text>
-  <text x="575" y="335" text-anchor="middle" class="label">Statistika i izvoz</text>
+  <!-- Main UC -->
+  <ellipse cx="365" cy="250" rx="125" ry="62" class="uc"/>
+  <text x="365" y="242" text-anchor="middle" class="label" font-weight="700">UC-009</text>
+  <text x="365" y="268" text-anchor="middle" class="label">Statistika i izvoz</text>
 
-  <!-- Included stats -->
-  <ellipse cx="910" cy="205" rx="175" ry="68" class="uc"/>
-  <text x="910" y="198" text-anchor="middle" class="label">Pregled statistike</text>
-  <text x="910" y="225" text-anchor="middle" class="label">poslovanja</text>
+  <!-- Secondary UCs -->
+  <ellipse cx="655" cy="160" rx="135" ry="55" class="uc"/>
+  <text x="655" y="154" text-anchor="middle" class="label">Pregled statistike</text>
+  <text x="655" y="178" text-anchor="middle" class="label">poslovanja</text>
 
-  <!-- Extensions -->
-  <ellipse cx="910" cy="380" rx="155" ry="62" class="uc"/>
-  <text x="910" y="372" text-anchor="middle" class="label">Izvoz podataka</text>
-  <text x="910" y="400" text-anchor="middle" class="label">u CSV</text>
+  <ellipse cx="655" cy="285" rx="120" ry="50" class="uc"/>
+  <text x="655" y="280" text-anchor="middle" class="label">Izvoz podataka</text>
+  <text x="655" y="303" text-anchor="middle" class="label">u CSV</text>
 
-  <ellipse cx="915" cy="555" rx="180" ry="68" class="uc"/>
-  <text x="915" y="547" text-anchor="middle" class="label">Generiranje i pregled</text>
-  <text x="915" y="575" text-anchor="middle" class="label">grafa</text>
+  <ellipse cx="655" cy="405" rx="135" ry="52" class="uc"/>
+  <text x="655" y="399" text-anchor="middle" class="label">Generiranje i pregled</text>
+  <text x="655" y="423" text-anchor="middle" class="label">grafa</text>
 
-  <!-- Associations -->
-  <line x1="180" y1="315" x2="410" y2="315" class="line"/>
+  <!-- Actor association -->
+  <line x1="100" y1="250" x2="240" y2="250" class="line"/>
 
   <!-- include -->
-  <line x1="710" y1="275" x2="750" y2="250" class="dash" marker-end="url(#arrow)"/>
-  <text x="735" y="245" text-anchor="middle" class="small">&lt;&lt;include&gt;&gt;</text>
+  <line x1="475" y1="215" x2="535" y2="185" class="dash" marker-end="url(#arrow)"/>
+  <text x="510" y="192" text-anchor="middle" class="small">&lt;&lt;include&gt;&gt;</text>
 
-  <!-- extend arrows point to base UC -->
-  <line x1="755" y1="380" x2="710" y2="345" class="dash" marker-end="url(#arrow)"/>
-  <text x="745" y="350" text-anchor="middle" class="small">&lt;&lt;extend&gt;&gt;</text>
+  <!-- extends -->
+  <line x1="535" y1="285" x2="485" y2="270" class="dash" marker-end="url(#arrow)"/>
+  <text x="520" y="264" text-anchor="middle" class="small">&lt;&lt;extend&gt;&gt;</text>
 
-  <line x1="770" y1="525" x2="690" y2="370" class="dash" marker-end="url(#arrow)"/>
-  <text x="740" y="455" text-anchor="middle" class="small">&lt;&lt;extend&gt;&gt;</text>
+  <line x1="545" y1="390" x2="470" y2="295" class="dash" marker-end="url(#arrow)"/>
+  <text x="525" y="350" text-anchor="middle" class="small">&lt;&lt;extend&gt;&gt;</text>
 
-  <!-- Notes -->
-  <rect x="1095" y="145" width="170" height="170" rx="4" class="note"/>
-  <text x="1110" y="170" class="small">Prikaz uključuje:</text>
-  <text x="1110" y="197" class="small">• zauzetost plovila</text>
-  <text x="1110" y="224" class="small">• broj rezervacija</text>
-  <text x="1110" y="251" class="small">• prihod</text>
-  <text x="1110" y="278" class="small">• tražene kategorije</text>
-  <text x="1110" y="305" class="small">• dodatne usluge</text>
+  <!-- Compact notes -->
+  <rect x="205" y="475" width="300" height="70" rx="4" class="note"/>
+  <text x="220" y="497" class="small">Statistika: zauzetost plovila, broj rezervacija, prihod,</text>
+  <text x="220" y="517" class="small">najtraženije kategorije i dodatne usluge.</text>
 
-  <rect x="1095" y="500" width="175" height="125" rx="4" class="note"/>
-  <text x="1110" y="528" class="small">Graf se može</text>
-  <text x="1110" y="554" class="small">generirati pomoću</text>
-  <text x="1110" y="580" class="small">Python matplotlib/</text>
-  <text x="1110" y="606" class="small">pyplot.</text>
+  <rect x="535" y="475" width="270" height="70" rx="4" class="note"/>
+  <text x="550" y="497" class="small">Graf se može generirati pomoću</text>
+  <text x="550" y="517" class="small">Python matplotlib/pyplot.</text>
 </svg>
