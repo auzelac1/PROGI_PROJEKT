@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
@@ -6,7 +6,7 @@
   </defs>
   <style>
     text { font-family: Arial, Helvetica, sans-serif; fill:#111; }
-    .title { font-size: 24px; font-weight: 700; }
+    .title { font-size: 26px; font-weight: 700; }
     .label { font-size: 18px; }
     .small { font-size: 15px; }
     .box { fill:#fff; stroke:#111; stroke-width:2; }
@@ -16,65 +16,65 @@
     .note { fill:#fffde7; stroke:#777; stroke-width:1.5; }
   </style>
 
-  <text x="600" y="38" text-anchor="middle" class="title">UC-009: Statistika i izvoz</text>
+  <text x="700" y="42" text-anchor="middle" class="title">UC-009: Statistika i izvoz</text>
 
   <!-- Actor -->
-  <circle cx="105" cy="210" r="28" class="line"/>
-  <line x1="105" y1="238" x2="105" y2="315" class="line"/>
-  <line x1="65" y1="270" x2="145" y2="270" class="line"/>
-  <line x1="105" y1="315" x2="70" y2="365" class="line"/>
-  <line x1="105" y1="315" x2="140" y2="365" class="line"/>
-  <text x="105" y="400" text-anchor="middle" class="label">Voditelj</text>
+  <circle cx="135" cy="235" r="30" class="line"/>
+  <line x1="135" y1="265" x2="135" y2="350" class="line"/>
+  <line x1="90" y1="300" x2="180" y2="300" class="line"/>
+  <line x1="135" y1="350" x2="95" y2="410" class="line"/>
+  <line x1="135" y1="350" x2="175" y2="410" class="line"/>
+  <text x="135" y="450" text-anchor="middle" class="label">Voditelj</text>
 
   <!-- System boundary -->
-  <rect x="245" y="80" width="880" height="540" rx="6" class="box"/>
-  <text x="270" y="115" class="label" font-weight="700">Charter sustav</text>
+  <rect x="275" y="95" width="1020" height="590" rx="6" class="box"/>
+  <text x="300" y="130" class="label" font-weight="700">Charter sustav</text>
 
   <!-- Main use case -->
-  <ellipse cx="500" cy="280" rx="145" ry="72" class="uc"/>
-  <text x="500" y="270" text-anchor="middle" class="label" font-weight="700">UC-009</text>
-  <text x="500" y="298" text-anchor="middle" class="label">Statistika i izvoz</text>
+  <ellipse cx="575" cy="315" rx="165" ry="78" class="uc"/>
+  <text x="575" y="305" text-anchor="middle" class="label" font-weight="700">UC-009</text>
+  <text x="575" y="335" text-anchor="middle" class="label">Statistika i izvoz</text>
 
   <!-- Included stats -->
-  <ellipse cx="810" cy="190" rx="150" ry="62" class="uc"/>
-  <text x="810" y="183" text-anchor="middle" class="label">Pregled statistike</text>
-  <text x="810" y="208" text-anchor="middle" class="label">poslovanja</text>
+  <ellipse cx="910" cy="205" rx="175" ry="68" class="uc"/>
+  <text x="910" y="198" text-anchor="middle" class="label">Pregled statistike</text>
+  <text x="910" y="225" text-anchor="middle" class="label">poslovanja</text>
 
   <!-- Extensions -->
-  <ellipse cx="805" cy="340" rx="135" ry="58" class="uc"/>
-  <text x="805" y="333" text-anchor="middle" class="label">Izvoz podataka</text>
-  <text x="805" y="358" text-anchor="middle" class="label">u CSV</text>
+  <ellipse cx="910" cy="380" rx="155" ry="62" class="uc"/>
+  <text x="910" y="372" text-anchor="middle" class="label">Izvoz podataka</text>
+  <text x="910" y="400" text-anchor="middle" class="label">u CSV</text>
 
-  <ellipse cx="810" cy="485" rx="155" ry="62" class="uc"/>
-  <text x="810" y="478" text-anchor="middle" class="label">Generiranje i pregled</text>
-  <text x="810" y="503" text-anchor="middle" class="label">grafa</text>
+  <ellipse cx="915" cy="555" rx="180" ry="68" class="uc"/>
+  <text x="915" y="547" text-anchor="middle" class="label">Generiranje i pregled</text>
+  <text x="915" y="575" text-anchor="middle" class="label">grafa</text>
 
   <!-- Associations -->
-  <line x1="145" y1="280" x2="350" y2="280" class="line"/>
+  <line x1="180" y1="315" x2="410" y2="315" class="line"/>
 
   <!-- include -->
-  <line x1="620" y1="245" x2="670" y2="220" class="dash" marker-end="url(#arrow)"/>
-  <text x="645" y="218" text-anchor="middle" class="small">&lt;&lt;include&gt;&gt;</text>
+  <line x1="710" y1="275" x2="750" y2="250" class="dash" marker-end="url(#arrow)"/>
+  <text x="735" y="245" text-anchor="middle" class="small">&lt;&lt;include&gt;&gt;</text>
 
   <!-- extend arrows point to base UC -->
-  <line x1="675" y1="340" x2="620" y2="305" class="dash" marker-end="url(#arrow)"/>
-  <text x="662" y="315" text-anchor="middle" class="small">&lt;&lt;extend&gt;&gt;</text>
+  <line x1="755" y1="380" x2="710" y2="345" class="dash" marker-end="url(#arrow)"/>
+  <text x="745" y="350" text-anchor="middle" class="small">&lt;&lt;extend&gt;&gt;</text>
 
-  <line x1="690" y1="460" x2="600" y2="330" class="dash" marker-end="url(#arrow)"/>
-  <text x="666" y="405" text-anchor="middle" class="small">&lt;&lt;extend&gt;&gt;</text>
+  <line x1="770" y1="525" x2="690" y2="370" class="dash" marker-end="url(#arrow)"/>
+  <text x="740" y="455" text-anchor="middle" class="small">&lt;&lt;extend&gt;&gt;</text>
 
   <!-- Notes -->
-  <rect x="930" y="130" width="170" height="160" rx="4" class="note"/>
-  <text x="945" y="155" class="small">Prikaz uključuje:</text>
-  <text x="945" y="180" class="small">• zauzetost plovila</text>
-  <text x="945" y="205" class="small">• broj rezervacija</text>
-  <text x="945" y="230" class="small">• prihod</text>
-  <text x="945" y="255" class="small">• tražene kategorije</text>
-  <text x="945" y="280" class="small">• dodatne usluge</text>
+  <rect x="1095" y="145" width="170" height="170" rx="4" class="note"/>
+  <text x="1110" y="170" class="small">Prikaz uključuje:</text>
+  <text x="1110" y="197" class="small">• zauzetost plovila</text>
+  <text x="1110" y="224" class="small">• broj rezervacija</text>
+  <text x="1110" y="251" class="small">• prihod</text>
+  <text x="1110" y="278" class="small">• tražene kategorije</text>
+  <text x="1110" y="305" class="small">• dodatne usluge</text>
 
-  <rect x="935" y="430" width="165" height="120" rx="4" class="note"/>
-  <text x="950" y="458" class="small">Graf se može</text>
-  <text x="950" y="482" class="small">generirati pomoću</text>
-  <text x="950" y="506" class="small">Python matplotlib/</text>
-  <text x="950" y="530" class="small">pyplot.</text>
+  <rect x="1095" y="500" width="175" height="125" rx="4" class="note"/>
+  <text x="1110" y="528" class="small">Graf se može</text>
+  <text x="1110" y="554" class="small">generirati pomoću</text>
+  <text x="1110" y="580" class="small">Python matplotlib/</text>
+  <text x="1110" y="606" class="small">pyplot.</text>
 </svg>
