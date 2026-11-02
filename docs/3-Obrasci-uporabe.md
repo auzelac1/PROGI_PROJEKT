@@ -93,13 +93,8 @@
 | **Primarni akter**                | Klijent     |
 | **Povezani zahtjevi**             | F-2.1 – F-2.8, F-3.1 – F-3.5, F-4.6, F-5.1, F-5.2, F-5.4, F-12.1, F-12.2, NF-01, NF-02, NF-08     |
 | **Preduvjeti**                    | Klijent mora biti prijavljen u sustav.     |
-| **Glavni uspješni tok**           | 1. Korisnik otvara stranicu za pretragu. Aplikacija prikazuje popis plovila s osnovnim podacima.
-<br>2. Korisnik unosi željene kriterije: termin, broj osoba, lokaciju polaska, vrstu plovila, cijenu, broj kabina, opremu i dodatne usluge.
-<br>3. Aplikacija prikazuje plovila koja odgovaraju kriterijima. Ako je unesen termin, prikazuju se samo plovila slobodna u cijelom razdoblju i ukupna cijena najma.
-<br>4. Korisnik odabire plovilo.
-<br>5. Aplikacija prikazuje sve podatke o plovilu, fotografije, cijenu, dodatne usluge s cijenama i slobodne termine. Prikazuje i matičnu luku na karti te vremensku prognozu za odabrani termin.     |
-| **Alternativni tokovi / Iznimke** | 3a — Neispravan termin ili nema rezultata: aplikacija prikazuje poruku i korisnik mijenja kriterije.
-<br>5a — Vanjski servis nije dostupan: karta ili prognoza se ne prikazuju, a ostatak stranice radi normalno.     |
+| **Glavni uspješni tok**           | 1. Korisnik otvara stranicu za pretragu. Aplikacija prikazuje popis plovila s osnovnim podacima.<br>2. Korisnik unosi željene kriterije: termin, broj osoba, lokaciju polaska, vrstu plovila, cijenu, broj kabina, opremu i dodatne usluge.<br>3. Aplikacija prikazuje plovila koja odgovaraju kriterijima. Ako je unesen termin, prikazuju se samo plovila slobodna u cijelom razdoblju i ukupna cijena najma.<br>4. Korisnik odabire plovilo.<br>5. Aplikacija prikazuje sve podatke o plovilu, fotografije, cijenu, dodatne usluge s cijenama i slobodne termine. Prikazuje i matičnu luku na karti te vremensku prognozu za odabrani termin.     |
+| **Alternativni tokovi / Iznimke** | 3a — Neispravan termin ili nema rezultata: aplikacija prikazuje poruku i korisnik mijenja kriterije.<br>5a — Vanjski servis nije dostupan: karta ili prognoza se ne prikazuju, a ostatak stranice radi normalno.     |
 | **Posljedice (ishod)**            | Korisnik je pregledao plovila koja odgovaraju kriterijima. Stanje sustava se ne mijenja.     |
 
 ### UC-008: Upravljanje plovilima i dodatnim uslugama
