@@ -1,22 +1,22 @@
 //baza ne mora biti u 3NF
 1. TABLICA KORISNIKA
- UID (od Googlea) (ključ), uloga (klijent, admin, djelatnik, voditelj]), popis atributa poput mail, br. tel.... ako ta uloga nema taj atribut, ide NULL
+ (UID), uloga [klijent, admin, djelatnik, voditelj], popis atributa poput mail, br. tel.... stupci (mogući atributi) fiksi - ako neka uloga "ne podržava" taj atribut, onda je NULL
 
 2. VRSTE/MODELI BRODOVA_OSNOVNO
-id_modela (ključ):svaka od osnovnih informacija zasebni stupac u tablici
+(id_model), svaka od osnovnih informacija zasebni stupac u tablici
 
 3. DODATNE USLUGE
-id_dodatne_usluge naziv
+(id_dodatne_usluge), naziv
 
 4. MODEL_USLUGE 
-(id_modela, id_dodatne_usluge), cijena te usluge za taj model
+(id_model, id_dodatne_usluge), cijena te usluge za taj model
 
 5. REZERVACIJA_USLUGA
-(id_rezervacije, id_modela, id_dodatne_usluge)
+(id_rezervacije, id_model, id_dodatne_usluge)
 
-
+//id jedinstven za svaki brod (nema ono da je ključ (kategorija, id unutar kategorije))
 6.TABLICA SVIH BRODOVA
-jedinstveni id za svaki brod (nema ono da je ključ (kategorija, id unutar kategorije)): id modela, lokacija_luka, cijena_dan (zbog mogućnosti da radimo sustav za više kompanija)
+(id_brod), id model, lokacija_luka, cijena_dan (zbog mogućnosti da radimo sustav za više kompanija)
 
 
 //rezervacije koje su uspješno završene ostaju pohranjene u sustavu zbog statistike npr
@@ -27,14 +27,14 @@ jedinstveni id za svaki brod (nema ono da je ključ (kategorija, id unutar kateg
 //polje cijena je prazno dok god je rezervacija u tijeku
 
 7. TABLICA REZERVACIJA
-id_rezervacije (ključ): UID osobe koja je napravila rezervaciju, status rezervacije, id_brod, cijena, datum_polaska, datum_povratka, lokacija_luka,koordinate_unutar_luke (za OpenStreetMap)
+(id_rezervacija), UID osobe koja je napravila rezervaciju, status rezervacije, id_brod, cijena, datum_polaska, datum_povratka, lokacija_luka, koordinate_unutar_luke (za OpenStreetMap)
 
 
 8.TABLICA NEDOSTUPNOSTI PLOVILA (popravci i slično)
-id_brod datum_početak datum_kraj razlog
+(id_brod), datum_početak, datum_kraj, razlog
 
 9. TABLICA FOTOGRAFIJA
-id_broda URL_foto
+(id_broda), URL_foto
 
 
 
