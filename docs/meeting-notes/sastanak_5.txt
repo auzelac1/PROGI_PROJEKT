@@ -36,5 +36,7 @@
 9. TABLICA FOTOGRAFIJA
 (id_broda), URL_foto
 
-
+//id_sajt: npr 1 za "pregled plovila", 2 za "pretraga plovila", ...
+10. TABLICA ULOGA_SAJT
+(uloga, id_sajt)
 
