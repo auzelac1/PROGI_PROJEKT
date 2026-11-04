@@ -1,0 +1,121 @@
+@startuml
+left to right direction
+title Charter poslovanje - logički podatkovni model
+
+skinparam shadowing false
+
+entity "Korisnik" as korisnik {
+    * UID : text <<PK>>
+    --
+    * uloga : enum
+    ime : text
+    prezime : text
+    * email : text
+    telefon : text
+}
+
+entity "Model" as model {
+    * id_model : ID <<PK>>
+    --
+    * tip : text
+    * kategorija : enum
+    * proizvodjac : text <<AK>>
+    * model : text <<AK>>
+    * kapacitet : integer
+    * broj_kabina : integer
+    * broj_lezajeva : integer
+}
+
+entity "Dodatna usluga" as usluga {
+    * id_dodatne_usluge : ID <<PK>>
+    --
+    * naziv : text <<AK>>
+}
+
+entity "Usluga modela" as model_usluge {
+    * id_model : ID <<PK, FK>>
+    * id_dodatne_usluge : ID <<PK, FK>>
+    --
+    * cijena : decimal
+}
+
+entity "Usluga rezervacije" as rezervacija_usluga {
+    * id_rezervacije : ID <<PK, FK>>
+    * id_dodatne_usluge : ID <<PK, FK>>
+}
+
+entity "Brod" as brod {
+    * id_brod : ID <<PK>>
+    --
+    * id_model : ID <<FK>>
+    * id_luka : ID <<FK>>
+    * naziv : text
+    * godina_proizvodnje : integer
+    * cijena_dan : decimal
+    * vrijeme_preuzimanja : time
+    * vrijeme_povratka : time
+    * aktivan : boolean
+}
+
+entity "Rezervacija" as rezervacija {
+    * id_rezervacije : ID <<PK>>
+    --
+    * UID : text <<FK>>
+    * id_brod : ID <<FK>>
+    * id_luka : ID <<FK>>
+    * status : enum
+    * broj_osoba : integer
+    * datum_preuzimanja : date
+    * datum_povratka : date
+    * vrijeme_nastanak : datetime
+    cijena_uk : decimal
+}
+
+entity "Nedostupnost" as nedostupnost {
+    * id_brod : ID <<PK, FK>>
+    * datum_pocetak : date <<PK>>
+    --
+    * datum_kraj : date
+    * razlog : text
+}
+
+entity "Fotografija" as fotografija {
+    * id_brod : ID <<PK, FK, AK>>
+    * URL_foto : text <<PK>>
+    --
+    * redoslijed : integer <<AK>>
+}
+
+entity "Luka" as luka {
+    * id_luka : ID <<PK>>
+    --
+    * ime_luka : text <<AK>>
+    * lat : decimal
+    * lng : decimal
+}
+
+entity "Oprema" as oprema {
+    * id_opreme : ID <<PK>>
+    --
+    * naziv : text <<AK>>
+}
+
+entity "Oprema modela" as model_oprema {
+    * id_model : ID <<PK, FK>>
+    * id_opreme : ID <<PK, FK>>
+}
+
+korisnik ||--o{ rezervacija : izrađuje >
+model ||--o{ brod : ima >
+luka ||--o{ brod : matična je za >
+luka ||--o{ rezervacija : mjesto je preuzimanja za >
+brod ||--o{ rezervacija : rezervira se u >
+brod ||--o{ nedostupnost : ima >
+brod ||--o{ fotografija : ima >
+model ||--o{ model_usluge : nudi >
+usluga ||--o{ model_usluge : ima cijenu u >
+rezervacija ||--o{ rezervacija_usluga : sadrži >
+usluga ||--o{ rezervacija_usluga : odabrana je u >
+model ||--o{ model_oprema : ima >
+oprema ||--o{ model_oprema : navedena je u >
+@enduml
