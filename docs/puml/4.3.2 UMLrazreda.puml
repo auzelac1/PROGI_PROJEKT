@@ -39,25 +39,39 @@ class Brod {
   + provjeriDostupnost(od: Date, do: Date): boolean
 }
 
+class Model {
+  - idModel: int
+  - naziv: String
+  - kapacitet: int
+  - brojKabina: int
+}
+
+class Luka {
+  - idLuka: int
+  - imeLuka: String
+  - lat: decimal
+  - lng: decimal
+}
+
 class DodatnaUsluga {
   - idDodatneUsluge: int
   - naziv: String
   - cijena: decimal
 }
 
-' --- ENUMI ---
 
 enum UlogaKorisnika {
   GOST
   KORISNIK
   ADMINISTRATOR
+  DJELATNIK
 }
 
 enum StatusRezervacije {
-  KREIRANA
-  POTVRDJENA
+  U TIJEKU
+  POTVRDENA
   OTKAZANA
-  ZAVRSENA
+  
 }
 
 ' --- VEZE (ASOCIJACIJE) ---
