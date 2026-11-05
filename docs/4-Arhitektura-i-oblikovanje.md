@@ -64,17 +64,55 @@
 
 **Cilj:** Prikazati redoslijed poruka za jedan reprezentativni scenarij i odgovore na važnu alternativu.
 
-**Scenarij:** [Naziv interakcije; dodajte UC ID ako postoji.]  
-**Sekvencijski dijagram:** [Ugradite čitljiv UML sekvencijski dijagram.]  
-**PlantUML izvor:** [Poveznica na odgovarajuću `.puml` datoteku.]
+**Scenarij:** UC-001: Izrada rezervacije
+
+Klijent odabire plovilo, termin i broj osoba. Sustav provjerava
+dostupnost te izrađuje rezervaciju „u tijeku“, koja blokira termin
+na 10 minuta. Nakon odabira dodatnih usluga klijent potvrđuje
+rezervaciju, a sustav sprema ukupnu cijenu i status „potvrđena“
+te šalje potvrdu e-poštom.
+
+Dijagram prikazuje i slučajeve kada rezervacija nije moguća
+zbog zauzetog termina ili nevaljanih podataka te kada blokada
+istekne prije potvrde rezervacije.
+
+**Sekvencijski dijagram:**
+
+![Sekvencijski dijagram – Izrada rezervacije](./assets/diagrams/4-4-1-izrada-rezervacije.svg)
+
+**Slika 4.4.** Sekvencijski dijagram izrade rezervacije
+
+**PlantUML izvor:** [Izrada rezervacije](./puml/4-4-1-izrada-rezervacije.puml)
 
 ### 4.4.2 Reprezentativni UML dijagram stanja
 
-**Cilj:** Prikazati važna stanja jednog domenskog objekta ili eksplicitno upravljanog načina rada sustava te događaje ili uvjete koji ih mijenjaju.
+**Cilj:** Prikazati važna stanja jednog domenskog objekta ili
+eksplicitno upravljanog načina rada sustava te događaje ili uvjete
+koji ih mijenjaju.
 
-**Vlasnik stanja i razlog odabira:** [Navedite objekt ili način rada sustava, kako se njegovo stanje prepoznaje i zašto su prijelazi važni.]  
-**Dijagram stanja:** [Ugradite čitljiv UML dijagram stanja.]  
-**PlantUML izvor:** [Poveznica na odgovarajuću `.puml` datoteku.]
+**Vlasnik stanja i razlog odabira:** Rezervacija. Njezino stanje
+određuju status, vrijeme nastanka i vrijeme povrata plovila.
+Odabrana je jer prijelazi između stanja određuju zauzetost
+termina i mogućnost potvrde ili otkazivanja rezervacije.
+
+Rezervacija nastaje u stanju „u tijeku“ i blokira termin na
+10 minuta. Pravodobnom potvrdom prelazi u stanje „potvrđena“.
+Istekom blokade, odustajanjem klijenta ili gubitkom dostupnosti
+broda privremena rezervacija briše se.
+
+Administrator može otkazati potvrđenu rezervaciju koja još nije
+završena. Nakon vremena povrata rezervacija se prikazuje kao
+„završena“. To se stanje računa pri upitu, dok u bazi ostaje
+status „potvrđena“. Otkazane i završene rezervacije čuvaju se
+radi statistike.
+
+**Dijagram stanja:**
+
+![Dijagram stanja rezervacije](./assets/diagrams/4-4-2-stanja-rezervacije.svg)
+
+**Slika 4.5.** Dijagram stanja rezervacije
+
+**PlantUML izvor:** [Stanja rezervacije](./puml/4-4-2-stanja-rezervacije.puml)
 
 ## 4.5 Zapisi arhitekturnih odluka
 
