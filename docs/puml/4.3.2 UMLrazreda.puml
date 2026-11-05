@@ -1,0 +1,71 @@
+@startuml Reprezentativni_UML_Dijagram_Razreda
+
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFFF
+
+' --- RAZREDI ---
+
+class Korisnik {
+  - uid: String
+  - uloga: UlogaKorisnika
+  - ime: String
+  - prezime: String
+  - email: String
+  - telefon: String
+  + registrirajSe(): boolean
+  + prijaviSe(): boolean
+}
+
+class Rezervacija {
+  - idRezervacije: int
+  - datumPreuzimanja: Date
+  - datumPovratka: Date
+  - brojOsoba: int
+  - cijenaUk: decimal
+  - status: StatusRezervacije
+  + kreirajRezervaciju(): boolean
+  + izracunajUkupnuCijenu(): decimal
+  + otkaziRezervaciju(): void
+}
+
+class Brod {
+  - idBrod: int
+  - naziv: String
+  - godinaProizvodnje: int
+  - cijenaDan: decimal
+  - vrijemePreuzimanja: Time
+  - vrijemePovratka: Time
+  - aktivan: boolean
+  + provjeriDostupnost(od: Date, do: Date): boolean
+}
+
+class DodatnaUsluga {
+  - idDodatneUsluge: int
+  - naziv: String
+  - cijena: decimal
+}
+
+' --- ENUMI ---
+
+enum UlogaKorisnika {
+  GOST
+  KORISNIK
+  ADMINISTRATOR
+}
+
+enum StatusRezervacije {
+  KREIRANA
+  POTVRDJENA
+  OTKAZANA
+  ZAVRSENA
+}
+
+' --- VEZE (ASOCIJACIJE) ---
+
+Korisnik "1" -- "0..*" Rezervacija : izradjuje >
+Rezervacija "0..*" -- "1" Brod : odnosi se na >
+Rezervacija "1" *-- "0..*" DodatnaUsluga : sadrzi >
+Korisnik ..> UlogaKorisnika : koristi >
+Rezervacija ..> StatusRezervacije : koristi >
+
+@enduml
