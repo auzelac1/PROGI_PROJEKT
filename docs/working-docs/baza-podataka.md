@@ -4,13 +4,13 @@ Tipovi su logički, kao u ER dijagramu. `ID` označava identifikator, `text` niz
 
 ## 1. KORISNIK
 
-**Ključ:** `UID`  
+**Ključ:** `UUID`  
 **Alternativni ključ:** nema  
 **Ograničenje:** `CHECK (uloga IN ('klijent', 'admin', 'djelatnik', 'voditelj'))`
 
 | Atribut | Tip | Obavezan | Opis |
 | --- | --- | --- | --- |
-| `UID` | `text` | da | Identifikator korisnika koji dolazi od Googlea |
+| `UUID` | `text` | da | Identifikator korisnika koji dolazi od Googlea |
 | `uloga` | `enum` | da | klijent, admin, djelatnik ili voditelj; novi korisnik dobiva ulogu klijenta, a prvi administrator određuje se konfiguracijom |
 | `ime` | `text` | ne | Ime korisnika; upisuje se pri prijavi ako ga Google pošalje |
 | `prezime` | `text` | ne | Prezime korisnika; upisuje se pri prijavi ako ga Google pošalje |
@@ -114,12 +114,12 @@ Tablica `REZERVACIJA_USLUGA` vezana je uz rezervaciju, a time i uz konkretan bro
 
 - `CHECK (datum_preuzimanja <= datum_povratka)`
 - `CHECK (status IN ('u tijeku', 'potvrdena', 'otkazana'))`; završena namjerno nije među statusima, jer se računa pri upitu i ne zapisuje u bazu
-- jedinstveni indeks na `UID` za retke sa statusom „u tijeku“: korisnik s istim `UID` ne može imati dvije rezervacije u tijeku
+- jedinstveni indeks na `UUID` za retke sa statusom „u tijeku“: korisnik s istim `UUID` ne može imati dvije rezervacije u tijeku
 
 | Atribut | Tip | Obavezan | Opis |
 | --- | --- | --- | --- |
 | `id_rezervacije` | `ID` | da | Identifikator rezervacije |
-| `UID` | `text` | da | Korisnik koji je napravio rezervaciju |
+| `UUID` | `text` | da | Korisnik koji je napravio rezervaciju |
 | `status` | `enum` | da | U bazi: u tijeku, potvrdena ili otkazana |
 | `id_brod` | `ID` | da | Rezervirani brod |
 | `broj_osoba` | `integer` | da | Broj osoba |
@@ -212,7 +212,7 @@ Oprema je ono što brod već ima. Nema cijenu i klijent je ne bira.
 
 ## ID-jevi
 
-ID-jevi se dodjeljuju slijedno (+1) i samo rastu. ID se nikad ne koristi ponovno, ni nakon brisanja retka. Iznimka je `UID`, koji dolazi od Googlea.
+ID-jevi se dodjeljuju slijedno (+1) i samo rastu. ID se nikad ne koristi ponovno, ni nakon brisanja retka. Iznimka je `UUID`, koji dolazi od Googlea.
 
 ## Strani ključevi
 
@@ -224,7 +224,7 @@ ID-jevi se dodjeljuju slijedno (+1) i samo rastu. ID se nikad ne koristi ponovno
 | `REZERVACIJA_USLUGA` | `id_dodatne_usluge` | `DODATNE_USLUGE` |
 | `BROD` | `id_model` | `MODEL` |
 | `BROD` | `id_luka` | `LUKA` |
-| `REZERVACIJA` | `UID` | `KORISNIK` |
+| `REZERVACIJA` | `UUID` | `KORISNIK` |
 | `REZERVACIJA` | `id_brod` | `BROD` |
 | `REZERVACIJA` | `id_luka` | `LUKA` |
 | `NEDOSTUPNOST` | `id_brod` | `BROD` |
