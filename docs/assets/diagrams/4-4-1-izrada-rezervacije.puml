@@ -1,0 +1,43 @@
+@startuml
+title UC-001 Izrada rezervacije
+
+actor Klijent
+boundary "Web UI" as UI
+control API as API
+database "Baza podataka" as DB
+
+
+Klijent -> UI: Odabire plovilo, termin i broj osoba
+Klijent -> UI: Klikne „Nastavi“
+UI -> API: Zahtjev za rezervaciju
+API -> DB: Provjeri dostupnost plovila
+DB --> API: Rezultat provjere
+
+
+alt Termin nije dostupan ili podaci nisu valjani
+    API --> UI: Poruka o pogrešci
+    UI --> Klijent: Prikaz poruke
+else Rezervacija je moguća
+    API -> DB: Spremi rezervaciju „u tijeku“
+    API --> UI: Termin blokiran na 10 minuta
+    UI --> Klijent: Prikaz dodatnih usluga
+
+    Klijent -> UI: Odabire usluge i klikne „Rezerviraj“
+    UI -> API: Zahtjev za potvrdu rezervacije
+    API -> API: Provjeri rok blokade
+
+    alt Blokada je istekla
+        API -> DB: Obriši privremenu rezervaciju
+        API --> UI: Blokada je istekla
+        UI --> Klijent: Potrebno je ponovno započeti rezervaciju
+    else Blokada još vrijedi
+        API -> API: Izračunaj ukupnu cijenu
+        API -> DB: Spremi usluge, cijenu i status „potvrđena“
+        API -> Klijent: Pošalji potvrdu e-poštom
+        API --> UI: Rezervacija je potvrđena
+        UI --> Klijent: Prikaz rezervacije i ukupne cijene
+    end
+end
+
+
+@enduml
