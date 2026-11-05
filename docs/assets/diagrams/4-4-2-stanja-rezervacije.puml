@@ -1,0 +1,33 @@
+@startuml
+title Dijagram stanja rezervacije
+
+state "U tijeku" as UT
+state "Potvrđena" as P
+state "Otkazana" as O
+state "Završena" as Z
+
+[*] --> UT : Klijent odabire „Nastavi“\n[termin je dostupan i podaci su valjani]
+
+UT --> P : Klijent potvrđuje rezervaciju\n[blokada još vrijedi]
+UT --> [*] : Istek 10 minuta ili odustajanje\n/ brisanje rezervacije
+UT --> [*] : Nedostupnost ili deaktivacija broda\n/ brisanje rezervacije
+
+P --> O : Administrator otkazuje rezervaciju\n[najam nije završen]
+P --> Z : Prošlo je vrijeme povrata
+
+note right of UT
+  Termin je privremeno blokiran
+  na 10 minuta.
+end note
+
+note right of Z
+  Izvedeno stanje: računa se pri upitu.
+  U bazi ostaje status „potvrđena“.
+end note
+
+note bottom of O
+  Otkazane rezervacije ostaju
+  u bazi radi statistike.
+end note
+
+@enduml
