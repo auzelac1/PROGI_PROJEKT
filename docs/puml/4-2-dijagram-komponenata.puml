@@ -1,0 +1,58 @@
+@startuml
+title Charter poslovanje - Dijagram komponenata
+left to right direction
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam componentStyle rectangle
+skinparam ArrowColor #212529
+
+skinparam component {
+    BackgroundColor #E7F1FF
+    BorderColor #0D6EFD
+}
+
+skinparam database {
+    BackgroundColor #FFF3CD
+    BorderColor #212529
+}
+
+' Granica sustava i unutarnje komponente
+
+rectangle "Charter poslovanje" {
+    component "Web-klijent" as Web
+
+    rectangle "Poslužiteljska aplikacija" {
+        component "REST API" as API
+        component "Usluga za korisnike" as Users
+        component "Usluga za rezervacije" as Reservations
+        component "Usluga za brodove" as Boats
+    }
+
+    database "PostgreSQL" as DB
+}
+
+' Vanjski sustavi
+
+component "Meteorološki servis\n(vanjski)" as WeatherAPI
+component "Kartografski servis\n(vanjski)" as Maps
+component "Vanjski pružatelj\nidentiteta (Google)" as OAuth
+
+' Ovisnosti i sučelja
+
+Web --> API : zahtjevi i odgovori
+
+API --> Users : prijava i upravljanje\n korisnicima
+API --> Reservations : stvaranje i upravljanje\nrezervacijama
+API --> Boats : dohvat i upravljanje\nbrodovima
+
+Users --> DB : pohrana i dohvat korisnika
+Reservations --> DB : pohrana i dohvat rezervacija
+Boats --> DB : pohrana i dohvat\npodataka o brodovima
+
+Web --> WeatherAPI : dohvat podataka o vremenu
+Web --> Maps : prikaz luka na karti
+
+Users --> OAuth : provjera identiteta korisnika
+
+@enduml
