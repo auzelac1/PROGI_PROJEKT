@@ -6,7 +6,7 @@ skinparam backgroundColor #FFFFFF
 ' --- RAZREDI ---
 
 class Korisnik {
-  - uid: String
+  - uuid: String
   - uloga: UlogaKorisnika
   - ime: String
   - prezime: String
