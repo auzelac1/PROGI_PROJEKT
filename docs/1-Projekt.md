@@ -44,6 +44,8 @@
 - plaćanje – obrazloženje: nije podržano u sklopu projektnog zadatka
 - iznajmljivanje po satu (najkraće trajanje najma je jedan dan) – obrazloženje: [nadopuniti]
 - rad s više charter tvrtki (sustav služi isključivo jednoj tvrtki) – obrazloženje: [nadopuniti]
+- povrat plovila u drugu luku (one-way charter) – obrazloženje: [nadopuniti]
+- rezervacija više plovila odjednom (jedna rezervacija odnosi se na jedno plovilo) – obrazloženje: [nadopuniti]
 
 **Vanjske ovisnosti:**
 
