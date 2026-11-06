@@ -6,10 +6,10 @@
 
 **Cilj:** Jasno razgraničiti problem koji se rješava od predloženog rješenja i stvarne koristi za korisnika.
 
-**Problem:** Poslovanje charter kompanija idalje se često oslanja na ručne procese, telefonske pozive i neusklađene tablice, što troši znatno vrijeme i povećava rizik od pogrešaka poput dvostrukih rezervacija. Klijentima istovremeno nedostaje brz i jednostavan uvid u raspoloživost, specifikacije i cijene plovila u realnom vremenu, što usporava cjelokupni proces prodaje.
+**Problem:** Poslovanje charter kompanija i dalje se često oslanja na ručne procese, telefonske pozive i neusklađene tablice, što troši znatno vrijeme i povećava rizik od pogrešaka poput dvostrukih rezervacija. Klijentima istovremeno nedostaje brz i jednostavan uvid u raspoloživost, specifikacije i cijene plovila u realnom vremenu, što usporava cjelokupni proces prodaje.
 
 **Cilj projekta:** Razviti web sustav koji modernizira i digitalizira charter poslovanje pružajući klijentima jednostavan uvid u ponudu, pretraživanje i rezervaciju plovila u realnom vremenu. Sustav istovremeno omogućuje zaposlenicima tvrtke centralizirano upravljanje flotom, rezervacijama i korisničkim ulogama, čime se automatiziraju poslovni procesi i smanjuje administrativno opterećenje.
-**Očekivana korist:** [nadopuniti]
+**Očekivana korist:** Klijenti mogu u bilo kojem trenutku sami provjeriti raspoloživost, cijene i dodatne usluge te odmah rezervirati plovilo i dobiti potvrdu e-poštom, bez čekanja na odgovor tvrtke. Automatsko ažuriranje zauzetosti sprječava dvostruke rezervacije. Djelatnici imaju jasan raspored preuzimanja i povrata plovila, administratori upravljaju flotom i rezervacijama na jednom mjestu, a voditelj dobiva statističke podatke o poslovanju bez ručnog prikupljanja iz više izvora
 
 ## 1.2 Ciljani korisnici i dionici
 
@@ -17,8 +17,8 @@
 
 | Skupina korisnika ili dionika | Potreba ili interes relevantan za ovaj projekt |
 | --- | --- |
-| Neprijavljeni korisnik | Pregledati osnovne podatke o plovilima na početnoj stranici bez prijave. |
-| Klijent | Pretražiti plovila prema svojim kriterijima, rezervirati plovilo s dodatnim uslugama i pregledati vlastite rezervacije. |
+| Neprijavljeni korisnik | Pregledati i pretražiti plovila prema svojim kriterijima. |
+| Klijent | Rezervirati plovilo s dodatnim uslugama i pregledati vlastite rezervacije. |
 | Djelatnik | Pregledati raspored preuzimanja i povrata plovila te podatke potrebne za realizaciju najma. |
 | Voditelj | Pregledati statističke podatke o poslovanju i izvesti odabrane podatke za daljnju analizu. |
 | Administrator | Upravljati flotom (plovila, oprema, cijene, dodatne usluge, nedostupnost), rezervacijama i korisnicima (dodjela uloga). |
@@ -37,21 +37,21 @@
 - upravljanje flotom, rezervacijama i korisnicima (administrator)
 - statistika i izvoz odabranih podataka (voditelj)
 - prijava putem vanjskog pružatelja identiteta
-- prikaz vremenske prognoze i položaja matične luke i lokacije preuzimanja na karti
+- prikaz vremenske prognoze i položaja matične luke na karti
 
 **Izvan opsega ili odgođeno:**
 
-- plaćanje – obrazloženje: nije podržano u sklopu projektnog zadatka
-- iznajmljivanje po satu (najkraće trajanje najma je jedan dan) – obrazloženje: [nadopuniti]
-- rad s više charter tvrtki (sustav služi isključivo jednoj tvrtki) – obrazloženje: [nadopuniti]
-- povrat plovila u drugu luku (one-way charter) – obrazloženje: [nadopuniti]
-- rezervacija više plovila odjednom (jedna rezervacija odnosi se na jedno plovilo) – obrazloženje: [nadopuniti]
+- plaćanje – obrazloženje: nije dio projektnog zadatka
+- iznajmljivanje po satu (najkraće trajanje najma je jedan dan) – obrazloženje: charter se tradicionalno rezervira na nekoliko dana
+- rad s više charter tvrtki (sustav služi isključivo jednoj tvrtki) – obrazloženje: odgođeno, planira se razvoj za više tvrtki ako ostane vremena
+- povrat plovila u drugu luku (one-way charter) – obrazloženje: zahtijeva praćenje trenutne lokacije plovila, logistiku vraćanja u matičnu luku, što bitno komplicira provjeru raspoloživosti i raspored djelatnika.
 
 **Vanjske ovisnosti:**
 
-- vanjski pružatelj identiteta (OpenID Connect / OAuth 2.0) – pružatelj: [nadopuniti]
-- meteorološki servis – servis: [nadopuniti]
-- kartografski servis – servis: [nadopuniti]
+- vanjski pružatelj identiteta (OpenID Connect / OAuth 2.0) – pružatelj: Google
+- meteorološki servis – servis: Open-Meteo API
+- kartografski servis – servis: OpenStreetMap
+
 
 ## 1.4 Postojeći pristupi i opravdanost projekta
 
