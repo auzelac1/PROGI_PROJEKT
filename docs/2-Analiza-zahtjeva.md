@@ -25,7 +25,7 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 
 | ID    | Opis                                                                                                                                | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                                                                                        |
 | ----- | ----------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| F-3.1 | Prijavljeni klijent može rezervirati slobodno plovilo za odabrano razdoblje i broj osoba te uz rezervaciju odabrati dodatne usluge. | Visok     | Projektni zadatak | Rezervacija dobiva status „potvrđena“ i prikazan je ukupni iznos; preklapanje termina, broj osoba veći od kapaciteta i razdoblje u prošlosti nisu dopušteni. |
+| F-3.1 | Prijavljeni klijent može rezervirati slobodno plovilo za odabrano razdoblje i za određeni broj osoba te uz rezervaciju odabrati dodatne usluge, ali ne smije već imati jednu rezervaciju u tijeku. | Visok     | Projektni zadatak | Rezervacija dobiva status „potvrđena“ i prikazan je ukupni iznos; preklapanje termina, broj osoba veći od kapaciteta i razdoblje u prošlosti nisu dopušteni. |
 | F-3.2 | Sustav privremeno zadržava odabrani termin dok klijent dovršava rezervaciju.                                                        | Srednji   | Odluka tima       | Zadržani termin 10 minuta nije dostupan drugim klijentima; nakon isteka roka bez potvrde ponovno je slobodan.                                                |
 
 ### 2.1.4 Potvrda i pregled rezervacija (klijent)
@@ -51,8 +51,7 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 
 | ID    | Opis                                                                                         | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                    |
 | ----- | -------------------------------------------------------------------------------------------- | --------- | ----------------- | ---------------------------------------------------------------------------------------- |
-| F-7.1 | Administrator može dodavati i uređivati plovila, njihovu opremu i dodatne usluge s cijenama. | Visok     | Projektni zadatak | Dodano ili izmijenjeno plovilo odmah je vidljivo u pretrazi i pregledu s novim podacima. |
-| F-7.2 | Administrator može evidentirati razdoblje nedostupnosti plovila.                             | Srednji   | Projektni zadatak | U tom razdoblju plovilo nije slobodno u pretrazi i ne može se rezervirati                |
+| F-7.1 | Administrator može upravljati flotom: plovilima, opremom, dodatnim uslugama s cijenama i razdobljima nedostupnosti. | Visok | Projektni zadatak | Promjene su odmah vidljive u pretrazi i pregledu plovila; deaktivirano plovilo ne pojavljuje se u pretrazi; pri unosu nedostupnosti ili deaktivaciji prikazuju se pogođene rezervacije, koje se nakon potvrde otkazuju i klijenti dobivaju e-poštu. |
 
 ### 2.1.8 Upravljanje korisnicima (administrator)
 
@@ -95,7 +94,7 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 | A-02 Klijent                      | Pretražuje plovila, izrađuje rezervacije i pregledava vlastite rezervacije.         | F-1.1, F-2.1 – F-2.2, F-3.1 – F-3.2, F-4.1 – F-4.2, F-10.1 – F-10.2 |
 | A-03 Djelatnik                    | Pregledava raspored preuzimanja i povrata te podatke potrebne za realizaciju najma. | F-1.1, F-2.1 – F-2.2, F-5.1                                         |
 | A-04 Voditelj                     | Pregledava statistiku i izvozi odabrane podatke.                                    | F-1.1, F-2.1 – F-2.2, F-9.1 – F-9.2                                 |
-| A-05 Administrator                | Upravlja flotom, rezervacijama i korisnicima.                                       | F-1.1, F-2.1 – F-2.2, F-5.1, F-6.1, F-7.1 – F-7.2, F-8.1            |
+| A-05 Administrator                | Upravlja flotom, rezervacijama i korisnicima.                                       | F-1.1, F-2.1 – F-2.2, F-5.1, F-6.1, F-7.1, F-8.1            |
 | A-06 Vanjski pružatelj identiteta | Provodi prijavu korisnika (OpenID Connect / OAuth 2.0).                             | F-1.1, NF-03                                                        |
 | A-07 Meteorološki servis          | Daje podatke o vremenskoj prognozi.                                                 | F-10.1                                                              |
 | A-08 Kartografski servis          | Daje prikaz karte.                                                                  | F-10.2                                                              |
@@ -104,23 +103,23 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 
 **Cilj:** Zabilježiti projektno specifične granice i pretpostavke koje utječu na zahtjeve ili oblikovanje, zajedno s njihovim izvorom i praktičnom posljedicom. Ovo je njihovo mjerodavno mjesto u dokumentaciji.
 
-| ID  | Tip | Opis ograničenja ili pretpostavke                                                                       | Izvor | Inženjerska posljedica / Provjera |
-| --- | --- | ------------------------------------------------------------------------------------------------------- | ----- | --------------------------------- |
-|     |     | Sustav podrazumijeva rad s isključivo jednom charter tvrtkom.                                           |       |                                   |
-|     |     | Najkraće trajanje najma je jedan dan; iznajmljivanje po satu nije podržano.                             |       |                                   |
-|     |     | Vrijeme preuzimanja i povrata fiksno je za svako plovilo, a ne za cijelu flotu; preuzimanje je prije povrata. |       |                                   |
-|     |     | Cijena najma obračunava se po danu, a svaka dodatna usluga naplaćuje se jednokratno po rezervaciji. Ukupan iznos ne mijenja se promjenom cjenika, nego se ponovno računa samo kad se promijene datumi ili dodatne usluge. |       |                                   |
-|     |     | Prvi administrator određuje se konfiguracijom sustava (pri postavljanju aplikacije).                    |       |                                   |
-|     |     | Plaćanje nije podržano u sklopu projektnog zadatka.                                                     |       |                                   |
-|     |     | Djelatnik, voditelj ili administrator koji želi rezervirati plovilo prijavljuje se klijentskim računom. |       |                                   |
-|     | Pretpostavka | Plovila istog modela imaju jednake tehničke podatke, opremu i dodatne usluge s istim cijenama. |       |                                   |
-|     | Pretpostavka | Lokacija preuzimanja i povrata je matična luka plovila, s jednom fiksnom točkom sastanka po luci. |       |                                   |
-|     | Pretpostavka | Plovilo se vraća na vrijeme, pa se najam smatra završenim čim prođe vrijeme povrata. |       |                                   |
-|     | Ograničenje | Jedna rezervacija odnosi se na jedno plovilo. |       |                                   |
-|     | Ograničenje | Klijent smije imati samo jednu rezervaciju u tijeku. |       |                                   |
-|     | Ograničenje | Datumi su uključivi, a isto plovilo može krenuti na novi najam najranije dan nakon povratka. |       |                                   |
-|     | Ograničenje | Kategorije plovila su fiksan popis. |       |                                   |
-|     | Ograničenje | Rezervaciju može otkazati samo administrator. |       |                                   |
+| ID   | Tip          | Opis ograničenja ili pretpostavke | Izvor | Inženjerska posljedica / Provjera |
+| ---- | ------------ | --------------------------------- | ----- | --------------------------------- |
+| O-01 | Ograničenje  | Sustav podržava rad s jednom charter tvrtkom. | Odluka tima | Model baze nema entitet tvrtke. |
+| O-02 | Ograničenje  | Najkraće trajanje najma je jedan dan; iznajmljivanje po satu nije podržano. | Odluka tima | Termini se pohranjuju kao datumi bez sata; provjera zauzetosti i cijena računaju se po danima. |
+| O-03 | Ograničenje  | Vrijeme preuzimanja i povrata fiksno je za svako plovilo, a ne za cijelu flotu; preuzimanje je prije povrata. | Odluka tima | Vremena preuzimanja i atributi su plovila |
+| O-04 | Ograničenje  | Cijena najma obračunava se po danu, a svaka dodatna usluga naplaćuje se jednokratno po rezervaciji. Ukupan iznos ne mijenja se promjenom cjenika, nego se ponovno računa samo kad se promijene datumi ili dodatne usluge. | Odluka tima | Ukupan iznos sprema se u rezervaciju u trenutku izrade; test: promjena cjenika ne mijenja postojeće rezervacije. |
+| O-05 | Ograničenje  | Prvi administrator određuje se konfiguracijom sustava (pri postavljanju aplikacije). | Odluka tima | E-mail prvog administratora zadaje se varijablom okruženja; pri prvoj prijavi dobiva ulogu administratora. |
+| O-06 | Ograničenje  | Plaćanje nije podržano u sklopu projektnog zadatka. | Projektni zadatak | Nema integracije s platnim servisom; rezervacija je potvrđena bez plaćanja. |
+| O-07 | Ograničenje  | Djelatnik, voditelj ili administrator koji želi rezervirati plovilo prijavljuje se klijentskim računom. | Odluka tima | Jedan korisnik ima jednu ulogu; rezervaciju može izraditi samo uloga klijenta. |
+| O-08 | Ograničenje  | Jedna rezervacija odnosi se na jedno plovilo. | Odluka tima | Rezervacija ima jednu poveznicu na plovilo. |
+| O-09 | Ograničenje  | Klijent smije imati samo jednu rezervaciju u tijeku. | Odluka tima | Provjera pri izradi rezervacije; pokušaj druge rezervacije odbija se s porukom. |
+| O-10 | Ograničenje  | Datumi su uključivi, a isto plovilo može krenuti na novi najam najranije dan nakon povratka. | Odluka tima | Provjera preklapanja koristi uključive datume; test rubnog slučaja (povratak i novi najam isti dan). |
+| O-11 | Ograničenje  | Kategorije plovila su fiksan popis. | Odluka tima | Kategorije su unaprijed upisane u bazu; administrator ih ne uređuje. |
+| O-12 | Ograničenje  | Rezervaciju može otkazati samo administrator. | Odluka tima | Klijent nema opciju otkazivanja. |
+| P-01 | Pretpostavka | Plovila istog modela imaju jednake tehničke podatke, opremu i dodatne usluge s istim cijenama. | Odluka tima | Tehnički podaci, oprema i usluge vezani su uz model, a ne uz pojedino plovilo. |
+| P-02 | Pretpostavka | Lokacija preuzimanja i povrata je matična luka plovila, s jednom fiksnom točkom sastanka po luci. | Odluka tima | Luka ima fiksne koordinate koje se prikazuju na karti (F-10.2); nema zasebne lokacije preuzimanja. |
+| P-03 | Pretpostavka | Plovilo se vraća na vrijeme, pa se najam smatra završenim čim prođe vrijeme povrata. | Odluka tima | Status najma računa se iz datuma i vremena povrata; nema ručnog potvrđivanja povrata. |
 
 ## 2.5 Značajne promjene zahtjeva
 
