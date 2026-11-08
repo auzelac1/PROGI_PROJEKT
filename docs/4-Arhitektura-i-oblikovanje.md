@@ -20,7 +20,8 @@
 
 | Odluka | Razmatrana alternativa | Projektno specifično obrazloženje i kompromis |
 | --- | --- | --- |
-|  |  |  |
+| Čim klijent klikne "Nastavi" sustav privremeno blokira termin na 10 minuta. | Termin dobiva klijent koji prvi popuni i potvrdi rezervaciju. | Nakon pritiska "Nastavi" klijent odabire dodatne usluge i potvrđuje rezervaciju. Bez blokade drugi klijent bi ga mogao preduhitriti i oduzeti mu termin nakon što prvi već ispuni podatke. Ovako se jamči da se rezervacija može ispuniti bez rizika gubitka (F-4.5, F-4.6, F-4.8). |
+| Djelatnik, voditelj ili administrator se mora prijaviti novim klijentskim računom ako želi rezervirati plovilo. | Svaka uloga može vršiti rezervacije | Samo klijent može rezervirati plovilo (F-4.3), a svaki korisnik ima jednu ulogu. Sustav time ne miješa službene ovlasti i potencijalne klijentske zahtjeve te nije potrebno implementirati kombinirano sučelje. Kompromisno rješenje je da određene osobe moraju izraditi dva računa. |
 
 ## 4.2 Gradivni blokovi i UML dijagram komponenata
 
