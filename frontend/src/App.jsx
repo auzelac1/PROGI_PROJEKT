@@ -9,6 +9,15 @@ function App() {
 
   return (
     <>
+      <div className="container py-4">
+        <h1 className="mb-3">Charter poslovanje</h1>
+
+        <button type="button" className="btn btn-primary">
+          Pregledaj plovila
+          //Test gumb s bootstrapom, nista ne radi
+        </button>
+      </div>
+
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
