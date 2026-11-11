@@ -155,6 +155,8 @@ Tablica `REZERVACIJA_USLUGA` vezana je uz rezervaciju, a time i uz konkretan bro
 | `datum_kraj` | `date` | da | Kraj razdoblja, uključivo; brod se može preuzeti najranije sljedeći dan |
 | `razlog` | `text` | da | Razlog, npr. servis ili održavanje |
 
+U tablici se vode samo privremene nedostupnosti. Brod koji je trajno izvan flote ne upisuje se ovdje, nego mu se u tablici `BROD` atribut `aktivan` postavlja na `false`.
+
 Zauzetost broda provjerava se u tablicama `REZERVACIJA` i `NEDOSTUPNOST`. Termin je zauzet ako za njega postoji potvrđena rezervacija, rezervacija „u tijeku“ mlađa od 10 minuta ili razdoblje nedostupnosti. Način zaštite od istodobnih upisa određuje se u implementaciji.
 
 Kad administrator unese nedostupnost, sustav prikazuje potvrđene rezervacije koje se s njom preklapaju. Nakon njegove potvrde nedostupnost se sprema, a te se rezervacije otkazuju odjednom i klijenti dobivaju e-poštu.
@@ -232,4 +234,4 @@ ID-jevi se dodjeljuju slijedno (+1) i samo rastu. ID se nikad ne koristi ponovno
 | `MODEL_OPREMA` | `id_model` | `MODEL` |
 | `MODEL_OPREMA` | `id_opreme` | `OPREMA` |
 
-Kad se rezervacija u tijeku obriše, brišu se i njezini retci u tablici `REZERVACIJA_USLUGA`.
+Dodatne usluge upisuju se u tablicu `REZERVACIJA_USLUGA` tek nakon potvrde rezervacije, pa rezervacija u tijeku nema redaka u toj tablici. Do potvrde se odabrane usluge čuvaju u `sessionStorage` preglednika, da ne nestanu pri osvježavanju stranice.
