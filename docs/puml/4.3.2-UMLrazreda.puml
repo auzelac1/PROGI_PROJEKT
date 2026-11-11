@@ -12,7 +12,6 @@ class Korisnik {
   - prezime: String
   - email: String
   - telefon: String
-  + registrirajSe(): boolean
   + prijaviSe(): boolean
 }
 
@@ -21,6 +20,7 @@ class Rezervacija {
   - datumPreuzimanja: Date
   - datumPovratka: Date
   - brojOsoba: int
+  - vrijemeNastanak: DateTime
   - cijenaUk: decimal
   - status: StatusRezervacije
   + kreirajRezervaciju(): boolean
@@ -41,9 +41,13 @@ class Brod {
 
 class Model {
   - idModel: int
-  - naziv: String
+  - tip: String
+  - kategorija: String
+  - proizvodjac: String
+  - model: String
   - kapacitet: int
   - brojKabina: int
+  - brojLezajeva: int
 }
 
 class Luka {
@@ -56,29 +60,36 @@ class Luka {
 class DodatnaUsluga {
   - idDodatneUsluge: int
   - naziv: String
+}
+
+class UslugaModela {
   - cijena: decimal
 }
 
 
 enum UlogaKorisnika {
-  GOST
-  KORISNIK
-  ADMINISTRATOR
+  KLIJENT
+  ADMIN
   DJELATNIK
+  VODITELJ
 }
 
 enum StatusRezervacije {
-  U TIJEKU
+  U_TIJEKU
   POTVRDENA
   OTKAZANA
-  
 }
 
 ' --- VEZE (ASOCIJACIJE) ---
 
 Korisnik "1" -- "0..*" Rezervacija : izradjuje >
 Rezervacija "0..*" -- "1" Brod : odnosi se na >
-Rezervacija "1" *-- "0..*" DodatnaUsluga : sadrzi >
+Rezervacija "0..*" -- "1" Luka : mjesto preuzimanja >
+Rezervacija "0..*" -- "0..*" DodatnaUsluga : sadrzi >
+Brod "0..*" -- "1" Model : primjerak je >
+Brod "0..*" -- "1" Luka : maticna luka >
+Model "0..*" -- "0..*" DodatnaUsluga : nudi >
+(Model, DodatnaUsluga) .. UslugaModela
 Korisnik ..> UlogaKorisnika : koristi >
 Rezervacija ..> StatusRezervacije : koristi >
 

@@ -11,7 +11,7 @@ Tipovi su logički, kao u ER dijagramu. `ID` označava identifikator, `text` niz
 | Atribut | Tip | Obavezan | Opis |
 | --- | --- | --- | --- |
 | `UUID` | `text` | da | Identifikator korisnika koji dolazi od Googlea |
-| `uloga` | `enum` | da | klijent, admin, djelatnik ili voditelj; novi korisnik dobiva ulogu klijenta, a prvi administrator određuje se konfiguracijom |
+| `uloga` | `enum` | da | klijent, admin, djelatnik ili voditelj; novi korisnik dobiva ulogu klijenta; prvom administratoru developer nakon njegove prve prijave ručno u bazi promijeni ulogu u admin |
 | `ime` | `text` | ne | Ime korisnika; upisuje se pri prijavi ako ga Google pošalje |
 | `prezime` | `text` | ne | Prezime korisnika; upisuje se pri prijavi ako ga Google pošalje |
 | `email` | `text` | da | Adresa e-pošte |

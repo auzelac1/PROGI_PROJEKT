@@ -5,7 +5,7 @@ title Charter poslovanje - logički podatkovni model
 skinparam shadowing false
 
 entity "Korisnik" as korisnik {
-    * UID : text <<PK>>
+    * UUID : text <<PK>>
     --
     * uloga : enum
     ime : text
@@ -60,7 +60,7 @@ entity "Brod" as brod {
 entity "Rezervacija" as rezervacija {
     * id_rezervacije : ID <<PK>>
     --
-    * UID : text <<FK>>
+    * UUID : text <<FK>>
     * id_brod : ID <<FK>>
     * id_luka : ID <<FK>>
     * status : enum

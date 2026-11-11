@@ -27,14 +27,14 @@
 
 **Cilj:** Prikazati logičku podjelu programa na komponente, njihova sučelja i vanjske integracije. Dijagram komponenata prikazuje logičku organizaciju, dok dijagram razmještaja prikazuje fizičko izvođenje. Ovaj prikaz ažurirajte kako sustav poprima konačan oblik.
 
-**Dijagram komponenata:** ![Dijagram komponenata Charter poslovanje](./assets/diagrams/4-2-dijagram-komponenata.svg)
+**Dijagram komponenata:** ![Dijagram komponenata Charter poslovanje](./assets/diagrams/4-2-dijagram-komponenata.svg)  
 **PlantUML izvor:** [izvor](./puml/4-2-dijagram-komponenata.puml)
 
 | Komponenta | Odgovornost | Razlog za ovu granicu |
 | --- | --- | --- |
 | Web-klijent | Prikazuje plovila i omogućuje rezervaciju istih. Omogućava prijavu u sustav, pregled i upravljanje rezervacijama, flotom i korisnicima, izvoz podataka te prikaz statistike.  | Korisnička interakcija odvojena je od pravila pohrane i pristupa bazi podataka. |
 | REST API | Prihvaća zahtjeve web-klijenta, prosljeđuje ih ostalim komponentama sustava te vraća odgovore.  | Odgovornosti izložene putem HTTP-a odvojene su od procesa obrade podataka. |
-| Usluga za brodove | Dohvaćanje i upravljanje podatcima o modelima, brodovima, njihovim osnovnim i dodatnim uslugama te razdobljima nedostupnosti.  | Funkcionalnosti vezane za dohvat i upravljanje plovilma odvojene su od ostalih funkcionalnosti sustava. |
+| Usluga za brodove | Dohvaćanje i upravljanje podatcima o modelima, brodovima, njihovim osnovnim i dodatnim uslugama te razdobljima nedostupnosti.  | Funkcionalnosti vezane za dohvat i upravljanje plovilima odvojene su od ostalih funkcionalnosti sustava. |
 | Usluga za rezervacije | Dohvaća rezervacije i omogućuje stvaranje, izmjenu i otkazivanje rezervacija. | Funkcionalnosti vezane uz dohvat i upravljanje rezervacijama odvojene su od ostalih funkcionalnosti sustava. |
 | Usluga za korisnike | Upravljanje korisnicima i prijava putem vanjskog pružatelja identiteta. | Funkcionalnosti vezane uz prijavu i upravljanje korisnicima odvojene su od ostalih funkcionalnosti sustava. |
 | Meteorološki servis (vanjski) | Dohvat i prikaz podataka o vremenu za odabrano razdoblje | Nemogućnost prikupljanja vlastitih meteoroloških podataka. |
@@ -55,14 +55,17 @@
 **Slika 4.2. ER dijagram podataka sustava Charter poslovanje**
 
 **Izvor dijagrama:** [izvor](./puml/4-2-charter-data-ERD.puml)  
-**Implementacija:** [Navedite gdje je odgovarajući model podataka definiran u projektu.]
+**Implementacija:** [db/migrations/001_initial_schema.sql](../db/migrations/001_initial_schema.sql)
 
 ### 4.3.2 Reprezentativni UML dijagram razreda
 
 **Cilj:** Prije implementacije reprezentativnog dijela sustava modelirati i prikazati razrede ili sučelja potrebna za dodjelu odgovornosti, operacija i veza. Oblikovanje ažurirajte kada se te odluke promijene.
 
-**Dijagram razreda:** [Ugradite čitljiv UML dijagram razreda za reprezentativni dio oblikovanja.]  
-**PlantUML izvor:** [Poveznica na odgovarajuću `.puml` datoteku.]  
+![UML dijagram razreda sustava Charter poslovanje](./assets/diagrams/4.3.2-UMLrazreda.svg)
+
+**Slika 4.3. UML dijagram razreda sustava Charter poslovanje**
+
+**PlantUML izvor:** [izvor](./puml/4.3.2-UMLrazreda.puml)  
 **Referenca na kod pri završnom pregledu:** [Poveznica na odgovarajuću implementaciju.]
 
 ## 4.4 Ponašanje tijekom izvođenja
