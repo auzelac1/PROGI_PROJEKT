@@ -10,170 +10,116 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 
 ### 2.1.1 Prijava i ovlasti
 
-| ID    | Opis                                                                                         | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ----- | -------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-1.1 | Korisnik se prijavljuje putem vanjskog pružatelja identiteta (OpenID Connect ili OAuth 2.0). |           |       |                       |
-| F-1.2 | Svaki novoregistrirani korisnik automatski dobiva ulogu klijenta.                            |           |       |                       |
+| ID    | Opis                                                          | Prioritet | Izvor            | Kriteriji prihvaćanja                                               |
+| ----- | ------------------------------------------------------------- | --------- | ---------------- | ------------------------------------------------------------------- |
+| F-1.1 | Korisnik se prijavljuje putem vanjskog pružatelja identiteta. | Visok     | Pravila kolegija | Uspješna prijava omogućuje radnje dostupne prijavljenim korisnicima |
 
-### 2.1.2 Pretraga plovila
+### 2.1.2 Pretraga i pregled plovila
 
-| ID    | Opis                                                                                                                                                         | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ----- | --------------------- |
-| F-2.1 | Prijavljeni korisnik može pretražiti plovila prema terminu; prikazuju se samo plovila slobodna u cijelom odabranom razdoblju.                                |           |       |                       |
-| F-2.2 | Prijavljeni korisnik može pretražiti plovila prema lokaciji polaska.                                                                                         |           |       |                       |
-| F-2.3 | Prijavljeni korisnik može pretražiti plovila prema vrsti plovila.                                                                                            |           |       |                       |
-| F-2.4 | Prijavljeni korisnik može pretražiti plovila prema broju osoba; prikazuju se plovila kapaciteta jednakog ili većeg od broja osoba.                           |           |       |                       |
-| F-2.5 | Prijavljeni korisnik može pretražiti plovila prema cijeni najma u rasponu od–do.                                                                             |           |       |                       |
-| F-2.6 | Prijavljeni korisnik može pretražiti plovila prema broju kabina.                                                                                             |           |       |                       |
-| F-2.7 | Prijavljeni korisnik može pretražiti plovila prema opremi.                                                                                                   |           |       |                       |
-| F-2.8 | Prijavljeni korisnik može pretražiti plovila prema dodatnim uslugama; svako plovilo ima vlastiti popis usluga, a filtrirati je moguće po najčešćim uslugama. |           |       |                       |
+| ID    | Opis                                                                                                            | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                             |
+| ----- | --------------------------------------------------------------------------------------------------------------- | --------- | ----------------- | ------------------------------------------------------------------------------------------------- |
+| F-2.1 | Svaki korisnik, neovisno o tome je li prijavljen, može pretraživati plovila prema kriterijima.                  | Visok     | Projektni zadatak | Prikaz plovila koja odgovaraju odabranim kriterijima i slobodna su u cijelom odabranom razdoblju. |
+| F-2.2 | Svaki korisnik, neovisno o tome je li prijavljen, može pregledati podatke o plovilu i njegove slobodne termine. | Visok     | Projektni zadatak | Za odabrano plovilo prikazani svi evidentirani podaci i slobodni termini.                         |
 
-### 2.1.3 Pregled plovila
+### 2.1.3 Izrada rezervacije
 
-| ID    | Opis                                                                                                                          | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-3.1 | Korisnik može na početnoj stranici pregledati osnovne podatke o plovilima neovisno o tome je li prijavljen.                   |           |       |                       |
-| F-3.2 | Prijavljeni korisnik može pregledati fotografije plovila.                                                                     |           |       |                       |
-| F-3.3 | Prijavljeni korisnik može pregledati cijenu najma plovila.                                                                    |           |       |                       |
-| F-3.4 | Prijavljeni korisnik može pregledati popis dodatnih usluga plovila s cijenama (cijene usluga razlikuju se po modelu plovila). |           |       |                       |
-| F-3.5 | Prijavljeni korisnik može pregledati slobodne termine plovila.                                                                |           |       |                       |
+| ID    | Opis                                                                                                                                | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                                                                                        |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| F-3.1 | Prijavljeni klijent može rezervirati slobodno plovilo za odabrano razdoblje i za određeni broj osoba te uz rezervaciju odabrati dodatne usluge, ali ne smije već imati jednu rezervaciju u tijeku. | Visok     | Projektni zadatak | Rezervacija dobiva status „potvrđena“ i prikazan je ukupni iznos; preklapanje termina, broj osoba veći od kapaciteta i razdoblje u prošlosti nisu dopušteni. |
+| F-3.2 | Sustav privremeno zadržava odabrani termin dok klijent dovršava rezervaciju.                                                        | Srednji   | Odluka tima       | Zadržani termin 10 minuta nije dostupan drugim klijentima; nakon isteka roka bez potvrde ponovno je slobodan.                                                |
 
-### 2.1.4 Izrada rezervacije
+### 2.1.4 Potvrda i pregled rezervacija (klijent)
 
-| ID     | Opis                                                                                                                                                                                        | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-4.1  | Prijavljeni klijent može izraditi rezervaciju odabirom plovila, razdoblja najma (datum preuzimanja i povrata) i broja osoba.                                                                |           |       |                       |
-| F-4.2  | Klijent pri rezerviranju može odabrati dodatne usluge iz popisa odabranog plovila, uz prikaz njihovih cijena.                                                                               |           |       |                       |
-| F-4.3  | Plovila može rezervirati samo klijent.                                                                                                                                                      |           |       |                       |
-| F-4.4  | Pokušaj rezerviranja bez ovlasti nije moguć (sustav prikazuje poruku ili sučelje tu mogućnost ne nudi).                                                                                     |           |       |                       |
-| F-4.5  | Nakon klika na „Nastavi“ sustav izrađuje rezervaciju sa statusom „u tijeku“ i privremeno blokira termin na 10 minuta.                                                                       |           |       |                       |
-| F-4.6  | Tijekom blokade termin se drugim klijentima ne prikazuje kao slobodan i ne mogu ga rezervirati; ako ga pokušaju odabrati, sustav ih obavještava da termin nije dostupan.                    |           |       |                       |
-| F-4.7  | Ako rok blokade istekne bez potvrde, sustav briše rezervaciju i oslobađa termin.                                                                                                            |           |       |                       |
-| F-4.8  | Ako više klijenata istodobno pokuša rezervirati isti termin, prednost ima klijent koji je prvi kliknuo „Nastavi“.                                                                           |           |       |                       |
-| F-4.9  | Ako klijent potvrdi rezervaciju unutar 10 minuta, a pravila rezervacije su zadovoljena, sustav je automatski potvrđuje (status „potvrđena“).                                                |           |       |                       |
-| F-4.10 | Ukupna cijena rezervacije jednaka je cijeni najma plovila po danu × broj dana najma + zbroj cijena odabranih dodatnih usluga; svaka dodatna usluga naplaćuje se jednokratno po rezervaciji. |           |       |                       |
+| ID    | Opis                                                          | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                       |
+| ----- | ------------------------------------------------------------- | --------- | ----------------- | ------------------------------------------------------------------------------------------- |
+| F-4.1 | Prijavljeni klijent može pregledati sve vlastite rezervacije. | Visok     | Projektni zadatak | Prikaz samo vlastitih rezervacija klijenta, sa statusom, podacima i ukupnim iznosom.        |
+| F-4.2 | Klijent dobiva potvrdu e-poštom da je rezervacija potvrđena.  | Srednji   | Projektni zadatak | Nakon potvrde rezervacije na adresu e-pošte klijenta stiže poruka s podacima o rezervaciji. |
 
-### 2.1.5 Pravila i podaci rezervacije
+### 2.1.5 Raspored preuzimanja i povrata (djelatnik)
 
-| ID    | Opis                                                                                                                 | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ----- | -------------------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-5.1 | Sustav ne dopušta rezervaciju plovila u terminu koji se preklapa s drugom rezervacijom ili razdobljem nedostupnosti. |           |       |                       |
-| F-5.2 | Sustav jednoznačno vodi zauzetost plovila (potvrđene rezervacije, blokade u tijeku i razdoblja nedostupnosti).       |           |       |                       |
-| F-5.3 | Broj osoba u rezervaciji ne smije premašiti kapacitet plovila.                                                       |           |       |                       |
-| F-5.4 | Početak razdoblja najma mora biti prije kraja i ne smije biti u prošlosti.                                           |           |       |                       |
-| F-5.5 | Sustav vodi status svake rezervacije: u tijeku, potvrđena, otkazana, završen najam.                                  |           |       |                       |
-| F-5.6 | Podatke o klijentu (ime i prezime, adresa e-pošte, broj telefona) sustav preuzima iz korisničkog računa.             |           |       |                       |
+| ID    | Opis                                                                              | Prioritet | Izvor             | Kriteriji prihvaćanja                                                            |
+| ----- | --------------------------------------------------------------------------------- | --------- | ----------------- | -------------------------------------------------------------------------------- |
+| F-5.1 | Djelatnik i administrator mogu pregledati raspored preuzimanja i povrata plovila. | Visok     | Projektni zadatak | Prikaz svih potvrđenih rezervacija s njihovim detaljima, bez mogućnosti izmjene. |
 
-### 2.1.6 Potvrda i pregled rezervacija (klijent)
+### 2.1.6 Upravljanje rezervacijama (administrator)
 
-| ID    | Opis                                                                                                      | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ----- | --------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-6.1 | Nakon potvrde rezervacije klijent može pregledati podatke o rezervaciji i ukupni iznos.                   |           |       |                       |
-| F-6.2 | Sustav klijentu automatski šalje potvrdu rezervacije e-poštom.                                            |           |       |                       |
-| F-6.3 | Klijent može pregledati popis vlastitih rezervacija (potvrđene, otkazane i završene).                     |           |       |                       |
-| F-6.4 | Klijent može za svaku vlastitu rezervaciju pregledati podatke i ukupni iznos.                             |           |       |                       |
-| F-6.5 | Klijent automatski dobiva e-poštu od sustava ako se njegova rezervacija otkaže, s povratnom informacijom. |           |       |                       |
+| ID    | Opis                                                                         | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                                                                                          |
+| ----- | ---------------------------------------------------------------------------- | --------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| F-6.1 | Administrator može pregledati sve rezervacije te ih izmijeniti ili otkazati. | Visok     | Projektni zadatak | Moguće otkazati i izmjeniti samo potvrđene rezervacije, a izmijena podliježe pravilima izrade rezervacije; korisnik koji nije administrator nema tu mogućnost. |
 
-### 2.1.7 Raspored preuzimanja i povrata (djelatnik)
+### 2.1.7 Upravljanje flotom (administrator)
 
-| ID    | Opis                                                                                                                                                                                     | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-7.1 | Djelatnik i administrator mogu pregledati raspored preuzimanja i povrata plovila (samo za čitanje).                                                                                      |           |       |                       |
-| F-7.2 | Za svaku potvrđenu rezervaciju raspored prikazuje jedinstveni identifikator, plovilo, matičnu luku, datum i vrijeme preuzimanja i povrata, odabrane dodatne usluge, cijenu i broj osoba. |           |       |                       |
-| F-7.3 | Za svaku potvrđenu rezervaciju raspored prikazuje osnovne podatke o klijentu (ime i prezime, broj telefona, adresa e-pošte).                                                             |           |       |                       |
+| ID    | Opis                                                                                         | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                    |
+| ----- | -------------------------------------------------------------------------------------------- | --------- | ----------------- | ---------------------------------------------------------------------------------------- |
+| F-7.1 | Administrator može upravljati flotom: plovilima, opremom, dodatnim uslugama s cijenama i razdobljima nedostupnosti. | Visok | Projektni zadatak | Promjene su odmah vidljive u pretrazi i pregledu plovila; deaktivirano plovilo ne pojavljuje se u pretrazi; pri unosu nedostupnosti ili deaktivaciji prikazuju se pogođene rezervacije, koje se nakon potvrde otkazuju i klijenti dobivaju e-poštu. |
 
-### 2.1.8 Upravljanje rezervacijama (administrator)
+### 2.1.8 Upravljanje korisnicima (administrator)
 
-| ID    | Opis                                                                                       | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ----- | ------------------------------------------------------------------------------------------ | --------- | ----- | --------------------- |
-| F-8.1 | Administrator može pregledati sve rezervacije.                                             |           |       |                       |
-| F-8.2 | Administrator može ručno otkazati rezervaciju na upit klijenta ili uslijed hitnog slučaja. |           |       |                       |
-| F-8.3 | Rezervaciju može otkazati isključivo administrator.                                        |           |       |                       |
-| F-8.4 | Administrator može urediti rezervaciju (promjena datuma preuzimanja i završetka).          |           |       |                       |
-| F-8.5 | Uređivanje rezervacije podliježe istim pravilima kao izrada rezervacije.                   |           |       |                       |
+| ID    | Opis                                                           | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                                             |
+| ----- | -------------------------------------------------------------- | --------- | ----------------- | ----------------------------------------------------------------------------------------------------------------- |
+| F-8.1 | Administrator može pregledati korisnike i dodijeliti im ulogu. | Visok     | Projektni zadatak | Nova uloga vrijedi od sljedeće prijave korisnika; korisnik kojem uloga (još) nije dodijeljena ima ulogu klijenta. |
 
-### 2.1.9 Upravljanje flotom (administrator)
+### 2.1.9 Statistika i izvoz (voditelj)
 
-| ID    | Opis                                                                                                                            | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-9.1 | Administrator može pregledati flotu.                                                                                            |           |       |                       |
-| F-9.2 | Administrator može dodati plovilo.                                                                                              |           |       |                       |
-| F-9.3 | Administrator može izmijeniti plovilo.                                                                                          |           |       |                       |
-| F-9.4 | Administrator može dodati opremu plovila.                                                                                       |           |       |                       |
-| F-9.5 | Administrator može izmijeniti opremu plovila.                                                                                   |           |       |                       |
-| F-9.6 | Administrator može definirati dodatne usluge za pojedinačno plovilo, s cijenama (cijene usluga razlikuju se po modelu plovila). |           |       |                       |
-| F-9.7 | Administrator može evidentirati razdoblje kada plovilo nije raspoloživo zbog servisa, održavanja i sl.                          |           |       |                       |
+| ID    | Opis                                                        | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                                                                  |
+| ----- | ----------------------------------------------------------- | --------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| F-9.1 | Voditelj može pregledati statistiku poslovanja.             | Srednji   | Projektni zadatak | Prikaz zauzetosti plovila, broja rezervacija po razdobljima, ostvarenog prihoda te najtraženijih kategorija plovila i dodatnih usluga. |
+| F-9.2 | Voditelj može izvesti odabrane podatke u standardni format. | Srednji   | Projektni zadatak | Izvezena datoteka otvara se u uobičajenom alatu i sadrži odabrane podatke.                                                             |
 
-### 2.1.10 Upravljanje korisnicima (administrator)
+### 2.1.10 Vanjske usluge
 
-| ID     | Opis                                                                                                                                        | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-10.1 | Administrator može pregledati popis svih registriranih korisnika (klijenti, djelatnici, voditelji i administratori).                        |           |       |                       |
-| F-10.2 | Administrator može dodijeliti ulogu korisniku (djelatnik, voditelj, administrator).                                                         |           |       |                       |
-| F-10.3 | Administrator može promijeniti ulogu korisnika.                                                                                             |           |       |                       |
-| F-10.4 | Promjena uloge mijenja funkcionalnosti dostupne korisniku; osvježenje izgleda i funkcionalnosti aplikacije događa se pri sljedećoj prijavi. |           |       |                       |
-
-### 2.1.11 Statistika i izvoz (voditelj)
-
-| ID     | Opis                                                                                                          | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ------ | ------------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-11.1 | Voditelj može pregledati zauzetost pojedinih plovila.                                                         |           |       |                       |
-| F-11.2 | Voditelj može pregledati broj rezervacija po razdobljima.                                                     |           |       |                       |
-| F-11.3 | Voditelj može pregledati ostvareni prihod.                                                                    |           |       |                       |
-| F-11.4 | Voditelj može pregledati najtraženije kategorije plovila.                                                     |           |       |                       |
-| F-11.5 | Voditelj može pregledati najtraženije dodatne usluge.                                                         |           |       |                       |
-| F-11.6 | Voditelj može odabrane podatke iz baze izvesti u standardni format za daljnju analizu (npr. xlsx, json, csv). |           |       |                       |
-
-### 2.1.12 Vanjske usluge
-
-| ID     | Opis                                                                                                                                                      | Prioritet | Izvor | Kriteriji prihvaćanja |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | --------------------- |
-| F-12.1 | Sustav putem meteorološkog servisa prikazuje podatke o vremenskoj prognozi (temperatura, vjetar, ostali vremenski uvjeti) za mjesto i termin rezervacije. |           |       |                       |
-| F-12.2 | Sustav putem kartografskog servisa prikazuje položaj matične luke i lokacije preuzimanja plovila.                                                         |           |       |                       |
+| ID     | Opis                                                                                      | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                           |
+| ------ | ----------------------------------------------------------------------------------------- | --------- | ----------------- | ----------------------------------------------------------------------------------------------- |
+| F-10.1 | Sustav putem meteorološkog servisa prikazuje vremensku prognozu za mjesto i termin najma. | Srednji   | Projektni zadatak | Prikaz vremenskih uvjeta. Ako servis nije dostupan, ostatak stranice radi i prikazuje napomenu. |
+| F-10.2 | Sustav putem kartografskog servisa prikazuje matičnu luku plovila na karti.               | Visok     | Projektni zadatak | Prikaz matične luke na karti. Ako servis nije dostupan, prikazuje se naziv luke bez karte.      |
 
 ## 2.2 Nefunkcijski zahtjevi
 
 **Cilj:** Odrediti važna svojstva kvalitete i uvjete rada odobrene aplikacije na način koji tim može razumno provjeriti.
 
-| ID    | Opis                                                                                                                                 | Prioritet | Izvor | Način provjere |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------ | --------- | ----- | -------------- |
-| NF-01 | Sustav omogućuje istodobni rad više korisnika, pri čemu istodobne rezervacije istog plovila ne smiju dovesti do preklapanja termina. |           |       |                |
-| NF-02 | Korisničko sučelje je responzivno i prilagođeno radu na računalu, tabletu i mobilnom uređaju.                                        |           |       |                |
-| NF-03 | Prijava korisnika delegirana je vanjskom pružatelju identiteta.                                                                      |           |       |                |
-| NF-04 | Aplikacija je postavljena na javno dostupan poslužitelj, a komunikacija s web preglednikom odvija se putem HTTPS-a.                  |           |       |                |
-| NF-05 | Podaci se trajno pohranjuju u bazi podataka.                                                                                         |           |       |                |
-| NF-06 | Pohranjuju se isključivo osobni podaci nužni za rad sustava.                                                                         |           |       |                |
-| NF-07 | Klijent vidi samo vlastite podatke, a djelatnici samo podatke potrebne za realizaciju najma.                                         |           |       |                |
-| NF-08 | Ograničenja prema ulozi provjeravaju se na poslužitelju.                                                                             |           |       |                |
+| ID    | Opis                                                                                                                                 | Prioritet | Izvor             | Način provjere                                                                        |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------ | --------- | ----------------- | ------------------------------------------------------------------------------------- |
+| NF-01 | Sustav omogućuje istodobni rad više korisnika, pri čemu istodobne rezervacije istog plovila ne smiju dovesti do preklapanja termina. | Visok     | Projektni zadatak | Test s više istodobnih zahtjeva za isti termin; spremljena je samo jedna rezervacija. |
+| NF-02 | Korisničko sučelje je responzivno i prilagođeno radu na računalu, tabletu i mobilnom uređaju.                                        | Visok     | Projektni zadatak | Pregled glavnih stranica na širinama zaslona računala, tableta i mobitela.            |
+| NF-03 | Prijava korisnika delegirana je vanjskom pružatelju identiteta.                                                                      | Visok     | Pravila kolegija  | Pregled: aplikacija nema vlastiti obrazac za lozinku i ne pohranjuje lozinke.         |
+| NF-04 | Aplikacija je postavljena na javno dostupan poslužitelj, a komunikacija s web preglednikom odvija se putem HTTPS-a.                  | Visok     | Pravila kolegija  | Otvaranje javne adrese; preglednik prikazuje valjanu HTTPS vezu.                      |
 
 ## 2.3 Dionici i akteri
 
 **Cilj:** Utvrditi uloge koje utječu na zahtjeve i razlikovati dionike od aktera koji komuniciraju s aplikacijom.
 
-| ID uloge ili aktera               | Odnos prema sustavu                                                                 | Relevantni zahtjevi                                                                                        |
-| --------------------------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| A-01 Neprijavljeni korisnik       | Pregledava osnovne podatke o plovilima na početnoj stranici.                        | F-3.1                                                                                                      |
-| A-02 Klijent                      | Pretražuje plovila, izrađuje rezervacije i pregledava vlastite rezervacije.         | F-1.1 – F-1.2, F-2.1 – F-2.8, F-3.2 – F-3.5, F-4.1 – F-4.10, F-5.1 – F-5.6, F-6.1 – F-6.5, F-12.1 – F-12.2 |
-| A-03 Djelatnik                    | Pregledava raspored preuzimanja i povrata te podatke potrebne za realizaciju najma. | F-1.1, F-2.1 – F-2.8, F-3.2 – F-3.5, F-7.1 – F-7.3                                                         |
-| A-04 Voditelj                     | Pregledava statistiku i izvozi odabrane podatke.                                    | F-1.1, F-2.1 – F-2.8, F-3.2 – F-3.5, F-11.1 – F-11.6                                                       |
-| A-05 Administrator                | Upravlja flotom, rezervacijama i korisnicima.                                       | F-1.1, F-2.1 – F-2.8, F-3.2 – F-3.5, F-7.1 – F-7.3, F-8.1 – F-8.5, F-9.1 – F-9.7, F-10.1 – F-10.4          |
-| A-06 Vanjski pružatelj identiteta | Provodi prijavu korisnika (OpenID Connect / OAuth 2.0).                             | F-1.1, NF-03                                                                                               |
-| A-07 Meteorološki servis          | Daje podatke o vremenskoj prognozi.                                                 | F-12.1                                                                                                     |
-| A-08 Kartografski servis          | Daje prikaz karte.                                                                  | F-12.2                                                                                                     |
+| ID uloge ili aktera               | Odnos prema sustavu                                                                 | Relevantni zahtjevi                                                 |
+| --------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| A-01 Neprijavljeni korisnik       | Pregledava osnovne podatke o plovilima na početnoj stranici.                        | F-2.1 – F-2.2                                                       |
+| A-02 Klijent                      | Pretražuje plovila, izrađuje rezervacije i pregledava vlastite rezervacije.         | F-1.1, F-2.1 – F-2.2, F-3.1 – F-3.2, F-4.1 – F-4.2, F-10.1 – F-10.2 |
+| A-03 Djelatnik                    | Pregledava raspored preuzimanja i povrata te podatke potrebne za realizaciju najma. | F-1.1, F-2.1 – F-2.2, F-5.1                                         |
+| A-04 Voditelj                     | Pregledava statistiku i izvozi odabrane podatke.                                    | F-1.1, F-2.1 – F-2.2, F-9.1 – F-9.2                                 |
+| A-05 Administrator                | Upravlja flotom, rezervacijama i korisnicima.                                       | F-1.1, F-2.1 – F-2.2, F-5.1, F-6.1, F-7.1, F-8.1            |
+| A-06 Vanjski pružatelj identiteta | Provodi prijavu korisnika (OpenID Connect / OAuth 2.0).                             | F-1.1, NF-03                                                        |
+| A-07 Meteorološki servis          | Daje podatke o vremenskoj prognozi.                                                 | F-10.1                                                              |
+| A-08 Kartografski servis          | Daje prikaz karte.                                                                  | F-10.2                                                              |
 
 ## 2.4 Ograničenja i pretpostavke
 
 **Cilj:** Zabilježiti projektno specifične granice i pretpostavke koje utječu na zahtjeve ili oblikovanje, zajedno s njihovim izvorom i praktičnom posljedicom. Ovo je njihovo mjerodavno mjesto u dokumentaciji.
 
-| ID  | Tip | Opis ograničenja ili pretpostavke                                                                       | Izvor | Inženjerska posljedica / Provjera |
-| --- | --- | ------------------------------------------------------------------------------------------------------- | ----- | --------------------------------- |
-|     |     | Sustav podrazumijeva rad s isključivo jednom charter tvrtkom.                                           |       |                                   |
-|     |     | Najkraće trajanje najma je jedan dan; iznajmljivanje po satu nije podržano.                             |       |                                   |
-|     |     | Rezervacija se preuzima u fiksnom jutarnjem terminu, a povrat je u fiksnom popodnevnom terminu.         |       |                                   |
-|     |     | Cijena najma obračunava se po danu, a svaka dodatna usluga naplaćuje se jednokratno po rezervaciji.     |       |                                   |
-|     |     | Prvi administrator određuje se konfiguracijom sustava (pri postavljanju aplikacije).                    |       |                                   |
-|     |     | Plaćanje nije podržano u sklopu projektnog zadatka.                                                     |       |                                   |
-|     |     | Djelatnik, voditelj ili administrator koji želi rezervirati plovilo prijavljuje se klijentskim računom. |       |                                   |
+| ID   | Tip          | Opis ograničenja ili pretpostavke | Izvor | Inženjerska posljedica / Provjera |
+| ---- | ------------ | --------------------------------- | ----- | --------------------------------- |
+| O-01 | Ograničenje  | Sustav podržava rad s jednom charter tvrtkom. | Odluka tima | Model baze nema entitet tvrtke. |
+| O-02 | Ograničenje  | Najkraće trajanje najma je jedan dan; iznajmljivanje po satu nije podržano. | Odluka tima | Termini se pohranjuju kao datumi bez sata; provjera zauzetosti i cijena računaju se po danima. |
+| O-03 | Ograničenje  | Vrijeme preuzimanja i povrata fiksno je za svako plovilo, a ne za cijelu flotu; preuzimanje je prije povrata. | Odluka tima | Vremena preuzimanja i atributi su plovila |
+| O-04 | Ograničenje  | Cijena najma obračunava se po danu, a svaka dodatna usluga naplaćuje se jednokratno po rezervaciji. Ukupan iznos ne mijenja se promjenom cjenika, nego se ponovno računa samo kad se promijene datumi ili dodatne usluge. | Odluka tima | Ukupan iznos sprema se u rezervaciju u trenutku izrade; test: promjena cjenika ne mijenja postojeće rezervacije. |
+| O-05 | Ograničenje  | Prvi administrator određuje se konfiguracijom sustava (pri postavljanju aplikacije). | Odluka tima | E-mail prvog administratora zadaje se varijablom okruženja; pri prvoj prijavi dobiva ulogu administratora. |
+| O-06 | Ograničenje  | Plaćanje nije podržano u sklopu projektnog zadatka. | Projektni zadatak | Nema integracije s platnim servisom; rezervacija je potvrđena bez plaćanja. |
+| O-07 | Ograničenje  | Djelatnik, voditelj ili administrator koji želi rezervirati plovilo prijavljuje se klijentskim računom. | Odluka tima | Jedan korisnik ima jednu ulogu; rezervaciju može izraditi samo uloga klijenta. |
+| O-08 | Ograničenje  | Jedna rezervacija odnosi se na jedno plovilo. | Odluka tima | Rezervacija ima jednu poveznicu na plovilo. |
+| O-09 | Ograničenje  | Klijent smije imati samo jednu rezervaciju u tijeku. | Odluka tima | Provjera pri izradi rezervacije; pokušaj druge rezervacije odbija se s porukom. |
+| O-10 | Ograničenje  | Datumi su uključivi, a isto plovilo može krenuti na novi najam najranije dan nakon povratka. | Odluka tima | Provjera preklapanja koristi uključive datume; test rubnog slučaja (povratak i novi najam isti dan). |
+| O-11 | Ograničenje  | Kategorije plovila su fiksan popis. | Odluka tima | Kategorije su unaprijed upisane u bazu; administrator ih ne uređuje. |
+| O-12 | Ograničenje  | Rezervaciju može otkazati samo administrator. | Odluka tima | Klijent nema opciju otkazivanja. |
+| P-01 | Pretpostavka | Plovila istog modela imaju jednake tehničke podatke, opremu i dodatne usluge s istim cijenama. | Odluka tima | Tehnički podaci, oprema i usluge vezani su uz model, a ne uz pojedino plovilo. |
+| P-02 | Pretpostavka | Lokacija preuzimanja i povrata je matična luka plovila, s jednom fiksnom točkom sastanka po luci. | Odluka tima | Luka ima fiksne koordinate koje se prikazuju na karti (F-10.2); nema zasebne lokacije preuzimanja. |
+| P-03 | Pretpostavka | Plovilo se vraća na vrijeme, pa se najam smatra završenim čim prođe vrijeme povrata. | Odluka tima | Status najma računa se iz datuma i vremena povrata; nema ručnog potvrđivanja povrata. |
 
 ## 2.5 Značajne promjene zahtjeva
 
@@ -189,76 +135,25 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 | ID zahtjeva | Obrazac uporabe / modul        | Arhitekturna realizacija | Ispitivanje ili provjera |
 | ----------- | ------------------------------ | ------------------------ | ------------------------ |
 | F-1.1       | Prijava i ovlasti              |                          |                          |
-| F-1.2       | Prijava i ovlasti              |                          |                          |
-| F-2.1       | Pretraga plovila               |                          |                          |
-| F-2.2       | Pretraga plovila               |                          |                          |
-| F-2.3       | Pretraga plovila               |                          |                          |
-| F-2.4       | Pretraga plovila               |                          |                          |
-| F-2.5       | Pretraga plovila               |                          |                          |
-| F-2.6       | Pretraga plovila               |                          |                          |
-| F-2.7       | Pretraga plovila               |                          |                          |
-| F-2.8       | Pretraga plovila               |                          |                          |
-| F-3.1       | Pregled plovila                |                          |                          |
-| F-3.2       | Pregled plovila                |                          |                          |
-| F-3.3       | Pregled plovila                |                          |                          |
-| F-3.4       | Pregled plovila                |                          |                          |
-| F-3.5       | Pregled plovila                |                          |                          |
-| F-4.1       | Izrada rezervacije             |                          |                          |
-| F-4.2       | Izrada rezervacije             |                          |                          |
-| F-4.3       | Izrada rezervacije             |                          |                          |
-| F-4.4       | Izrada rezervacije             |                          |                          |
-| F-4.5       | Izrada rezervacije             |                          |                          |
-| F-4.6       | Izrada rezervacije             |                          |                          |
-| F-4.7       | Izrada rezervacije             |                          |                          |
-| F-4.8       | Izrada rezervacije             |                          |                          |
-| F-4.9       | Izrada rezervacije             |                          |                          |
-| F-4.10      | Izrada rezervacije             |                          |                          |
-| F-5.1       | Pravila i podaci rezervacije   |                          |                          |
-| F-5.2       | Pravila i podaci rezervacije   |                          |                          |
-| F-5.3       | Pravila i podaci rezervacije   |                          |                          |
-| F-5.4       | Pravila i podaci rezervacije   |                          |                          |
-| F-5.5       | Pravila i podaci rezervacije   |                          |                          |
-| F-5.6       | Pravila i podaci rezervacije   |                          |                          |
-| F-6.1       | Potvrda i pregled rezervacija  |                          |                          |
-| F-6.2       | Potvrda i pregled rezervacija  |                          |                          |
-| F-6.3       | Potvrda i pregled rezervacija  |                          |                          |
-| F-6.4       | Potvrda i pregled rezervacija  |                          |                          |
-| F-6.5       | Potvrda i pregled rezervacija  |                          |                          |
-| F-7.1       | Raspored preuzimanja i povrata |                          |                          |
-| F-7.2       | Raspored preuzimanja i povrata |                          |                          |
-| F-7.3       | Raspored preuzimanja i povrata |                          |                          |
-| F-8.1       | Upravljanje rezervacijama      |                          |                          |
-| F-8.2       | Upravljanje rezervacijama      |                          |                          |
-| F-8.3       | Upravljanje rezervacijama      |                          |                          |
-| F-8.4       | Upravljanje rezervacijama      |                          |                          |
-| F-8.5       | Upravljanje rezervacijama      |                          |                          |
-| F-9.1       | Upravljanje flotom             |                          |                          |
-| F-9.2       | Upravljanje flotom             |                          |                          |
-| F-9.3       | Upravljanje flotom             |                          |                          |
-| F-9.4       | Upravljanje flotom             |                          |                          |
-| F-9.5       | Upravljanje flotom             |                          |                          |
-| F-9.6       | Upravljanje flotom             |                          |                          |
-| F-9.7       | Upravljanje flotom             |                          |                          |
-| F-10.1      | Upravljanje korisnicima        |                          |                          |
-| F-10.2      | Upravljanje korisnicima        |                          |                          |
-| F-10.3      | Upravljanje korisnicima        |                          |                          |
-| F-10.4      | Upravljanje korisnicima        |                          |                          |
-| F-11.1      | Statistika i izvoz             |                          |                          |
-| F-11.2      | Statistika i izvoz             |                          |                          |
-| F-11.3      | Statistika i izvoz             |                          |                          |
-| F-11.4      | Statistika i izvoz             |                          |                          |
-| F-11.5      | Statistika i izvoz             |                          |                          |
-| F-11.6      | Statistika i izvoz             |                          |                          |
-| F-12.1      | Vanjske usluge                 |                          |                          |
-| F-12.2      | Vanjske usluge                 |                          |                          |
+| F-2.1       | Pretraga i pregled plovila     |                          |                          |
+| F-2.2       | Pretraga i pregled plovila     |                          |                          |
+| F-3.1       | Izrada rezervacije             |                          |                          |
+| F-3.2       | Izrada rezervacije             |                          |                          |
+| F-4.1       | Potvrda i pregled rezervacija  |                          |                          |
+| F-4.2       | Potvrda i pregled rezervacija  |                          |                          |
+| F-5.1       | Raspored preuzimanja i povrata |                          |                          |
+| F-6.1       | Upravljanje rezervacijama      |                          |                          |
+| F-7.1       | Upravljanje flotom             |                          |                          |
+| F-7.2       | Upravljanje flotom             |                          |                          |
+| F-8.1       | Upravljanje korisnicima        |                          |                          |
+| F-9.1       | Statistika i izvoz             |                          |                          |
+| F-9.2       | Statistika i izvoz             |                          |                          |
+| F-10.1      | Vanjske usluge                 |                          |                          |
+| F-10.2      | Vanjske usluge                 |                          |                          |
 | NF-01       |                                |                          |                          |
 | NF-02       |                                |                          |                          |
 | NF-03       |                                |                          |                          |
 | NF-04       |                                |                          |                          |
-| NF-05       |                                |                          |                          |
-| NF-06       |                                |                          |                          |
-| NF-07       |                                |                          |                          |
-| NF-08       |                                |                          |                          |
 
 ## 2.7 Pregled zahtjeva
 
