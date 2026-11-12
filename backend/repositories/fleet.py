@@ -43,16 +43,44 @@ def get_boat_info(id_boat):
 
             return boat_info
 
-def get_boat_busy_dates(id_boat, date_from, date_to):         
-    pass
+def get_boat_busy_dates(id_boat, date_from, date_to):
+    params = {"id": id_boat, "od": date_from, "do": date_to}
+    with get_connection() as conn:
+        return conn.execute("""
+            select datum_preuzimanja as od, datum_povratka as do, 'rezervacija' as izvor
+            from rezervacija
+            where id_brod = %(id)s
+              and datum_preuzimanja <= %(do)s
+              and datum_povratka >= %(od)s
+              and (status = 'potvrdena'
+                   or (status = 'u tijeku' and vrijeme_nastanak > now() - interval '10 minutes'))
+
+            union all
+
+            select datum_pocetak, datum_kraj, 'nedostupnost'
+            from nedostupnost
+            where id_brod = %(id)s
+              and datum_pocetak <= %(do)s
+              and datum_kraj >= %(od)s
+
+            order by od
+        """, params).fetchall()
+
+
 def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, category=None, equipment=None, price_per_day=None, num_of_cabins=None, services=None):
     pass
+
 def get_categories():
     return ["jedrilica", "motorni brod", "katamaran", "ostalo"]
 
 def get_equipment():
-    pass
+    with get_connection() as conn:
+        return conn.execute("select id_opreme, naziv from oprema order by naziv").fetchall()
+
 def get_services():
-    pass
+    with get_connection() as conn:
+        return conn.execute("select id_dodatne_usluge, naziv from dodatne_usluge order by naziv").fetchall()
+
 def get_ports():
-    pass
+    with get_connection() as conn:
+        return conn.execute("select id_luka, ime_luka, lat, lng from luka order by ime_luka").fetchall()

@@ -5,6 +5,9 @@ import psycopg
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 
+from routers import boats
+
+
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
 app = FastAPI(
@@ -13,6 +16,7 @@ app = FastAPI(
     redoc_url=None,
 )
 
+app.include_router(boats.router)
 
 @app.get("/api/health")
 def health():
