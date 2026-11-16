@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syncopate:wght@400;700&display=swap');
+
+:root {
+    --primary: #012A4A;
+    --secondary: #778DA9;
+    --orange: #FB8500;
+    --danger: #880808;
+    --success: #4BB543;
+}
+
+/* Fonts */
+
+.poppins {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.syncopate {
+    font-family: 'Syncopate', Arial, Helvetica, sans-serif;
+}
+
+.playfair {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Fonts */
+
+/* Colors */
+
+.color-primary {
+    color: var(--primary);
+}
+
+/* Colors */
+
+/* Navbar */
+
+.navbar-brand {
+    color: var(--primary) !important;
+    font-size: 24px;
+}
+
+.nav-item {
+    padding: 0 10px;
+}
+
+.nav-item .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.nav-link:hover {
+    color: var(--secondary);
+}
+
+.nav-link:hover svg path {
+    stroke: var(--secondary);
+}
+
+.nav-item svg {
+    margin-right: 7px;
+}
+
+.nav-item svg path {
+    transition: .3s;
+}
+
+/* Navbar */
+
+/* Page Title */
+
+.welcome-text {
+    color: var(--primary);
+    height: 38vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-text div {
+    padding: 0 10px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .welcome-text div {
+        padding: 0;
+        width: 50%;
+    }
+}
+
+.divider {
+    background-color: var(--orange);
+    border: none;
+    height: 4px;
+    opacity: 1;
+    border-radius: 20px;
+    width: 275px;
+    margin: 1rem auto;
+}
+
+/* Page Title */
+
+/* Profile */
+
+.profile {
+    color: var(--primary);
+}
+
+.profile .col-md-4 {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-picture {
+    background-color: var(--secondary);
+    height: 276px;
+    width: 276px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.profile-info {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-info div > span, a {
+    display: inline-block;
+    padding: 7px 0;
+}
+
+.profile-info svg {
+    margin-right: 10px;
+}
+
+/* Profile */
+
+/* Footer */
+
+footer {
+    margin-top: 35px;
+    background-color: var(--primary);
+    padding: 35px 0;
+    color: white;
+}
+
+footer p {
+    color: var(--secondary);
+}
+
+footer svg {
+    margin-right: 10px;
+}
+
+.footer-location {
+    display: flex;
+    align-items: center;
+}
+
+.footer-location, .footer-phone, .footer-mail {
+    margin-bottom: 15px;
+}
+
+.footer-white {
+    color: white;
+    margin-bottom: 0;
+}
+
+a.footer-white {
+    text-decoration: none;
+    transition: .3s;
+}
+
+a.footer-white:hover {
+    color: var(--secondary);
+}
+
+a.footer-white:hover svg path {
+    stroke: var(--secondary) !important;
+}
+
+/* Footer */
+
+/* UsersTable */
+
+table {
+    width: max-content;
+    min-width: 100%;
+    white-space: nowrap;
+}
+
+table th, table td {
+    color: var(--primary) !important;
+}
+
+thead {
+    border-color: var(--secondary);
+    border-bottom-width: 3px;
+}
+
+tr {
+    border-color: var(--secondary);
+}
+
+.table-striped tbody tr:nth-child(odd) td {
+    background-color: #F6FDFF;
+}
+
+.button-tertiary {
+    background: none;
+    border: none;
+    text-decoration: underline dotted 3px;
+    text-underline-offset: 3px;
+    transition: .3s;
+}
+
+.button-tertiary-primary {
+    color: var(--primary);
+}
+
+.button-tertiary-primary:hover {
+    color: var(--secondary);
+}
+
+.button-tertiary-danger {
+    color: var(--danger);
+    filter: brightness(160%);
+}
+
+.button-tertiary-danger:hover {
+    filter: brightness(100%);
+}
+
+/* UsersTable */
+
+/* Login */
+
+.login-page {
+    background-image: linear-gradient(rgba(0,0,0,0.3)), url('../src/assets/login_bg.jpg');
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background-color: white;
+    border-radius: 10px;
+    width: 30vw;
+    padding: 35px;
+    color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 5px 5px 30px 14px rgba(0, 0, 0, 0.38);
+}
+
+@media screen and (max-width: 767px) {
+    .login-container {
+        width: 85vw;
+    }
+
+    .login-container .divider {
+        width: 150px;
+    }
+
+    .login-container .button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 15px;
+    }
+}
+
+.login-container .button-primary {
+    width: 100%;
+    border-radius: 7px;
+}
+
+.button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    transition: .3s;
+}
+
+.button-orange {
+    background-color: var(--orange);
+}
+
+.button-orange:hover {
+    background-color: #ba6300;
+}
+
+.button-primary {
+    background-color: var(--primary);
+}
+
+.button-primary:hover {
+    background-color: #01243f;
+}
+
+.button-danger {
+    background-color: var(--danger);
+}
+
+.button-danger:hover {
+    background-color: #560505;
+}
+
+.button-success {
+    background-color: var(--success);
+}
+
+.button-success:hover {
+    background-color: #368a32;
+}
+
+.login-form-disabled input {
+    margin: 15px 0;
+}
+
+input[disabled] {
+   border: 3px solid var(--primary);
+   border-radius: 0;
+   background-color: rgba(119, 141, 169, 0.4) !important;
+}
+
+input[disabled]::placeholder {
+   color: var(--secondary);
+}
+
+/* Login */
+
+/* Change Phone Number Modal */
+
+.modal-title, .modal-body, .modal-footer {
+    color: var(--primary) !important;
+} 
+
+.modal-header{
+    border-bottom: 3px solid var(--orange);
+}
+
+.modal-footer {
+    border-top: none
+}
+
+.form-control {
+    border: 3px solid var(--primary);
+    border-radius: 0;
+    color: var(--primary) !important;
+    transition: .3s;
+    margin-bottom: 10px;
+}
+
+.form-control::placeholder {
+    color: var(--secondary);
+}
+
+.form-control:active, .form-control:focus {
+    border-color: var(--orange);
+    /*color: var(--orange) !important;*/
+    box-shadow: none !important;
+}
+
+select.form-control:has(option:checked[value=""]) {
+    color: var(--secondary) !important;
+}
+
+/* Change Phone Number Modal */
+
+/* Modal Danger */
+
+.modal-danger .modal-header {
+    border-bottom: 3px solid var(--danger);
+}
+
+.modal-danger .modal-title, .modal-danger .modal-footer, .modal-danger .modal-body {
+    color: var(--danger) !important;
+}
+
+/* Modal Danger */
+
+/* Boat Card */
+
+.boat-card {
+    border: 4px solid var(--primary);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.boat-deactivated::after {
+    content: 'NEAKTIVAN';
+    position: absolute;
+    top: 25px;
+    right: -78px;
+    background-color: var(--orange);
+    font-size: 16px;
+    font-weight: 800;
+    font-family: "Poppins", sans-serif;
+    color: var(--primary);
+    text-align: center;
+    width: 250px;
+    padding: 10px 15px;
+    transform: rotate(45deg);
+}
+
+.card-body .card-title, .card-body .card-text {
+    color: var(--primary);
+}
+
+.card-img-top {
+    height: 250px;
+    width: auto;
+    object-fit: cover;
+}
+
+/* Boat Card */
+
+/* Boat Info Modal */
+
+#BoatInfoImagesCarousel .carousel-inner {
+    border-radius: 10px;
+    border: 4px solid var(--primary);
+}
+
+#BoatInfoImagesCarousel img {
+    height: 450px;
+    object-fit: cover;
+}
+
+.carousel-img-prev {
+    background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2219%22%20height%3D%2238%22%20viewBox%3D%220%200%2019%2038%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M16.9756%201.5L1.97558%2019L16.9756%2036.5%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke%3D%22%23FB8500%22%2F%3E%0A%3C%2Fsvg%3E');
+
+}
+
+.carousel-img-next {
+    background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2219%22%20height%3D%2238%22%20viewBox%3D%220%200%2019%2038%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M1.5%2036.5L16.5%2019L1.5%201.5%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke%3D%22%23FB8500%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+}
+
+/* Boat Info Modal */
