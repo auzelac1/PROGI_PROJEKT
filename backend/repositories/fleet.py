@@ -67,8 +67,36 @@ def get_boat_busy_dates(id_boat, date_from, date_to):
         """, params).fetchall()
 
 
-def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, category=None, equipment=None, price_per_day=None, num_of_cabins=None, services=None):
-    pass
+def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, category=None):
+    params = {"od": date_from, "do": date_to, "br_osoba": num_of_people,
+              "luka": port, "kategorija": category}
+    with get_connection() as conn:
+        return conn.execute("""
+            select b.id_brod, b.naziv, b.cijena_dan, b.godina_proizvodnje,
+                   m.kategorija, m.proizvodjac, m.model, m.kapacitet, m.broj_kabina,
+                   l.id_luka, l.ime_luka,
+                   (select f.url_foto from fotografija f
+                     where f.id_brod = b.id_brod order by f.redoslijed limit 1) as naslovna_foto
+            from brod b
+            join model m on m.id_model = b.id_model
+            join luka  l on l.id_luka  = b.id_luka
+            where b.aktivan
+              and (%(kategorija)s::text is null or m.kategorija = %(kategorija)s)
+              and (%(luka)s::bigint is null or b.id_luka = %(luka)s)
+              and (%(br_osoba)s::int is null or m.kapacitet >= %(br_osoba)s)
+              and (%(od)s::date is null or not exists (
+                    select 1 from rezervacija r
+                    where r.id_brod = b.id_brod
+                      and (r.status = 'potvrdena'
+                           or (r.status = 'u tijeku'
+                               and r.vrijeme_nastanak > now() - interval '10 minutes'))
+                      and r.datum_preuzimanja <= %(do)s and r.datum_povratka >= %(od)s))
+              and (%(od)s::date is null or not exists (
+                    select 1 from nedostupnost n
+                    where n.id_brod = b.id_brod
+                      and n.datum_pocetak <= %(do)s and n.datum_kraj >= %(od)s))
+            order by b.cijena_dan
+        """, params).fetchall()
 
 def get_categories():
     return ["jedrilica", "motorni brod", "katamaran", "ostalo"]
