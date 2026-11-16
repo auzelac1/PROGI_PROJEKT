@@ -1,11 +1,34 @@
 from datetime import date, timedelta
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 
 from repositories import fleet
 
 router = APIRouter(prefix="/api")
 
+@router.get("/boats")
+def search_boats_endpoint(
+    date_from: date | None = None,
+    date_to: date | None = None,
+    num_of_people: int | None = Query(None, ge=1),
+    port: int | None = None,
+    category: str | None = None,):
+    if (date_from is None) != (date_to is None):
+        raise HTTPException(status_code=400, detail="Potrebna su oba datuma.")
+    if date_from is not None and (date_from > date_to or date_from < date.today()):
+        raise HTTPException(status_code=400, detail="Početni datum ne smije biti u prošlosti ni nakon završnog.")
+    if category is not None and category not in fleet.get_categories():
+        raise HTTPException(status_code=400, detail="Nepoznata kategorija.")
+
+    return fleet.search_boats(
+        date_from=date_from,
+        date_to=date_to,
+        num_of_people=num_of_people,
+        port=port,
+        category=category,
+    )
+
+    
 
 @router.get("/boats/{id_brod}")
 def boat_detail(id_brod: int):
