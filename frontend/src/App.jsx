@@ -30,13 +30,7 @@ function App() {
     return <Ucitavanje />
   }
 
-  let user = {
-    uloga: "KORISNIK"
-  }
-
-  if (loggedUser !== null) {
-    user = loggedUser;
-  }
+  let user = loggedUser;
 
   return (
     
@@ -56,13 +50,13 @@ function App() {
                 </UsersProvider>
                 } />
             </Route>
-            <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
+            {/* <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
               <Route path='/fleet' element={
                 <FleetProvider>
                   <Fleet />
                 </FleetProvider>
               } />
-            </Route>
+            </Route> */}
             <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
               <Route path='/logout' element={<Logout />} />
             </Route>

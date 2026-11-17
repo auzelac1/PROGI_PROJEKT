@@ -5,12 +5,13 @@ import PortsMap from '../components/PortsMap';
 import PrijavaModal from '../components/PrijavaModal';
 import Ucitavanje from '../components/Ucitavanje';
 import { useKorisnik } from '../privremeno/useKorisnik';
-import { dohvatiPlovilo, PORTS, TYPES, eur, fmtDate } from '../api/plovila';
+import { PORTS, TYPES, eur } from '../api/plovila';
 import { useProfileContext } from '../contexts/ProfileContext';
 import NavBar from '../components/NavBar';
 
 import { useStyles } from '../useStyles';
 import indexCss from '../styles/index.css?url';
+import { getBoat } from '../services/fleetServices';
 
 export default function ShipDetailsPage() {
   useStyles(indexCss);
@@ -29,7 +30,7 @@ export default function ShipDetailsPage() {
   useEffect(() => {
     setShip(undefined);
     setActive(0);
-    dohvatiPlovilo(id).then(setShip).catch(() => setError(true));
+    getBoat(id).then(setShip).catch(() => setError(true));
   }, [id]);
 
   if (error) return <main className="pregled section"><div className="container"><p className="text-danger">Plovilo se trenutno ne može učitati. Pokušajte ponovno kasnije.</p></div></main>;
@@ -45,11 +46,11 @@ export default function ShipDetailsPage() {
 
   const luka = PORTS.find((p) => p.id === ship.luka);
   const tip = TYPES.find((t) => t.id === ship.tip)?.naziv;
-  const rezerviraj = () => (prijavljen ? navigate(`/rezervacija/${ship.id}`) : setPitajPrijavu(true));
+  const rezerviraj = () => (loggedUser.uloga !== "KORISNIK" ? navigate(`/rezervacija/${ship.id_brod}`) : setPitajPrijavu(true));
 
   const specs = [
-    ['Vrsta', tip], ['Proizvođač i model', `${ship.proizvodac} ${ship.model}`], ['Godina proizvodnje', ship.godina],
-    ['Kapacitet', `${ship.kapacitet} osoba`], ['Kabine', ship.kabine], ['Ležajevi', ship.lezajevi], ['Matična luka', luka?.naziv],
+    ['Vrsta', ship.model.tip], ['Proizvođač i model', `${ship.model.proizvodjac} ${ship.model.model}`], ['Godina proizvodnje', ship.basics.godina_proizvodnje],
+    ['Kapacitet', `${ship.model.kapacitet} osoba`], ['Kabine', ship.model.broj_kabina], ['Ležajevi', ship.model.broj_lezajeva], ['Matična luka', ship.port.ime_luka],
   ];
 
   return (
@@ -64,7 +65,6 @@ export default function ShipDetailsPage() {
             <div className="container-fluid px-0">
               <Link className="pregled-brand text-decoration-none" to="/">Natalia Charter</Link>
               <div className="d-flex align-items-center gap-4 ms-auto">
-                <Link to="/plovila" className="nav-link">Sva plovila</Link>
                 <Link to="/#vrste" className="nav-link">Vrste plovila</Link>
                 <Link to="/#luke" className="nav-link">Luke polaska</Link>
                 <Link to="/#kako-radi" className="nav-link">Kako rezervirati?</Link>
@@ -76,22 +76,26 @@ export default function ShipDetailsPage() {
       </header>
 
       <div className="container py-5">
-        <nav aria-label="Navigacija" className="mb-3"><Link to="/plovila">&lsaquo; Natrag na plovila</Link></nav>
+        <nav aria-label="Navigacija" className="mb-3">
+          <Link to="/plovila" className="btn btn-sm btn-outline-secondary back-link">
+            <span className="me-1">&lsaquo;&nbsp;</span> Povratak na pretragu
+          </Link>
+        </nav>
         <div className="row g-4">
           <div className="col-lg-8">
-            <ShipImage src={ship.slike[active]} alt={ship.naziv} className="gallery-main" />
-            {ship.slike.length > 1 && (
+            <ShipImage src={ship.photos[0].url_foto} alt={ship.basics.naziv} className="gallery-main" />
+            {ship.photos.length > 1 && (
               <div className="gallery-thumbs">
-                {ship.slike.map((src, i) => (
-                  <button key={src} type="button" className={i === active ? 'active' : ''} onClick={() => setActive(i)} aria-label={`Fotografija ${i + 1}`}>
-                    <ShipImage src={src} alt="" />
+                {ship.photos.map((photo, i) => (
+                  <button key={photo.url_foto} type="button" className={i === active ? 'active' : ''} onClick={() => setActive(i)} aria-label={`Fotografija ${i + 1}`}>
+                    <ShipImage src={photo.url_foto} alt="" />
                   </button>
                 ))}
               </div>
             )}
 
-            <h1 className="mt-4">{ship.naziv}</h1>
-            <p className="text-muted">{tip}, matična luka {luka?.naziv}</p>
+            <h1 className="mt-4">{ship.basics.naziv}</h1>
+            <p className="text-muted">{ship.model.tip}, matična luka {ship.port.ime_luka}</p>
 
             <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
               <h2 className="h4 mb-3">Osnovni podaci</h2>
@@ -100,7 +104,7 @@ export default function ShipDetailsPage() {
 
             <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
               <h2 className="h4 mb-3">Oprema</h2>
-              <ul className="equip mb-0">{ship.oprema.map((o) => <li key={o}>{o}</li>)}</ul>
+              <ul className="equip mb-0">{ship.equipment.map((o) => <li key={o.id_opreme}>{o.naziv}</li>)}</ul>
             </div>
 
             <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
@@ -108,30 +112,23 @@ export default function ShipDetailsPage() {
               <div className="table-responsive">
                 <table className="table align-middle mb-0">
                   <thead><tr><th>Usluga</th><th className="text-end">Cijena (jednokratno)</th></tr></thead>
-                  <tbody>{ship.usluge.map((u) => <tr key={u.id}><td>{u.naziv}</td><td className="text-end fw-bold">{eur(u.cijena)}</td></tr>)}</tbody>
+                  <tbody>{ship.services.map((u) => <tr key={u.id_dodatne_usluge}><td>{u.naziv}</td><td className="text-end fw-bold">{eur(u.cijena)}</td></tr>)}</tbody>
                 </table>
               </div>
             </div>
 
             <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
-              <h2 className="h4 mb-3">Zauzeti termini</h2>
-              {ship.zauzeto.length === 0
-                ? <div className="p-3 bg-light rounded-3 text-success fw-medium">✅ Trenutno nema zauzetih termina. Plovilo je u potpunosti dostupno za odabrani period.</div>
-                : <ul className="mb-0">{ship.zauzeto.map((z) => <li key={z.od}>{fmtDate(z.od)} do {fmtDate(z.do)}</li>)}</ul>}
-            </div>
-
-            <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
               <h2 className="h4 mb-3">Lokacija preuzimanja</h2>
-              <PortsMap ports={[luka]} zoom={11} link={false} height={320} />
+              <PortsMap ports={[ship.port]} zoom={11} link={false} height={320} />
             </div>
           </div>
 
           <div className="col-lg-4">
             <aside className="booking-card">
-              <div><span className="ship-price big">{eur(ship.cijenaDan)}</span> <span className="text-muted">po danu</span></div>
+              <div><span className="ship-price big">{eur(ship.basics.cijena_dan)}</span> <span className="ship-price-day">po danu</span></div>
               <p className="small text-muted mt-1">Najkraći najam je 1 dan. Dodatne usluge naplaćuju se jednokratno.</p>
               <button type="button" className="btn btn-lg pregled-btn w-100 mt-3" onClick={rezerviraj}>Rezerviraj</button>
-              {!prijavljen && <p className="small text-muted mt-2 mb-0">Za rezervaciju je potrebna prijava.</p>}
+              {!(loggedUser.uloga !== "KORISNIK") && <p className="small text-muted mt-2 mb-0">Za rezervaciju je potrebna prijava.</p>}
             </aside>
           </div>
         </div>

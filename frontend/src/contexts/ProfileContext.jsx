@@ -7,7 +7,11 @@ export const useProfileContext = () => useContext(ProfileContext)
 
 export const ProfileProvider = ({children}) => {
 
-    const [loggedUser, setLoggedUser] = useState(null);
+    const defaultUser = {
+        uloga: "KORISNIK"
+    };
+
+    const [loggedUser, setLoggedUser] = useState(defaultUser);
     const [loadingProfile, setLoadingProfile] = useState(true);
     const [errorProfile, setErrorProfile] = useState("");
     const [successProfile, setSuccessProfile] = useState("");
@@ -16,9 +20,10 @@ export const ProfileProvider = ({children}) => {
         async function loadLoggedUser() {
             try {
                 const data = await getMe();
-                setLoggedUser(data);
+                if (data !== null) {
+                    setLoggedUser(data);
+                }
             } catch (err) {
-                setLoggedUser(null);
                 setErrorProfile(err.message);
             } finally {
                 setLoadingProfile(false);

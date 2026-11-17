@@ -1,6 +1,6 @@
 let API_URL = import.meta.env.VITE_API_URL;
 if (API_URL === undefined) {
-    API_URL = "http://localhost:8000/api";
+    API_URL = "https://progiprojekt.vercel.app/api";
 }
 
 export async function getUsers() {

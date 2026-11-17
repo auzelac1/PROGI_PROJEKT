@@ -181,6 +181,25 @@ p {
   text-decoration: none;
 }
 
+.pregled .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  border-color: var(--pr-line);
+  color: var(--pr-navy);
+  font-weight: 600;
+  background-color: #fff;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.pregled .back-link:hover {
+  background-color: var(--pr-foam);
+  border-color: var(--pr-teal);
+  color: var(--pr-teal);
+}
+
 .pregled-header {
   border-bottom: 1px solid var(--pr-line);
   background: #fff;
@@ -309,9 +328,16 @@ p {
   font-size: 2rem;
 }
 
+.pregled .ship-price-day {
+  color: #5c6c7e;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
 .pregled .fleet-label .text-muted,
 .pregled .ship-card .text-muted,
-.pregled .small.text-muted {
+.pregled .small.text-muted,
+.pregled p.text-muted {
   color: #5c6c7e !important;
   font-weight: 500;
 }
@@ -348,6 +374,24 @@ p {
   border-color: var(--pr-teal);
   box-shadow: 0 6px 16px rgba(14, 58, 92, 0.1);
   color: var(--pr-ink);
+}
+
+@media (min-width: 1200px) {
+  .pregled .fleet-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .pregled .fleet-item {
+    flex: none;
+    width: 100%;
+  }
+
+  .pregled .fleet-arrows-container {
+    display: none !important;
+  }
 }
 
 .pregled .fleet-label {
@@ -407,16 +451,7 @@ p {
   font-weight: 600;
   color: var(--pr-navy);
   text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-}
-
-.pregled .port-item-link:hover {
-  border-color: var(--pr-teal);
-  background-color: var(--pr-foam);
-  color: var(--pr-navy);
-  transform: translateX(3px);
 }
 
 .pregled .step-num {
@@ -508,10 +543,6 @@ p {
 
 .pregled tr:last-child td {
   border-bottom: none;
-}
-
-.pregled tr:hover td {
-  background-color: rgba(242, 246, 248, 0.7) !important;
 }
 
 .pregled .booking-card {

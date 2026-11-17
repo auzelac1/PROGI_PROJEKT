@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import FleetStrip from '../components/FleetStrip';
 import ShipCard from '../components/ShipCard';
 import PortsMap from '../components/PortsMap';
 import Ucitavanje from '../components/Ucitavanje';
-import { dohvatiPlovila, PORTS } from '../api/plovila';
+import { dohvatiPlovila, PORTS, TYPES } from '../api/plovila';
 
 import { useStyles } from '../useStyles';
 import indexCss from '../styles/index.css?url';
 import NavBar from '../components/NavBar';
 import { useProfileContext } from '../contexts/ProfileContext';
+import { getCategories, getFleet, getPorts } from '../services/fleetServices';
 
 const STEPS = [
   { t: 'Odaberite plovilo', d: 'Pregledajte cijene, opremu i slobodne termine bez prijave.' },
@@ -23,12 +24,26 @@ export default function HomePage() {
   const {loggedUser} = useProfileContext();
 
   const { hash } = useLocation();
+  const navigate = useNavigate();
   const [ships, setShips] = useState(null);
   const [error, setError] = useState(false);
+  const [selectedType, setSelectedType] = useState(TYPES[0].id || '');
+  const [types, setTypes] = useState([]);
+
+  const [portsError, setPortsError] = useState(false);
+  const [ports, setPorts] = useState([]);
 
   useEffect(() => {
-    dohvatiPlovila().then(setShips).catch(() => setError(true));
+    getFleet().then(setShips).catch(() => setError(true));
   }, []);
+
+  useEffect(() => {
+    getPorts().then(setPorts).catch(() => setPortsError(true));
+  }, []);
+
+  useEffect(() => {
+    getCategories().then(setTypes).catch(() => setError(true));
+  }, [])
 
   useEffect(() => {
     if (hash) {
@@ -38,6 +53,12 @@ export default function HomePage() {
       window.scrollTo(0, 0);
     }
   }, [hash]);
+
+  const handleSearch = () => {
+    if (selectedType) {
+      navigate(`/plovila?tip=${selectedType}`);
+    }
+  };
 
   const sadrzaj = (render) => {
     if (error) return <p className="text-danger">Plovila se trenutno ne mogu učitati. Osvježite stranicu ili pokušajte kasnije.</p>;
@@ -57,7 +78,6 @@ export default function HomePage() {
               <div className="container-fluid px-0">
                 <Link className="pregled-brand text-decoration-none" to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Natalia Charter</Link>
                 <div className="d-flex align-items-center gap-4 ms-auto">
-                  <Link to="/plovila" className="nav-link">Sva plovila</Link>
                   <Link to="/#vrste" className="nav-link">Vrste plovila</Link>
                   <Link to="/#luke" className="nav-link">Luke polaska</Link>
                   <Link to="/#kako-radi" className="nav-link">Kako rezervirati?</Link>
@@ -71,45 +91,65 @@ export default function HomePage() {
         <section className="hero">
           <div className="container">
             <h1 className="hero-title">Iznajmite plovilo na Jadranu</h1>
-            <p className="hero-sub">Pregled cijena, opreme, slobodnih termina te rezervaciju plovila uz prethodnu prijavu.</p>
+            <p className="hero-sub">Pregled cijena, opreme, slobodnih termina te rezervacija plovila uz prethodnu prijavu.</p>
 
-            <div className="bg-white p-4 rounded-4 shadow-lg" style={{ maxWidth: '820px' }}>
+            <div className="bg-white p-4 rounded-4 shadow-lg" style={{ maxWidth: '1600px' }}>
               <div className="row g-3 align-items-end">
-                <div className="col-md-3">
+                <div className="col-md">
+                  <label className="form-label small text-muted fw-bold text-start d-block mb-1">Vrsta</label>
+                  <div className="input-group border rounded-3 p-1 bg-light">
+                    <span className="input-group-text bg-transparent border-0 text-muted ps-2">⛵</span>
+                    <select
+                      className="form-select border-0 bg-transparent shadow-none px-1"
+                      value={selectedType}
+                      onChange={(e) => setSelectedType(e.target.value)}
+                    >
+                      {types.map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="col-md">
                   <label className="form-label small text-muted fw-bold text-start d-block mb-1">Datum</label>
                   <div className="input-group border rounded-3 p-1 bg-light">
                     <span className="input-group-text bg-transparent border-0 text-muted ps-2">📅</span>
                     <input type="text" className="form-control border-0 bg-transparent shadow-none px-1" readOnly value="Stu 7, 2026" />
                   </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md">
                   <label className="form-label small text-muted fw-bold text-start d-block mb-1">Trajanje</label>
                   <div className="input-group border rounded-3 p-1 bg-light">
                     <span className="input-group-text bg-transparent border-0 text-muted ps-2">🌙</span>
                     <input type="text" className="form-control border-0 bg-transparent shadow-none px-1" readOnly value="1 tjedan" />
                   </div>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md">
                   <label className="form-label small text-muted fw-bold text-start d-block mb-1">Gosti</label>
                   <div className="input-group border rounded-3 p-1 bg-light">
                     <span className="input-group-text bg-transparent border-0 text-muted ps-2">👥</span>
                     <input type="text" className="form-control border-0 bg-transparent shadow-none px-1" readOnly value="8 osoba" />
                   </div>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md">
                   <label className="form-label small text-muted fw-bold text-start d-block mb-1">Luka</label>
                   <div className="input-group border rounded-3 p-1 bg-light">
                     <span className="input-group-text bg-transparent border-0 text-muted ps-2">⚓</span>
                     <input type="text" className="form-control border-0 bg-transparent shadow-none px-1" readOnly value="Sve luke" />
                   </div>
                 </div>
-                <div className="col-md-2">
-                  <Link to="/plovila" className="btn pregled-btn w-100 py-2 d-flex align-items-center justify-content-center" style={{ height: '48px', fontSize: '1.05rem' }}>
+                <div className="col-md-auto">
+                  <button
+                    type="button"
+                    onClick={handleSearch}
+                    className="btn pregled-btn w-100 py-2 px-4 d-flex align-items-center justify-content-center"
+                    style={{ height: '48px', fontSize: '1.05rem' }}
+                  >
                     Pretraži
-                  </Link>
+                  </button>
                 </div>
               </div>
-              <div className="text-muted small mt-2 text-start ps-1">💡 Vizija napredne pretrage (datumi, trajanje, broj osoba i luka za kolegu)</div>
+              <div className="text-muted small mt-2 text-start ps-1">💡 Vizija napredne pretrage (vrsta, datumi, trajanje, broj osoba i luka za kolegu)</div>
             </div>
           </div>
         </section>
@@ -117,42 +157,35 @@ export default function HomePage() {
         <section id="vrste" className="section">
           <div className="container">
             <h2>Vrste plovila</h2>
-            <p className="section-lead">Pomaknite za pregled ponude ili otvorite cijeli katalog.</p>
-            {sadrzaj((s) => <FleetStrip ships={s} />)}
+             <p className="section-lead">Istražite našu flotu i odaberite željeno plovilo.</p>
+            {sadrzaj((s) => <FleetStrip ships={s} types={types} />)}
           </div>
         </section>
 
         <section className="section section-alt">
           <div className="container">
-            <div className="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-4">
-              <div>
-                <h2 className="mb-1">Istaknuta plovila</h2>
-                <p className="section-lead mb-0">Cijene su po danu najma, bez dodatnih usluga.</p>
-              </div>
-              <Link to="/plovila" className="btn btn-outline-secondary">Sva plovila</Link>
-            </div>
-            {sadrzaj((s) => (
-              <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {s.slice(0, 6).map((ship) => <div className="col" key={ship.id}><ShipCard ship={ship} /></div>)}
-              </div>
-            ))}
+            <div className="mb-4">
+            <h2 className="mb-1">Istaknuta plovila</h2>
+            <p className="section-lead mb-0">Prikazane cijene odnose se na dnevni najam plovila bez dodatnih usluga.</p>
+          </div>
+              {sadrzaj((s) => (
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                  {s.slice(0, 6).map((ship) => <div className="col" key={ship.id}><ShipCard ship={ship} /></div>)}
+                </div>
+              ))}
           </div>
         </section>
 
         <section id="luke" className="section">
           <div className="container">
             <h2>Luke polaska</h2>
-            <p className="section-lead">Odaberite luku na karti ili s popisa kako biste vidjeli u njoj dostupna plovila.</p>
+            <p className="section-lead">Pregled naših polaznih luka.</p>
             <div className="row g-4">
-              <div className="col-lg-8"><PortsMap ports={PORTS} /></div>
+              <div className="col-lg-8"><PortsMap ports={ports} /></div>
               <div className="col-lg-4">
                 <div className="port-list">
-                  {PORTS.map((p, index) => (
-                    <Link
-                      key={p.id}
-                      to={`/plovila?luka=${p.id}`}
-                      className="port-item-link"
-                    >
+                  {ports.map((p, index) => (
+                   <div key={p.id_luka} className='port-item-link'>
                       <div className="d-flex align-items-center gap-3">
                         <span
                           className="badge rounded-circle text-white d-inline-flex align-items-center justify-content-center"
@@ -160,10 +193,9 @@ export default function HomePage() {
                         >
                           {index + 1}
                         </span>
-                        <span className="fw-bold">{p.naziv}</span>
+                        <span className="fw-bold">{p.ime_luka}</span>
                       </div>
-                      {ships && <span className="text-muted small">{ships.filter((s) => s.luka === p.id).length} plovila</span>}
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>

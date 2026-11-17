@@ -12,10 +12,14 @@ function PhoneNumberModal({uuid}) {
     const {loggedUser, setLoggedUser, setErrorProfile, setSuccessProfile} = useProfileContext();
 
     const [newPhone, setNewPhone] = useState(loggedUser.telefon);
+    const [ime, setIme] = useState(loggedUser.ime);
+    const [prezime, setPrezime] = useState(loggedUser.prezime);
     const [savingPhone, setSavingPhone] = useState(false);
 
     useEffect(() => {
         setNewPhone(loggedUser.telefon || "");
+        setIme(loggedUser.ime);
+        setPrezime(loggedUser.prezime);
     }, [loggedUser.telefon]);
 
     const [phoneError, setPhoneError] = useState(false);
@@ -35,17 +39,17 @@ function PhoneNumberModal({uuid}) {
         try {
             setErrorProfile("");
             setSuccessProfile("");
-            const data = await changePhoneNumber(uuid, newPhone);
+            const data = await changePhoneNumber(uuid, newPhone, ime, prezime, loggedUser.uloga);
             const editedUser = {
                 uuid: loggedUser.uuid,
-                ime: loggedUser.ime,
-                prezime: loggedUser.prezime,
+                ime: ime,
+                prezime: prezime,
                 email: loggedUser.email,
                 telefon: newPhone,
                 uloga: loggedUser.uloga
             }
             setLoggedUser(editedUser);
-            setSuccessProfile("Broj telefona uspješno je promijenjen.");
+            setSuccessProfile("Vaši korisnički podatci uspješno su izmijenjeni.");
             const modalElement = document.getElementById("PhoneNumberModal");
             const modalInstance = Modal.getInstance(modalElement);
             modalInstance?.hide();
@@ -70,6 +74,10 @@ function PhoneNumberModal({uuid}) {
                     </div>
                     <div className="modal-body">
                         {phoneError && <Alert alertType="danger" alertText={["Broj telefona mora biti u obliku ", <strong>+1234567890</strong>, " i ne smije biti dulji od ", <strong>15</strong>, " znamenki."]} onClose={() => setPhoneError(false)} />}
+                        <label htmlFor="ime" className="ms-2 mb-2">Ime:</label>
+                        <input type="text" className="form-control fw-bold" name="ime" id="ime" placeholder="Vaše ime" value={ime} onChange={(e) => setIme(e.target.value)} disabled={savingPhone}/>
+                        <label htmlFor="prezime" className="ms-2 mb-2">Ime:</label>
+                        <input type="text" className="form-control fw-bold" name="prezime" id="prezime" placeholder="Vaše prezime" value={prezime} onChange={(e) => setPrezime(e.target.value)} disabled={savingPhone}/>
                         <label htmlFor="phone-number" className="ms-2 mb-2">Broj telefona:</label>
                         <input type="text" className="form-control fw-bold" name="phoneNumber" id="phone-number" placeholder="npr. +385 12 345 6789" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} disabled={savingPhone}/>
                     </div>

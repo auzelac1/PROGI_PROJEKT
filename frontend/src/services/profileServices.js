@@ -1,6 +1,6 @@
 let API_URL = import.meta.env.VITE_API_URL;
 if (API_URL === undefined) {
-    API_URL = "http://localhost:8000/api";
+    API_URL = "https://progiprojekt.vercel.app/api";
 }
 
 export async function getMe() {
@@ -22,7 +22,7 @@ export async function getMe() {
     return await response.json();
 }
 
-export async function changePhoneNumber(uuid, phone) {
+export async function changePhoneNumber(uuid, phone, ime, prezime, uloga) {
     let response;
 
     try {
@@ -32,7 +32,10 @@ export async function changePhoneNumber(uuid, phone) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                telefon: phone
+                telefon: phone,
+                ime: ime,
+                prezime: prezime,
+                uloga: uloga
             }),
             credentials: "include"
         });

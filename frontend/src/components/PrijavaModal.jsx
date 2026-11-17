@@ -1,5 +1,6 @@
 // Vlastiti prozor (bez dodatnih biblioteka) sa Bootstrap klasama.
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function PrijavaModal({ show, onClose, onPrijava }) {
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function PrijavaModal({ show, onClose, onPrijava }) {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-outline-secondary" onClick={onClose}>Odustani</button>
-              <button type="button" className="btn pregled-btn" onClick={onPrijava}>Prijava</button>
+              <Link to="/prijava" type="button" className="btn pregled-btn">Prijava</Link>
             </div>
           </div>
         </div>
