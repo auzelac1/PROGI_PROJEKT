@@ -2,11 +2,16 @@ import { useStyles } from '../useStyles';
 import styleCss from '../style.css?url';
 import '../style.css'
 
+let API_URL = import.meta.env.VITE_API_URL;
+if (API_URL === undefined) {
+    API_URL = "https://progiprojekt.vercel.app/api";
+}
+
 function Login() {
     useStyles(styleCss);
 
     function LoginUser() {
-        window.location.href = 'http://localhost:3000/auth/google';
+        window.location.href = `${API_URL}/auth/google`;
     }
     
     return (
