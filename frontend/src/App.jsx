@@ -3,12 +3,18 @@ import './style.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Profile from './pages/Profile';
-/* import Home from './pages/Home'; */
 import Error404 from './pages/Error404';
 import Users from './pages/Users'
 import Login from './pages/Login'
 import Fleet from './pages/Fleet'
 import Logout from './pages/Logout'
+
+import HomePage from './pages/HomePage';
+import ShipDetailsPage from './pages/ShipDetailsPage';
+
+import { PretragaStranica, RezervacijaStranica } from './privremeno/Stranice';
+
+import Ucitavanje from './components/Ucitavanje';
 
 import ProtectedRoute from './ProtectedRoute';
 import Layout from './Layout'
@@ -22,7 +28,7 @@ function App() {
   const { loggedUser, setLoggedUser, loadingProfile } = useProfileContext();
 
   if (loadingProfile) {
-    return <h1>Učitavanje profila...</h1>
+    return <Ucitavanje />
   }
 
   let user = {
@@ -41,7 +47,6 @@ function App() {
             <Route path='/login' element={<Login />} />
           </Route>
           <Route element={<Layout user={user} />}>
-            {/* <Route path='/' element={<Home />} /> */}
             <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
               <Route path='/profile' element={<Profile user={user} />} />
             </Route>
@@ -64,6 +69,10 @@ function App() {
             </Route>
             <Route path='*' element={<Error404 />} />
           </Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/plovila/:id" element={<ShipDetailsPage />} />
+          <Route path="/plovila" element={<PretragaStranica />} />
+          <Route path="/rezervacija/:id" element={<RezervacijaStranica />} />
         </Routes>
       </BrowserRouter>
     

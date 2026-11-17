@@ -6,9 +6,11 @@ import Footer from "./components/Footer";
 function Layout({user}) {
     return (
         <>
-            <NavBar user={user} />
-            <Outlet />
-            <Footer />
+            <div id="styleCss">
+                <NavBar user={user} />
+                <Outlet />
+                <Footer />
+            </div>
         </>
     )
 }

@@ -10,15 +10,15 @@
 
 /* Fonts */
 
-.poppins {
+#styleCss .poppins {
     font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.syncopate {
+#styleCss .syncopate {
     font-family: 'Syncopate', Arial, Helvetica, sans-serif;
 }
 
-.playfair {
+#styleCss .playfair {
     font-family: 'Playfair Display', serif;
 }
 
@@ -26,7 +26,7 @@
 
 /* Colors */
 
-.color-primary {
+#styleCss .color-primary {
     color: var(--primary);
 }
 
@@ -34,35 +34,35 @@
 
 /* Navbar */
 
-.navbar-brand {
+#styleCss .navbar-brand {
     color: var(--primary) !important;
     font-size: 24px;
 }
 
-.nav-item {
+#styleCss .nav-item {
     padding: 0 10px;
 }
 
-.nav-item .nav-link {
+#styleCss .nav-item .nav-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: var(--primary);
 }
 
-.nav-link:hover {
+#styleCss .nav-link:hover {
     color: var(--secondary);
 }
 
-.nav-link:hover svg path {
+#styleCss .nav-link:hover svg path {
     stroke: var(--secondary);
 }
 
-.nav-item svg {
+#styleCss .nav-item svg {
     margin-right: 7px;
 }
 
-.nav-item svg path {
+#styleCss .nav-item svg path {
     transition: .3s;
 }
 
@@ -70,7 +70,7 @@
 
 /* Page Title */
 
-.welcome-text {
+#styleCss .welcome-text {
     color: var(--primary);
     height: 38vh;
     display: flex;
@@ -78,19 +78,19 @@
     justify-content: center;
 }
 
-.welcome-text div {
+#styleCss .welcome-text div {
     padding: 0 10px;
     width: 100%;
 }
 
 @media (min-width: 768px) {
-    .welcome-text div {
+    #styleCss .welcome-text div {
         padding: 0;
         width: 50%;
     }
 }
 
-.divider {
+#styleCss .divider {
     background-color: var(--orange);
     border: none;
     height: 4px;
@@ -104,16 +104,16 @@
 
 /* Profile */
 
-.profile {
+#styleCss .profile {
     color: var(--primary);
 }
 
-.profile .col-md-4 {
+#styleCss .profile .col-md-4 {
     display: flex;
     justify-content: center;
 }
 
-.profile-picture {
+#styleCss .profile-picture {
     background-color: var(--secondary);
     height: 276px;
     width: 276px;
@@ -125,18 +125,18 @@
     font-weight: 600;
 }
 
-.profile-info {
+#styleCss .profile-info {
     font-size: 18px;
     display: flex;
     align-items: center;
 }
 
-.profile-info div > span, a {
+#styleCss .profile-info div > span, a {
     display: inline-block;
     padding: 7px 0;
 }
 
-.profile-info svg {
+#styleCss .profile-info svg {
     margin-right: 10px;
 }
 
@@ -144,45 +144,45 @@
 
 /* Footer */
 
-footer {
+#styleCss footer {
     margin-top: 35px;
     background-color: var(--primary);
     padding: 35px 0;
     color: white;
 }
 
-footer p {
+#styleCss footer p {
     color: var(--secondary);
 }
 
-footer svg {
+#styleCss footer svg {
     margin-right: 10px;
 }
 
-.footer-location {
+#styleCss .footer-location {
     display: flex;
     align-items: center;
 }
 
-.footer-location, .footer-phone, .footer-mail {
+#styleCss .footer-location, .footer-phone, .footer-mail {
     margin-bottom: 15px;
 }
 
-.footer-white {
+#styleCss .footer-white {
     color: white;
     margin-bottom: 0;
 }
 
-a.footer-white {
+#styleCss a.footer-white {
     text-decoration: none;
     transition: .3s;
 }
 
-a.footer-white:hover {
+#styleCss a.footer-white:hover {
     color: var(--secondary);
 }
 
-a.footer-white:hover svg path {
+#styleCss a.footer-white:hover svg path {
     stroke: var(--secondary) !important;
 }
 
@@ -190,30 +190,30 @@ a.footer-white:hover svg path {
 
 /* UsersTable */
 
-table {
+#styleCss table {
     width: max-content;
     min-width: 100%;
     white-space: nowrap;
 }
 
-table th, table td {
+#styleCss table th, #styleCss table td {
     color: var(--primary) !important;
 }
 
-thead {
+#styleCss thead {
     border-color: var(--secondary);
     border-bottom-width: 3px;
 }
 
-tr {
+#styleCss tr {
     border-color: var(--secondary);
 }
 
-.table-striped tbody tr:nth-child(odd) td {
+#styleCss .table-striped tbody tr:nth-child(odd) td {
     background-color: #F6FDFF;
 }
 
-.button-tertiary {
+#styleCss .button-tertiary {
     background: none;
     border: none;
     text-decoration: underline dotted 3px;
@@ -221,20 +221,20 @@ tr {
     transition: .3s;
 }
 
-.button-tertiary-primary {
+#styleCss .button-tertiary-primary {
     color: var(--primary);
 }
 
-.button-tertiary-primary:hover {
+#styleCss .button-tertiary-primary:hover {
     color: var(--secondary);
 }
 
-.button-tertiary-danger {
+#styleCss .button-tertiary-danger {
     color: var(--danger);
     filter: brightness(160%);
 }
 
-.button-tertiary-danger:hover {
+#styleCss .button-tertiary-danger:hover {
     filter: brightness(100%);
 }
 
@@ -242,7 +242,7 @@ tr {
 
 /* Login */
 
-.login-page {
+#styleCss .login-page {
     background-image: linear-gradient(rgba(0,0,0,0.3)), url('../src/assets/login_bg.jpg');
     background-size: cover;
     height: 100vh;
@@ -251,7 +251,7 @@ tr {
     align-items: center;
 }
 
-.login-container {
+#styleCss .login-container {
     background-color: white;
     border-radius: 10px;
     width: 30vw;
@@ -264,15 +264,15 @@ tr {
 }
 
 @media screen and (max-width: 767px) {
-    .login-container {
+    #styleCss .login-container {
         width: 85vw;
     }
 
-    .login-container .divider {
+    #styleCss .login-container .divider {
         width: 150px;
     }
 
-    .login-container .button {
+    #styleCss .login-container .button {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -281,12 +281,12 @@ tr {
     }
 }
 
-.login-container .button-primary {
+#styleCss .login-container .button-primary {
     width: 100%;
     border-radius: 7px;
 }
 
-.button {
+#styleCss .button {
     background: none;
     border: none;
     text-decoration: none;
@@ -295,49 +295,49 @@ tr {
     transition: .3s;
 }
 
-.button-orange {
+#styleCss .button-orange {
     background-color: var(--orange);
 }
 
-.button-orange:hover {
+#styleCss .button-orange:hover {
     background-color: #ba6300;
 }
 
-.button-primary {
+#styleCss .button-primary {
     background-color: var(--primary);
 }
 
-.button-primary:hover {
+#styleCss .button-primary:hover {
     background-color: #01243f;
 }
 
-.button-danger {
+#styleCss .button-danger {
     background-color: var(--danger);
 }
 
-.button-danger:hover {
+#styleCss .button-danger:hover {
     background-color: #560505;
 }
 
-.button-success {
+#styleCss .button-success {
     background-color: var(--success);
 }
 
-.button-success:hover {
+#styleCss .button-success:hover {
     background-color: #368a32;
 }
 
-.login-form-disabled input {
+#styleCss .login-form-disabled input {
     margin: 15px 0;
 }
 
-input[disabled] {
+#styleCss input[disabled] {
    border: 3px solid var(--primary);
    border-radius: 0;
    background-color: rgba(119, 141, 169, 0.4) !important;
 }
 
-input[disabled]::placeholder {
+#styleCss input[disabled]::placeholder {
    color: var(--secondary);
 }
 
@@ -345,19 +345,19 @@ input[disabled]::placeholder {
 
 /* Change Phone Number Modal */
 
-.modal-title, .modal-body, .modal-footer {
+#styleCss .modal-title, #styleCss .modal-body, #styleCss .modal-footer {
     color: var(--primary) !important;
 } 
 
-.modal-header{
+#styleCss .modal-header{
     border-bottom: 3px solid var(--orange);
 }
 
-.modal-footer {
+#styleCss .modal-footer {
     border-top: none
 }
 
-.form-control {
+#styleCss .form-control {
     border: 3px solid var(--primary);
     border-radius: 0;
     color: var(--primary) !important;
@@ -365,17 +365,17 @@ input[disabled]::placeholder {
     margin-bottom: 10px;
 }
 
-.form-control::placeholder {
+#styleCss .form-control::placeholder {
     color: var(--secondary);
 }
 
-.form-control:active, .form-control:focus {
+#styleCss .form-control:active, #styleCss .form-control:focus {
     border-color: var(--orange);
     /*color: var(--orange) !important;*/
     box-shadow: none !important;
 }
 
-select.form-control:has(option:checked[value=""]) {
+#styleCss select.form-control:has(option:checked[value=""]) {
     color: var(--secondary) !important;
 }
 
@@ -383,11 +383,11 @@ select.form-control:has(option:checked[value=""]) {
 
 /* Modal Danger */
 
-.modal-danger .modal-header {
+#styleCss .modal-danger .modal-header {
     border-bottom: 3px solid var(--danger);
 }
 
-.modal-danger .modal-title, .modal-danger .modal-footer, .modal-danger .modal-body {
+#styleCss .modal-danger .modal-title, #styleCss .modal-danger .modal-footer, #styleCss .modal-danger .modal-body {
     color: var(--danger) !important;
 }
 
@@ -395,14 +395,14 @@ select.form-control:has(option:checked[value=""]) {
 
 /* Boat Card */
 
-.boat-card {
+#styleCss .boat-card {
     border: 4px solid var(--primary);
     border-radius: 10px;
     position: relative;
     overflow: hidden;
 }
 
-.boat-deactivated::after {
+#styleCss .boat-deactivated::after {
     content: 'NEAKTIVAN';
     position: absolute;
     top: 25px;
@@ -418,11 +418,11 @@ select.form-control:has(option:checked[value=""]) {
     transform: rotate(45deg);
 }
 
-.card-body .card-title, .card-body .card-text {
+#styleCss .card-body .card-title, #styleCss .card-body .card-text {
     color: var(--primary);
 }
 
-.card-img-top {
+#styleCss .card-img-top {
     height: 250px;
     width: auto;
     object-fit: cover;
@@ -432,22 +432,22 @@ select.form-control:has(option:checked[value=""]) {
 
 /* Boat Info Modal */
 
-#BoatInfoImagesCarousel .carousel-inner {
+#styleCss #BoatInfoImagesCarousel .carousel-inner {
     border-radius: 10px;
     border: 4px solid var(--primary);
 }
 
-#BoatInfoImagesCarousel img {
+#styleCss #BoatInfoImagesCarousel img {
     height: 450px;
     object-fit: cover;
 }
 
-.carousel-img-prev {
+#styleCss .carousel-img-prev {
     background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2219%22%20height%3D%2238%22%20viewBox%3D%220%200%2019%2038%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M16.9756%201.5L1.97558%2019L16.9756%2036.5%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke%3D%22%23FB8500%22%2F%3E%0A%3C%2Fsvg%3E');
 
 }
 
-.carousel-img-next {
+#styleCss .carousel-img-next {
     background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2219%22%20height%3D%2238%22%20viewBox%3D%220%200%2019%2038%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M1.5%2036.5L16.5%2019L1.5%201.5%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke%3D%22%23FB8500%22%2F%3E%0A%3C%2Fsvg%3E%0A');
 }
 
