@@ -25,7 +25,7 @@ function PhoneNumberModal({uuid}) {
         //setPhoneError(false);
 
         const formattedPhone = newPhone.replace(/[\s()-]/g, "");
-        const phoneRegex = /^\+[1-9]\d{7,14}$/;
+        const phoneRegex = /^(\+[1-9]\d{7,14})?$/;
         if (!phoneRegex.test(formattedPhone)) {
             setPhoneError(true);
             setSavingPhone(false);

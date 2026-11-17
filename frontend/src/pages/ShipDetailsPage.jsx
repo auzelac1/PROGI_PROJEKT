@@ -6,8 +6,17 @@ import PrijavaModal from '../components/PrijavaModal';
 import Ucitavanje from '../components/Ucitavanje';
 import { useKorisnik } from '../privremeno/useKorisnik';
 import { dohvatiPlovilo, PORTS, TYPES, eur, fmtDate } from '../api/plovila';
+import { useProfileContext } from '../contexts/ProfileContext';
+import NavBar from '../components/NavBar';
+
+import { useStyles } from '../useStyles';
+import indexCss from '../styles/index.css?url';
 
 export default function ShipDetailsPage() {
+  useStyles(indexCss);
+
+  const {loggedUser} = useProfileContext();
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -44,19 +53,23 @@ export default function ShipDetailsPage() {
   ];
 
   return (
+    <>
+    {loggedUser.uloga !== "KORISNIK" && <div id="styleCss" className='py-1'>
+        <NavBar user={loggedUser} brand={false}/>
+      </div>}
     <main className="pregled">
       <header className="pregled-header sticky-top">
         <div className="container">
           <nav className="navbar navbar-expand-lg py-3">
             <div className="container-fluid px-0">
               <Link className="pregled-brand text-decoration-none" to="/">Natalia Charter</Link>
-              <div className="d-flex align-items-center gap-4 ms-auto me-4">
+              <div className="d-flex align-items-center gap-4 ms-auto">
                 <Link to="/plovila" className="nav-link">Sva plovila</Link>
                 <Link to="/#vrste" className="nav-link">Vrste plovila</Link>
                 <Link to="/#luke" className="nav-link">Luke polaska</Link>
                 <Link to="/#kako-radi" className="nav-link">Kako rezervirati?</Link>
               </div>
-              <Link to="/prijava" className="btn btn-prijava">Prijava</Link>
+              {loggedUser.uloga === "KORISNIK" && <Link to="/prijava" className="ms-4 btn btn-prijava">Prijava</Link>}
             </div>
           </nav>
         </div>
@@ -126,5 +139,6 @@ export default function ShipDetailsPage() {
 
       <PrijavaModal show={pitajPrijavu} onClose={() => setPitajPrijavu(false)} onPrijava={() => prijava(pathname)} />
     </main>
+    </>
   );
 }

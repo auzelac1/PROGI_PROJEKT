@@ -1,4 +1,4 @@
-:root {
+.pregled {
   --text: #4a5568;
   --text-h: #0E3A5C;
   --bg: #fff;
@@ -529,6 +529,47 @@ p {
   padding: 2.5rem 0;
 }
 
+.pregled .site-footer p {
+    color: #778DA9;
+}
+
+.pregled .site-footer svg {
+    margin-right: 10px;
+}
+
+.pregled .site-footer .footer-location {
+    display: flex;
+    align-items: center;
+}
+
+.pregled .site-footer .footer-location, .pregled .site-footer  .footer-phone, .pregled .site-footer  .footer-mail {
+    margin-bottom: 15px;
+}
+
+.pregled .site-footer .footer-white {
+    color: white;
+    margin-bottom: 0;
+}
+
+.pregled .site-footer a.footer-white {
+    text-decoration: none;
+    transition: .3s;
+}
+
+.pregled .site-footer a.footer-white:hover {
+    color: #778DA9;
+}
+
+.pregled .site-footer .footer-white:hover svg path {
+    stroke: #778DA9 !important;
+}
+
+.pregled .site-footer h3 {
+  color: white;
+}
+
+/* Style.css Footer */
+
 @media (max-width: 575px) {
   .pregled .equip {
     columns: 1;
@@ -538,3 +579,42 @@ p {
     padding: 3rem 0;
   }
 }
+
+/* Style.css NavBar */
+
+#styleCss .navbar-brand {
+    color: var(--pr-navy) !important;
+    font-size: 24px;
+}
+
+#styleCss .nav-item {
+    padding: 0 10px;
+}
+
+#styleCss .nav-item .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pr-ink);
+    /*font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    font-weight: 600;*/
+}
+
+#styleCss .nav-link:hover {
+    color: var(--pr-teal-hover);
+}
+
+#styleCss .nav-link:hover svg path {
+    stroke: var(--pr-teal-hover);
+}
+
+#styleCss .nav-item svg {
+    margin-right: 7px;
+}
+
+#styleCss .nav-item svg path {
+    transition: .3s;
+}
+
+/* Style.css NavBar */
+

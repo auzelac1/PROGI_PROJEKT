@@ -31,7 +31,7 @@ function EditUserModal({activeUser}) {
         setPhoneError(false);
 
         const formattedPhone = phoneNumber.replace(/[\s()-]/g, "");
-        const phoneRegex = /^\+[1-9]\d{7,14}$/;
+        const phoneRegex = /^(\+[1-9]\d{7,14})?$/;
         if (!phoneRegex.test(formattedPhone)) {
             setPhoneError(true);
             setLoading(false);

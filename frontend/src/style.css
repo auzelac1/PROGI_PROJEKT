@@ -131,7 +131,7 @@
     align-items: center;
 }
 
-#styleCss .profile-info div > span, a {
+#styleCss .profile-info div > span, #styleCss a {
     display: inline-block;
     padding: 7px 0;
 }

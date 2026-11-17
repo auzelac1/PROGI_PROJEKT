@@ -12,7 +12,7 @@ function Logout() {
         async function handleLogout() {
             try {
                 const data = await logout();
-                setLoggedUser(null);
+                setLoggedUser({uloga: "KORISNIK"});
             } catch (err) {
                 //setLoggedUser(null), obriši kolačić
             } finally {

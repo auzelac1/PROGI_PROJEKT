@@ -1,4 +1,3 @@
-import './style.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -44,7 +43,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute allowedRoles={["KORISNIK"]} user={user} />}>
-            <Route path='/login' element={<Login />} />
+            <Route path='/prijava' element={<Login />} />
           </Route>
           <Route element={<Layout user={user} />}>
             <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
