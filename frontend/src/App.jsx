@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Profile from './pages/Profile';
 import Error404 from './pages/Error404';
-import Users from './pages/Users'
-import Login from './pages/Login'
-import Logout from './pages/Logout'
+import Users from './pages/Users';
+import Login from './pages/Login';
+import Logout from './pages/Logout';
 
 import HomePage from './pages/HomePage';
 import ShipDetailsPage from './pages/ShipDetailsPage';
@@ -21,7 +21,6 @@ import { useProfileContext } from './contexts/ProfileContext';
 import { UsersProvider } from './contexts/UsersContext';
 
 function App() {
-
   const { loggedUser, loadingProfile } = useProfileContext();
 
   if (loadingProfile) {
@@ -33,9 +32,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<ProtectedRoute allowedRoles={["korisnik"]} user={user} />}>
-          <Route path='/prijava' element={<Login />} />
-        </Route>
+        <Route path='/prijava' element={<Login />} />
+        <Route path='/login' element={<Login />} />
         <Route element={<Layout user={user} />}>
           <Route element={<ProtectedRoute allowedRoles={["klijent", "admin", "djelatnik", "voditelj"]} user={user} />}>
             <Route path='/profile' element={<Profile user={user} />} />
@@ -47,9 +45,7 @@ function App() {
               </UsersProvider>
             } />
           </Route>
-          <Route element={<ProtectedRoute allowedRoles={["klijent", "admin", "djelatnik", "voditelj"]} user={user} />}>
-            <Route path='/logout' element={<Logout />} />
-          </Route>
+          <Route path='/logout' element={<Logout />} />
           <Route path='*' element={<Error404 />} />
         </Route>
         <Route path="/" element={<HomePage />} />
