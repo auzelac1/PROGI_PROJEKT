@@ -9,7 +9,9 @@ export async function getUsers() {
     try {
         response = await fetch(`${API_URL}/users`, {
             method: 'GET',
-            credentials: "include"
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
     } catch {
         throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
@@ -29,13 +31,13 @@ export async function saveUser(uuid, phone, role) {
         response = await fetch(`${API_URL}/users/${uuid}`, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
                 telefon: phone,
                 uloga: role
-            }),
-            credentials: "include"
+            })
         });
     } catch {
         throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
