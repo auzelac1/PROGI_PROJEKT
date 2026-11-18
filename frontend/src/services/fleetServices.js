@@ -3,11 +3,13 @@ if (API_URL === undefined) {
     API_URL = "/api";
 }
 
-export async function getFleet() {
+export async function getFleet(params = {}) {
     let response;
+    const query = new URLSearchParams(params).toString();
+    const url = query ? `${API_URL}/boats?${query}` : `${API_URL}/boats`;
 
     try {
-        response = await fetch(`${API_URL}/boats`, {
+        response = await fetch(url, {
             method: 'GET',
             credentials: "include"
         });

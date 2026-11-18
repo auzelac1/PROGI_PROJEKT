@@ -16,29 +16,15 @@ export default function PlovilaPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    const category = searchParams.get('category') || '';
-    const port = searchParams.get('port') || '';
-    const numOfPeople = searchParams.get('num_of_people') || '';
-
     useEffect(() => {
         setLoading(true);
         setError(false);
 
-        getFleet()
+        const params = Object.fromEntries(searchParams.entries());
+
+        getFleet(params)
             .then((data) => {
-                let filtered = data;
-
-                if (category) {
-                    filtered = filtered.filter((s) => s.model.kategorija === category);
-                }
-                if (port) {
-                    filtered = filtered.filter((s) => String(s.port.id_luka) === String(port));
-                }
-                if (numOfPeople) {
-                    filtered = filtered.filter((s) => s.model.kapacitet >= Number(numOfPeople));
-                }
-
-                setShips(filtered);
+                setShips(data);
                 setLoading(false);
             })
             .catch(() => {
