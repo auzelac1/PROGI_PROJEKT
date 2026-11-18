@@ -78,6 +78,8 @@ def dohvati_trenutnog_korisnika(token: str = Depends(shema_tokena)):
     korisnik = get_user_by_email(email)
     if korisnik is None:
         raise greska_autorizacije
+    #slika dolazi iz Google podacih spremljeni u JWT.
+    korisnik["picture"] = sadrzaj.get("picture")
     return korisnik
 
 

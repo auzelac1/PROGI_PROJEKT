@@ -41,7 +41,7 @@ function PhoneNumberModal({uuid}) {
             setSuccessProfile("");
             const data = await changePhoneNumber(uuid, newPhone, ime, prezime);
             const editedUser = {
-                uuid: loggedUser.uuid,
+                ...loggedUser,
                 ime: ime,
                 prezime: prezime,
                 email: loggedUser.email,

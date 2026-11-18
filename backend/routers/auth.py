@@ -53,7 +53,11 @@ async def google_callback(request: Request):
 
     korisnik = get_or_create_google_user(user_info)
     jwt_token = stvori_token(
-        {"sub": korisnik["email"], "uloga": korisnik["uloga"]}
+        {
+            "sub": korisnik["email"],
+            "uloga": korisnik["uloga"],
+            "picture": user_info.get("picture"),
+        }
     )
 
     frontend_base = os.getenv("FRONTEND_URL", "http://localhost:5173")
@@ -76,6 +80,7 @@ def _profil(trenutni_korisnik):
         "telefon": trenutni_korisnik["telefon"],
         "email": trenutni_korisnik["email"],
         "uloga": trenutni_korisnik["uloga"],
+        "picture": trenutni_korisnik.get("picture"),
     }
 
 
