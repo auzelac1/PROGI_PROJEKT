@@ -54,9 +54,7 @@ function App() {
                 </FleetProvider>
               } />
             </Route> */}
-            <Route element={<ProtectedRoute allowedRoles={["klijent", "admin", "djelatnik", "voditelj"]} user={user} />}>
-              <Route path='/logout' element={<Logout />} />
-            </Route>
+            <Route path='/logout' element={<Logout />} />
             <Route path='*' element={<Error404 />} />
           </Route>
           <Route path="/" element={<HomePage />} />

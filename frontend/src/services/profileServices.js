@@ -55,22 +55,7 @@ export async function changePhoneNumber(uuid, phone, ime, prezime) {
 }
 
 export async function logout() {
-    // Budući da se radi o JWT tokenima, odjava se najčešće obavlja na frontendu brisanjem tokena.
-    // Ako imate backend rutu za logout, šaljemo i tu token.
-    const token = localStorage.getItem('jwt_token');
-
-    try {
-        await fetch(`${API_URL}/logout`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-    } catch {
-        // Čak i ako backend javi grešku, mi na frontendu obavezno brišemo token
-    }
-
-    // Uvijek očisti token iz lokalne memorije preglednika kod odjave
+    // JWT odjava je lokalna; backend nema rutu za odjavu.
     localStorage.removeItem('jwt_token');
 
     return { success: true };
