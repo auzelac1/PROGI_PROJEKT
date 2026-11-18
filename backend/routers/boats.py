@@ -10,15 +10,25 @@ router = APIRouter(prefix="/api")
 def search_boats_endpoint(
     date_from: date | None = None,
     date_to: date | None = None,
-    num_of_people: int | None = Query(None, ge=1),
+    num_of_people: int | None = None,
     port: int | None = None,
-    category: str | None = None,):
+    category: str | None = None,
+    max_price: float | None = None,
+    min_cabins: int | None = None,
+    equipment: list[int] | None = Query(None), 
+    services: list[int] | None = Query(None),):
     if (date_from is None) != (date_to is None):
         raise HTTPException(status_code=400, detail="Potrebna su oba datuma.")
     if date_from is not None and (date_from > date_to or date_from < date.today()):
         raise HTTPException(status_code=400, detail="Početni datum ne smije biti u prošlosti ni nakon završnog.")
     if category is not None and category not in fleet.get_categories():
         raise HTTPException(status_code=400, detail="Nepoznata kategorija.")
+    if num_of_people is not None and num_of_people < 1:
+        raise HTTPException(status_code=400, detail="Broj osoba mora biti barem 1.")
+    if max_price is not None and max_price < 0:
+        raise HTTPException(status_code=400, detail="Cijena ne smije biti negativna.")
+    if min_cabins is not None and min_cabins < 0:
+        raise HTTPException(status_code=400, detail="Broj kabina ne smije biti negativan.")
 
     return fleet.search_boats(
         date_from=date_from,
@@ -26,6 +36,10 @@ def search_boats_endpoint(
         num_of_people=num_of_people,
         port=port,
         category=category,
+        max_price=max_price,
+        min_cabins=min_cabins,
+        equipment=equipment,
+        services=services,
     )
 
     
