@@ -3,11 +3,13 @@ if (API_URL === undefined) {
     API_URL = "/api";
 }
 
-export async function getFleet() {
+export async function getFleet(params = {}) {
     let response;
+    const query = new URLSearchParams(params).toString();
+    const url = query ? `${API_URL}/boats?${query}` : `${API_URL}/boats`;
 
     try {
-        response = await fetch(`${API_URL}/boats`, {
+        response = await fetch(url, {
             method: 'GET',
             credentials: "include"
         });
@@ -32,6 +34,10 @@ export async function getBoat(id) {
         });
     } catch {
         throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
+    }
+
+    if (response.status === 404) {
+        return null;
     }
 
     if (!response.ok) {
@@ -115,7 +121,7 @@ export async function setBoatStatus(id, status) {
         if (status === false) {
             let responseCheckReservations = await checkReservations(id);
             if (responseCheckReservations.reservations > 0) {
-                throw new Error(); 
+                throw new Error();
             }
         }
 

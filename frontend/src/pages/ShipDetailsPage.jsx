@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import ShipImage from '../components/ShipImage';
 import PortsMap from '../components/PortsMap';
 import PrijavaModal from '../components/PrijavaModal';
 import Ucitavanje from '../components/Ucitavanje';
-import { useKorisnik } from '../privremeno/useKorisnik';
-import { PORTS, TYPES, eur } from '../api/plovila';
+import { eur } from '../utils/format';
 import { useProfileContext } from '../contexts/ProfileContext';
-import NavBar from '../components/NavBar';
 
 import { useStyles } from '../useStyles';
 import indexCss from '../styles/index.css?url';
@@ -17,12 +15,10 @@ import PublicHeader from '../components/PublicHeader';
 export default function ShipDetailsPage() {
   useStyles(indexCss);
 
-  const {loggedUser} = useProfileContext();
+  const { loggedUser } = useProfileContext();
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const { prijavljen, prijava } = useKorisnik();
   const [ship, setShip] = useState(undefined);
   const [error, setError] = useState(false);
   const [active, setActive] = useState(0);
@@ -45,9 +41,7 @@ export default function ShipDetailsPage() {
     );
   }
 
-  const luka = PORTS.find((p) => p.id === ship.luka);
-  const tip = TYPES.find((t) => t.id === ship.tip)?.naziv;
-  const rezerviraj = () => (loggedUser.uloga !== "korisnik" ? navigate(`/rezervacija/${ship.id_brod}`) : setPitajPrijavu(true));
+  const rezerviraj = () => (loggedUser.uloga !== "korisnik" ? navigate(`/rezervacija/${ship.basics.id_brod}`) : setPitajPrijavu(true));
 
   const specs = [
     ['Vrsta', ship.model.tip], ['Proizvođač i model', `${ship.model.proizvodjac} ${ship.model.model}`], ['Godina proizvodnje', ship.basics.godina_proizvodnje],
@@ -56,17 +50,17 @@ export default function ShipDetailsPage() {
 
   return (
     <main className="pregled">
-      <PublicHeader/>
+      <PublicHeader />
 
       <div className="container py-5">
         <nav aria-label="Navigacija" className="mb-3">
-          <Link to="/plovila" className="btn btn-sm btn-outline-secondary back-link">
-            <span className="me-1">&lsaquo;&nbsp;</span> Povratak na pretragu
-          </Link>
+          <button type="button" onClick={() => navigate(-1)} className="btn btn-sm btn-outline-secondary back-link">
+            <span className="me-1">&lsaquo;&nbsp;</span> Natrag
+          </button>
         </nav>
         <div className="row g-4">
           <div className="col-lg-8">
-            <ShipImage src={ship.photos[0].url_foto} alt={ship.basics.naziv} className="gallery-main" />
+            <ShipImage src={ship.photos[active]?.url_foto} alt={ship.basics.naziv} className="gallery-main" />
             {ship.photos.length > 1 && (
               <div className="gallery-thumbs">
                 {ship.photos.map((photo, i) => (
@@ -117,7 +111,7 @@ export default function ShipDetailsPage() {
         </div>
       </div>
 
-      <PrijavaModal show={pitajPrijavu} onClose={() => setPitajPrijavu(false)} onPrijava={() => prijava(pathname)} />
+      <PrijavaModal show={pitajPrijavu} onClose={() => setPitajPrijavu(false)} />
     </main>
   );
 }

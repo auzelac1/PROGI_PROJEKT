@@ -51,7 +51,7 @@ export default function FleetStrip({ ships, categories }) {
               <ShipImage src={categoryImages[categoryImageNames[category]]} alt={category} />
               <div className="fleet-label">
                 <strong>{category}</strong>
-                <span className="text-muted d-block small">{category /* OPIS */}</span>
+                <span className="text-muted d-block small">{category}</span>
                 <span className="small">{ofCategory.length} u ponudi</span>
               </div>
             </Link>

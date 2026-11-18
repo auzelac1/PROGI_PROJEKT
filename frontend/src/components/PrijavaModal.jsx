@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function PrijavaModal({ show, onClose, onPrijava }) {
+export default function PrijavaModal({ show, onClose }) {
   useEffect(() => {
     if (!show) return undefined;
     const onKey = (e) => e.key === 'Escape' && onClose();
@@ -21,7 +21,7 @@ export default function PrijavaModal({ show, onClose, onPrijava }) {
               <button type="button" className="btn-close" aria-label="Zatvori" onClick={onClose} />
             </div>
             <div className="modal-body">
-              Plovilo možete pregledavati bez prijave, ali rezervaciju može izraditi samo prijavljeni klijent. Nakon prijave vraćate se na ovo plovilo.
+              Plovilo možete pregledavati bez prijave, ali rezervaciju može izraditi samo prijavljeni klijent.
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-outline-secondary" onClick={onClose}>Odustani</button>
