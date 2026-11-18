@@ -5,6 +5,7 @@ if (API_URL === undefined) {
 
 export async function getUsers() {
     let response;
+    const token = localStorage.getItem('jwt_token');
 
     try {
         response = await fetch(`${API_URL}/users`, {
@@ -26,6 +27,7 @@ export async function getUsers() {
 
 export async function saveUser(uuid, phone, role) {
     let response;
+    const token = localStorage.getItem('jwt_token');
 
     try {
         response = await fetch(`${API_URL}/users/${uuid}`, {
