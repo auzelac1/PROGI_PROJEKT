@@ -2,7 +2,8 @@
 cd /d "%~dp0"
 
 :: 1. Gasi stare skrivene Python procese da ne blokiraju port 8000
-taskkill /F /IM python.exe >nul 2>&1
+:: Tonko: opasna komanda, moglo bi nekom programe zeznut koji su im pokrenuti na racunalu, skripte, servere, subprocese....
+:: taskkill /F /IM python.exe >nul 2>&1
 
 :: 2. Pokrece Backend u novom prozoru (bez --reload da ga OneDrive ne zamrzne)
 start "Charter - Backend" cmd /k "cd /d "%~dp0backend" && title Charter - Backend && .venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8000"
