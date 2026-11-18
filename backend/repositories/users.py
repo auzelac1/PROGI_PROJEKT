@@ -30,7 +30,8 @@ def get_or_create_google_user(google_data: dict):
     osim ako mu je email u .env kao FIRST_ADMIN_EMAIL (tada je admin).
     """
     email = google_data.get("email").lower()
-    name = google_data.get("name", "")
+    name = google_data.get("given_name", "")
+    surname = google_data.get("family_name", "")
     uuid = google_data.get("sub")  # Google-ov jedinstveni ID
 
     # Provjeri postoji li već
@@ -42,8 +43,8 @@ def get_or_create_google_user(google_data: dict):
 
         with get_connection() as conn:
             conn.execute(
-                "insert into korisnik (uuid, ime, email, uloga) values (%s, %s, %s, %s)",
-                (uuid, name, email, uloga),
+                "insert into korisnik (uuid, ime, prezime, email, uloga) values (%s, %s, %s, %s, %s)",
+                (uuid, name, surname, email, uloga),
             )
             conn.commit()
 
