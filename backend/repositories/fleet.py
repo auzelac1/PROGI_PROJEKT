@@ -71,9 +71,9 @@ def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, ca
     params = {"od": date_from, "do": date_to, "br_osoba": num_of_people,
               "luka": port, "kategorija": category}
     with get_connection() as conn:
-        return conn.execute("""
+        rows = conn.execute("""
             select b.id_brod, b.naziv, b.cijena_dan, b.godina_proizvodnje,
-                   m.kategorija, m.proizvodjac, m.model, m.kapacitet, m.broj_kabina,
+                   m.kategorija, m.tip, m.proizvodjac, m.model, m.kapacitet, m.broj_kabina,
                    l.id_luka, l.ime_luka,
                    (select f.url_foto from fotografija f
                      where f.id_brod = b.id_brod order by f.redoslijed limit 1) as naslovna_foto
@@ -97,6 +97,18 @@ def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, ca
                       and n.datum_pocetak <= %(do)s and n.datum_kraj >= %(od)s))
             order by b.cijena_dan
         """, params).fetchall()
+
+    boats = []
+    for row in rows:
+        boats.append({
+            "basics": {"id_brod": row["id_brod"], "naziv": row["naziv"],
+                       "cijena_dan": row["cijena_dan"], "godina_proizvodnje": row["godina_proizvodnje"]},
+            "model":  {"kategorija": row["kategorija"], "tip": row["tip"], "proizvodjac": row["proizvodjac"],
+                       "model": row["model"], "kapacitet": row["kapacitet"], "broj_kabina": row["broj_kabina"]},
+            "port":   {"id_luka": row["id_luka"], "ime_luka": row["ime_luka"]},
+            "photos": [{"url_foto": row["naslovna_foto"]}] if row["naslovna_foto"] else [],
+        })
+    return boats
 
 def get_categories():
     return ["jedrilica", "motorni brod", "katamaran", "ostalo"]
