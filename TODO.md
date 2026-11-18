@@ -266,7 +266,7 @@ Tjedan 7 traži osnovna ispitivanja. Za prvu predaju testovi samo čitaju podatk
 | | krivi link `/login`, ikona Googlea | **Ian Vrbaslija** (prijava, frontend) |
 | | adrese API-ja (`/api` svugdje) | **Tonko Buncuga** (setup/devops: Vercel i proxy) |
 | Vlastiti profil: frontend | rušenje `ProfileInfo`, natpisi u prozoru | **Ian Vrbaslija** (izrada tog dijela) |
-| Istaknuta plovila: backend | spajanje grane, ugniježđeni oblik | **Nikolina Žderić** (plovila, backend) |
+| Istaknuta plovila: backend | spajanje grane, ugniježđeni oblik | **Nikolina Žderić** (plovila, backend) | [x]
 | Istaknuta plovila: frontend | ključ `key`, pozadinska slika | **Ana Bartulović** (izrada početne) |
 | Detalji plovila | poruka za 404, galerija, gumb „Natrag”, mrtvi kod, rečenica u prozoru | **Ana Bartulović** (izrada stranice) |
 | | gumb „Rezerviraj” | kasnije, uz rezervaciju |
@@ -277,7 +277,7 @@ Tjedan 7 traži osnovna ispitivanja. Za prvu predaju testovi samo čitaju podatk
 
 | Odjeljak u `TODO.md` | Stavke | Tko |
 | :--- | :--- | :--- |
-| Pregled plovila: backend | proširenje `search_boats` i `/api/boats` (oprema, usluge, cijena, kabine) | **Nikolina Žderić** (plovila, backend) |
+| Pregled plovila: backend | proširenje `search_boats` i `/api/boats` (oprema, usluge, cijena, kabine) | **Nikolina Žderić** (plovila, backend) | [x]
 | Pregled plovila: frontend | tražilica `SearchBar.jsx` (radi se prije nove stranice) | **Ana Bartulović** (izrada početne) |
 | | funkcija u `fleetServices.js`, nova stranica `BoatList.jsx`, dodatni filtri, ukupna cijena, zamjena u `App.jsx` | **Luka Martinić** (pretraga, frontend) |
 | | zajedničko zaglavlje `PublicHeader.jsx` (radi se prije nove stranice), uključujući sklapanje na mobitelu | **Ian Vrbaslija** (izrada `NavBar.jsx`, `Layout.jsx`) |
