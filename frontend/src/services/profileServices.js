@@ -40,8 +40,7 @@ export async function changePhoneNumber(uuid, phone, ime, prezime) {
                 telefon: phone,
                 ime: ime,
                 prezime: prezime
-            }),
-            credentials: "include"
+            })
         });
     } catch {
         throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
