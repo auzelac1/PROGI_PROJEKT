@@ -68,12 +68,12 @@ Frontend je napravljen (odjeljak „Istaknuta plovila” na početnoj stranici),
 
 ### Backend: potrebno napraviti — Nikolina Žderić
 
-- [ ] **Spojiti `feature/plovila-backend` u `main`.** Ruta `/api/boats` postoji samo u toj grani. Spajanje sada daje konflikte u `backend/repositories/fleet.py` i `backend/routers/boats.py`, jer su kod mergea `feature/prijava-frontend` izbačene izmjene backenda iz commita `97109c8`. Postupak:
+- [x] **Spojiti `feature/plovila-backend` u `main`.** Ruta `/api/boats` postoji samo u toj grani. Spajanje sada daje konflikte u `backend/repositories/fleet.py` i `backend/routers/boats.py`, jer su kod mergea `feature/prijava-frontend` izbačene izmjene backenda iz commita `97109c8`. Postupak:
   1. U granu `feature/plovila-backend` spojiti `main` (`git merge main`).
   2. Kod konflikata zadržati verzije iz `feature/plovila-backend` za `fleet.py` i `routers/boats.py`.
   3. Provjeriti da `backend/main.py` ima `from routers import boats` i `app.include_router(boats.router)`, a da postoji prazan `backend/routers/__init__.py`. Git ovo neće prijaviti kao konflikt, pa lako ostane izostavljeno.
   4. Pokrenuti backend lokalno i provjeriti `/api/boats` u Swaggeru (`/api/docs`), zatim spojiti granu u `main`.
-- [ ] **`/api/boats` treba vraćati ugniježđeni oblik.** Frontend (`ShipCard.jsx`, a kasnije i pretraga) očekuje isti oblik kao `/api/boats/{id}`: `ship.basics.naziv`, `ship.model.kapacitet`, `ship.port.ime_luka`, `ship.photos[0].url_foto`. Sada `search_boats` vraća ravan popis (`naziv`, `kapacitet`, `ime_luka`, `naslovna_foto`…).
+- [x] **`/api/boats` treba vraćati ugniježđeni oblik.** Frontend (`ShipCard.jsx`, a kasnije i pretraga) očekuje isti oblik kao `/api/boats/{id}`: `ship.basics.naziv`, `ship.model.kapacitet`, `ship.port.ime_luka`, `ship.photos[0].url_foto`. Sada `search_boats` vraća ravan popis (`naziv`, `kapacitet`, `ime_luka`, `naslovna_foto`…).
   - **Ne** pozivati `get_boat_info` za svaki brod (za 15 brodova to je 15 veza i 90 upita). Zadržati postojeći jedan upit i retke u Pythonu presložiti:
     ```python
     boats = []
