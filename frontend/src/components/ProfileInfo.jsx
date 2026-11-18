@@ -4,6 +4,10 @@ import PhoneNumberModal from "./PhoneNumberModal"
 function ProfileInfo({user}) {
     const [failedPicture, setFailedPicture] = useState(null);
     const showPicture = user.picture && user.picture !== failedPicture;
+    //regex za pronalazenje slike u google urlu, slaba je bila kvaliteta prije
+    const googlePictureSizePattern = /=s\d+(?=-|$)/;
+    //prije je google slao 96x96 rezoluciju, sada se trazi od 552px
+    const profilePictureUrl = user.picture?.replace(googlePictureSizePattern, "=s552");
 
     return (
         <div className="container profile poppins">
@@ -12,7 +16,7 @@ function ProfileInfo({user}) {
                     <div className="profile-picture">
                         {showPicture ? (
                             <img
-                                src={user.picture}
+                                src={profilePictureUrl}
                                 alt="Profilna slika"
                                 referrerPolicy="no-referrer"
                                 onError={() => setFailedPicture(user.picture)}
