@@ -34,6 +34,10 @@ export async function getBoat(id) {
         throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
     }
 
+    if (response.status === 404) {
+        return null;
+    }
+
     if (!response.ok) {
         throw new Error("Trenutno ne možemo dohvatiti podatke o brodu.");
     }
@@ -115,7 +119,7 @@ export async function setBoatStatus(id, status) {
         if (status === false) {
             let responseCheckReservations = await checkReservations(id);
             if (responseCheckReservations.reservations > 0) {
-                throw new Error(); 
+                throw new Error();
             }
         }
 

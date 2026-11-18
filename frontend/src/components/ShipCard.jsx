@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ShipImage from './ShipImage';
-import { eur } from '../api/plovila';
+import { eur } from '../utils/format';
 
 export default function ShipCard({ ship }) {
   return (

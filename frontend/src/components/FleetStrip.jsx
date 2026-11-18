@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import ShipImage from './ShipImage';
-import { TYPES } from '../api/plovila';
 
 export default function FleetStrip({ ships, categories }) {
   const ref = useRef(null);
@@ -33,10 +32,10 @@ export default function FleetStrip({ ships, categories }) {
           const ofCategory = ships.filter((s) => s.model.kategorija === category);
           return (
             <Link key={category} to={`/plovila?category=${category}`} className="fleet-item">
-              <ShipImage src={ofCategory[0]?.photos[0].url_foto} alt={category} />
+              <ShipImage src={ofCategory[0]?.photos[0]?.url_foto} alt={category} />
               <div className="fleet-label">
                 <strong>{category}</strong>
-                <span className="text-muted d-block small">{category /* OPIS */}</span>
+                <span className="text-muted d-block small">{category}</span>
                 <span className="small">{ofCategory.length} u ponudi</span>
               </div>
             </Link>

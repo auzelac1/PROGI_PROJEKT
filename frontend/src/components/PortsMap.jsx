@@ -1,7 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
-import { PORTS } from '../api/plovila';
 
 export default function PortsMap({ ports, zoom = 7, height = 420 }) {
   const center = ports.length === 1 ? [ports[0].lat, ports[0].lng] : [44.2, 15.9];
@@ -22,7 +21,6 @@ export default function PortsMap({ ports, zoom = 7, height = 420 }) {
           <Marker key={p.id_luka} position={[p.lat, p.lng]} icon={customIcon}>
             <Popup>
               <strong>{globalIndex}. {p.ime_luka}</strong>
-              {/* {link && <div><Link to={`/plovila?luka=${p.id_luka}`}>Plovila iz ove luke</Link></div>} */}
             </Popup>
           </Marker>
         );
