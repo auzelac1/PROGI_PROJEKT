@@ -25,48 +25,44 @@ function App() {
     return <h1>Učitavanje profila...</h1>
   }
 
-  let user = {
-    uloga: "KORISNIK"
-  }
+  let user = null; // Ispravljeno: ako korisnik nije prijavljen, inicijalno je null da ProtectedRoute zna blokirati zaštićene rute!
 
   if (loggedUser !== null) {
     user = loggedUser;
   }
 
   return (
-    
-      <BrowserRouter>
-        <Routes>
-          <Route element={<ProtectedRoute allowedRoles={["KORISNIK"]} user={user} />}>
-            <Route path='/login' element={<Login />} />
+    <BrowserRouter>
+      <Routes>
+        {/* /login JE SADA JAVNA RUTA - Pristupa joj se slobodno bez provjere uloge */}
+        <Route path='/login' element={<Login />} />
+
+        <Route element={<Layout user={user} />}>
+          {/* <Route path='/' element={<Home />} /> */}
+          <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
+            <Route path='/profile' element={<Profile user={user} />} />
           </Route>
-          <Route element={<Layout user={user} />}>
-            {/* <Route path='/' element={<Home />} /> */}
-            <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
-              <Route path='/profile' element={<Profile user={user} />} />
-            </Route>
-            <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
-              <Route path='/users' element={
-                <UsersProvider>
-                  <Users />
-                </UsersProvider>
-                } />
-            </Route>
-            <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
-              <Route path='/fleet' element={
-                <FleetProvider>
-                  <Fleet />
-                </FleetProvider>
+          <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
+            <Route path='/users' element={
+              <UsersProvider>
+                <Users />
+              </UsersProvider>
               } />
-            </Route>
-            <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
-              <Route path='/logout' element={<Logout />} />
-            </Route>
-            <Route path='*' element={<Error404 />} />
           </Route>
-        </Routes>
-      </BrowserRouter>
-    
+          <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
+            <Route path='/fleet' element={
+              <FleetProvider>
+                <Fleet />
+              </FleetProvider>
+            } />
+          </Route>
+          <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
+            <Route path='/logout' element={<Logout />} />
+          </Route>
+          <Route path='*' element={<Error404 />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

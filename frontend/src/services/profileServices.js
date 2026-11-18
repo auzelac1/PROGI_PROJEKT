@@ -5,11 +5,14 @@ if (API_URL === undefined) {
 
 export async function getMe() {
     let response;
+    const token = localStorage.getItem('jwt_token'); // Dohvaćamo spremljeni JWT token
 
     try {
         response = await fetch(`${API_URL}/me`, {
             method: 'GET',
-            credentials: "include"
+            headers: {
+                'Authorization': `Bearer ${token}` // Šaljemo token u zaglavlju da backend zna tko je prijavljen
+            }
         });
     } catch (err) {
         throw new Error(err.message);
@@ -24,17 +27,18 @@ export async function getMe() {
 
 export async function changePhoneNumber(uuid, phone) {
     let response;
+    const token = localStorage.getItem('jwt_token');
 
     try {
         response = await fetch(`${API_URL}/users/${uuid}`, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // I ovdje nam treba token za autorizaciju
             },
             body: JSON.stringify({
                 telefon: phone
-            }),
-            credentials: "include"
+            })
         });
     } catch {
         throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
@@ -45,24 +49,26 @@ export async function changePhoneNumber(uuid, phone) {
     }
 
     return await response.json();
-    
 }
 
 export async function logout() {
-    let response;
-
+    // Budući da se radi o JWT tokenima, odjava se najčešće obavlja na frontendu brisanjem tokena.
+    // Ako imate backend rutu za logout, šaljemo i tu token.
+    const token = localStorage.getItem('jwt_token');
+    
     try {
-        response = await fetch(`${API_URL}/logout`, {
+        await fetch(`${API_URL}/logout`, {
             method: 'GET',
-            credentials: "include"
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
     } catch {
-        throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
+        // Čak i ako backend javi grešku, mi na frontendu obavezno brišemo token
     }
 
-    if (!response.ok) {
-        throw new Error("Nismo se mogli odjaviti.");
-    }
-
-    return await response.json();
+    // Uvijek očisti token iz lokalne memorije preglednika kod odjave
+    localStorage.removeItem('jwt_token');
+    
+    return { success: true };
 }

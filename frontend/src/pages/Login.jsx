@@ -1,9 +1,8 @@
-
-
 function Login() {
 
     function LoginUser() {
-        window.location.href = 'http://localhost:3000/auth/google';
+        // Ispravljen port na 8000 i točna backend ruta /auth/login/google
+        window.location.href = 'http://localhost:8000/auth/login/google';
     }
     
     return (
