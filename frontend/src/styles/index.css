@@ -546,12 +546,19 @@ p {
 }
 
 .pregled .booking-card {
-  position: static;
+  position: sticky;
+  top: 100px;
   border: 1px solid var(--pr-line);
   border-radius: 14px;
   padding: 1.75rem;
   background: #fff;
   box-shadow: 0 6px 20px rgba(14, 58, 92, .06);
+}
+
+@media (max-width: 991px) {
+  .pregled .booking-card {
+    position: static;
+  }
 }
 
 .pregled .site-footer {
