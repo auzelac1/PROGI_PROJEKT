@@ -19,7 +19,7 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 | ID    | Opis                                                                                                            | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                             |
 | ----- | --------------------------------------------------------------------------------------------------------------- | --------- | ----------------- | ------------------------------------------------------------------------------------------------- |
 | F-2.1 | Svaki korisnik, neovisno o tome je li prijavljen, može pretraživati plovila prema kriterijima.                  | Visok     | Projektni zadatak | Prikaz plovila koja odgovaraju odabranim kriterijima i slobodna su u cijelom odabranom razdoblju. |
-| F-2.2 | Svaki korisnik, neovisno o tome je li prijavljen, može pregledati podatke o plovilu i njegove slobodne termine. | Visok     | Projektni zadatak | Za odabrano plovilo prikazani svi evidentirani podaci i slobodni termini.                         |
+| F-2.2 | Svaki korisnik, neovisno o tome je li prijavljen, može pregledati podatke o plovilu.                            | Visok     | Projektni zadatak | Za odabrano plovilo prikazani su svi evidentirani podaci. Slobodni termini ne prikazuju se na stranici plovila, nego tek pri izradi rezervacije. |
 
 ### 2.1.3 Izrada rezervacije
 
