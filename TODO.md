@@ -236,6 +236,27 @@ NF-02 traži da sučelje radi na računalu, tabletu i mobitelu. Za prvu predaju 
 
 ---
 
+## Ispitivanje — Tonko Buncuga
+
+Tjedan 7 traži osnovna ispitivanja. Za prvu predaju testovi samo čitaju podatke (`GET`), jer se koristi ista baza kao za demonstraciju; testove koji mijenjaju podatke (npr. `PATCH /api/users/{uuid}`) ostaviti za kasnije ili za zasebnu bazu. Većina ruta još nije na `main`: odmah se može postaviti `pytest`, testirati `/api/health` i pisati ručne scenarije, a testovi za plovila i korisnike pišu se kad te rute dođu na `main`.
+
+- [ ] **Postaviti automatske testove backenda:** `pytest` i FastAPI `TestClient` u mapi `backend/tests/`; `pytest` dodati u `backend/requirements.txt`; u `docs/upute.md` dopisati kako se testovi pokreću.
+- [ ] **Testovi backenda** (prijedlog, prema testnim podacima iz `db/migrations/002_test_data.sql`):
+  - `/api/health` i `/api/health/db` vraćaju `200`
+  - `/api/boats` bez filtara vraća samo aktivna plovila (neaktivni Neptun nije u rezultatima)
+  - `/api/boats` s datumima unutar nedostupnosti ne vraća to plovilo (Galeb je nedostupan od 1. 11. 2026. do 31. 3. 2027.)
+  - filtri `category`, `port`, `num_of_people`, a kad budu napravljeni i `equipment`, `services`, `max_price`, `min_cabins`
+  - samo jedan datum, ili „datum od” nakon „datum do”, vraća `400`
+  - `/api/boats/{id}` za postojeće plovilo vraća `basics`, `model`, `port`, `equipment`, `services`, `photos`; za nepostojeće i neaktivno (Neptun) vraća `404`
+  - `/api/users` bez prijave vraća `401` (kad Antonija napravi rute)
+- [ ] **Ručni scenariji za frontend:** za prijavu, profil (uređivanje imena, prezimena i telefona), upravljanje korisnicima, istaknuta plovila, detalje plovila i pregled plovila zapisati korake i očekivani rezultat, proći ih u pregledniku (i na uskom ekranu, vidi *Responzivnost*) i zapisati stvarni rezultat.
+- [ ] **Obavezno uz testiranje ispuniti dokumentaciju:**
+  - napisati `docs/5-Ispitivanje.md` (već predviđen u `docs/Home.md`: pristup ispitivanju, stvarni rezultati i poznati nedostaci); upisivati samo testove koji stvarno postoje i rezultate koji su stvarno dobiveni
+  - u `docs/2-Analiza-zahtjeva.md`, u tablici sljedivosti, popuniti stupac „Ispitivanje ili provjera” za zahtjeve koji su ispitani (naziv testa ili ručnog scenarija)
+  - poznate nedostatke koji se ne poprave do predaje (npr. neispunjene stavke iz ovog dokumenta) navesti u `5-Ispitivanje.md`
+
+---
+
 ## Podjela zadataka (prije pretrage)
 
 | Odjeljak u `TODO.md` | Stavke | Tko |
@@ -261,3 +282,4 @@ NF-02 traži da sučelje radi na računalu, tabletu i mobitelu. Za prvu predaju 
 | | funkcija u `fleetServices.js`, nova stranica `BoatList.jsx`, dodatni filtri, ukupna cijena, zamjena u `App.jsx` | **Luka Martinić** (pretraga, frontend) |
 | | zajedničko zaglavlje `PublicHeader.jsx` (radi se prije nove stranice), uključujući sklapanje na mobitelu | **Ian Vrbaslija** (izrada `NavBar.jsx`, `Layout.jsx`) |
 | Responzivnost | provjera stranica, mreža kartica na novoj stranici (sklapanje zaglavlja ide uz `PublicHeader.jsx`) | **Luka Martinić** (pretraga, frontend; prilagodba za mobitel) |
+| Ispitivanje | testovi backenda (`pytest`), ručni scenariji za frontend, `5-Ispitivanje.md`, stupac „Ispitivanje ili provjera” u tablici sljedivosti | **Tonko Buncuga** (setup/devops) |
