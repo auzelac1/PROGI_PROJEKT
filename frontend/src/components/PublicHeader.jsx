@@ -29,7 +29,10 @@ function PublicHeader() {
                                 <Link to="/#vrste" className="nav-link">Kategorije plovila</Link>
                                 <Link to="/#luke" className="nav-link">Luke polaska</Link>
                                 <Link to="/#kako-radi" className="nav-link">Kako rezervirati?</Link>
+                                {/* 
+                                Tonko: maknut ovaj dio zbog duplog pregleda na mobilnim uredajima
                                 {loggedUser.uloga === "korisnik" && <Link to="/prijava" className="nav-link btn btn-prijava">Prijava</Link>}
+                                */}
                                 <NavBarLinks user={loggedUser}/>
                             </ul>
                         </div>
