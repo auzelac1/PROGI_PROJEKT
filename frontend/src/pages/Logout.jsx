@@ -27,7 +27,7 @@ function Logout() {
             } catch (err) {
                  //
             } finally {
-                setLoggedUser({uloga: "KORISNIK"}); // i obriši kolačić
+                setLoggedUser({uloga: "korisnik"}); // i obriši kolačić
                 window.location.href = `${URL}/`;
             }
         }

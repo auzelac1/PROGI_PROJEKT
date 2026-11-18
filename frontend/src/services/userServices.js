@@ -22,25 +22,6 @@ export async function getUsers() {
     return await response.json();
 }
 
-export async function removeUser(uuid) {
-    let response;
-
-    try {
-        response = await fetch(`${API_URL}/users/${uuid}`, {
-            method: 'DELETE',
-            credentials: "include"
-        });
-    } catch {
-        throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
-    }
-
-    if (!response.ok) {
-        throw new Error("Došlo je do pogreške prilikom uklanjanja korisnika.");
-    }
-
-    return await response.json();
-}
-
 export async function saveUser(uuid, phone, role) {
     let response;
 

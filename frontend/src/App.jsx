@@ -36,28 +36,28 @@ function App() {
     
       <BrowserRouter>
         <Routes>
-          <Route element={<ProtectedRoute allowedRoles={["KORISNIK"]} user={user} />}>
+          <Route element={<ProtectedRoute allowedRoles={["korisnik"]} user={user} />}>
             <Route path='/prijava' element={<Login />} />
           </Route>
           <Route element={<Layout user={user} />}>
-            <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
+            <Route element={<ProtectedRoute allowedRoles={["klijent", "admin", "djelatnik", "voditelj"]} user={user} />}>
               <Route path='/profile' element={<Profile user={user} />} />
             </Route>
-            <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
+            <Route element={<ProtectedRoute allowedRoles={["admin"]} user={user} />}>
               <Route path='/users' element={
                 <UsersProvider>
                   <Users />
                 </UsersProvider>
                 } />
             </Route>
-            {/* <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
+            {/* <Route element={<ProtectedRoute allowedRoles={["admin"]} user={user} />}>
               <Route path='/fleet' element={
                 <FleetProvider>
                   <Fleet />
                 </FleetProvider>
               } />
             </Route> */}
-            <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
+            <Route element={<ProtectedRoute allowedRoles={["klijent", "admin", "djelatnik", "voditelj"]} user={user} />}>
               <Route path='/logout' element={<Logout />} />
             </Route>
             <Route path='*' element={<Error404 />} />

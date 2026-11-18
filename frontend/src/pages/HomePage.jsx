@@ -27,8 +27,8 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [ships, setShips] = useState(null);
   const [error, setError] = useState(false);
-  const [selectedType, setSelectedType] = useState(TYPES[0].id || '');
-  const [types, setTypes] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(TYPES[0].id || '');
+  const [categories, setCategories] = useState([]);
 
   const [portsError, setPortsError] = useState(false);
   const [ports, setPorts] = useState([]);
@@ -42,7 +42,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    getCategories().then(setTypes).catch(() => setError(true));
+    getCategories().then(setCategories).catch(() => setError(true));
   }, [])
 
   useEffect(() => {
@@ -55,8 +55,8 @@ export default function HomePage() {
   }, [hash]);
 
   const handleSearch = () => {
-    if (selectedType) {
-      navigate(`/plovila?tip=${selectedType}`);
+    if (selectedCategory) {
+      navigate(`/plovila?category=${selectedCategory}`);
     }
   };
 
@@ -68,7 +68,7 @@ export default function HomePage() {
 
   return (
     <>
-      {loggedUser.uloga !== "KORISNIK" && <div id="styleCss" className='py-1'>
+      {loggedUser.uloga !== "korisnik" && <div id="styleCss" className='py-1'>
         <NavBar user={loggedUser} brand={false}/>
       </div>}
       <main className="pregled">
@@ -78,11 +78,11 @@ export default function HomePage() {
               <div className="container-fluid px-0">
                 <Link className="pregled-brand text-decoration-none" to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Natalia Charter</Link>
                 <div className="d-flex align-items-center gap-4 ms-auto">
-                  <Link to="/#vrste" className="nav-link">Vrste plovila</Link>
+                  <Link to="/#vrste" className="nav-link">Kategorije plovila</Link>
                   <Link to="/#luke" className="nav-link">Luke polaska</Link>
                   <Link to="/#kako-radi" className="nav-link">Kako rezervirati?</Link>
                 </div>
-                {loggedUser.uloga === "KORISNIK" && <Link to="/prijava" className=" ms-4 btn btn-prijava">Prijava</Link>}
+                {loggedUser.uloga === "korisnik" && <Link to="/prijava" className=" ms-4 btn btn-prijava">Prijava</Link>}
               </div>
             </nav>
           </div>
@@ -96,16 +96,16 @@ export default function HomePage() {
             <div className="bg-white p-4 rounded-4 shadow-lg" style={{ maxWidth: '1600px' }}>
               <div className="row g-3 align-items-end">
                 <div className="col-md">
-                  <label className="form-label small text-muted fw-bold text-start d-block mb-1">Vrsta</label>
+                  <label className="form-label small text-muted fw-bold text-start d-block mb-1">Kategorija</label>
                   <div className="input-group border rounded-3 p-1 bg-light">
                     <span className="input-group-text bg-transparent border-0 text-muted ps-2">⛵</span>
                     <select
                       className="form-select border-0 bg-transparent shadow-none px-1"
-                      value={selectedType}
-                      onChange={(e) => setSelectedType(e.target.value)}
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
                     >
-                      {types.map((t) => (
-                        <option key={t} value={t}>{t}</option>
+                      {categories.map((category) => (
+                        <option key={category} value={category}>{category}</option>
                       ))}
                     </select>
                   </div>
@@ -156,9 +156,9 @@ export default function HomePage() {
 
         <section id="vrste" className="section">
           <div className="container">
-            <h2>Vrste plovila</h2>
+            <h2>Kategorije plovila</h2>
              <p className="section-lead">Istražite našu flotu i odaberite željeno plovilo.</p>
-            {sadrzaj((s) => <FleetStrip ships={s} types={types} />)}
+            {sadrzaj((s) => <FleetStrip ships={s} categories={categories} />)}
           </div>
         </section>
 

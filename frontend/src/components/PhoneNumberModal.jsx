@@ -39,7 +39,7 @@ function PhoneNumberModal({uuid}) {
         try {
             setErrorProfile("");
             setSuccessProfile("");
-            const data = await changePhoneNumber(uuid, newPhone, ime, prezime, loggedUser.uloga);
+            const data = await changePhoneNumber(uuid, newPhone, ime, prezime);
             const editedUser = {
                 uuid: loggedUser.uuid,
                 ime: ime,

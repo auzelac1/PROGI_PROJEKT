@@ -8,7 +8,7 @@ export const useProfileContext = () => useContext(ProfileContext)
 export const ProfileProvider = ({children}) => {
 
     const defaultUser = {
-        uloga: "KORISNIK"
+        uloga: "korisnik"
     };
 
     const [loggedUser, setLoggedUser] = useState(defaultUser);

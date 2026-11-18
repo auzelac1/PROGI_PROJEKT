@@ -46,7 +46,7 @@ export default function ShipDetailsPage() {
 
   const luka = PORTS.find((p) => p.id === ship.luka);
   const tip = TYPES.find((t) => t.id === ship.tip)?.naziv;
-  const rezerviraj = () => (loggedUser.uloga !== "KORISNIK" ? navigate(`/rezervacija/${ship.id_brod}`) : setPitajPrijavu(true));
+  const rezerviraj = () => (loggedUser.uloga !== "korisnik" ? navigate(`/rezervacija/${ship.id_brod}`) : setPitajPrijavu(true));
 
   const specs = [
     ['Vrsta', ship.model.tip], ['Proizvođač i model', `${ship.model.proizvodjac} ${ship.model.model}`], ['Godina proizvodnje', ship.basics.godina_proizvodnje],
@@ -55,7 +55,7 @@ export default function ShipDetailsPage() {
 
   return (
     <>
-    {loggedUser.uloga !== "KORISNIK" && <div id="styleCss" className='py-1'>
+    {loggedUser.uloga !== "korisnik" && <div id="styleCss" className='py-1'>
         <NavBar user={loggedUser} brand={false}/>
       </div>}
     <main className="pregled">
@@ -65,11 +65,11 @@ export default function ShipDetailsPage() {
             <div className="container-fluid px-0">
               <Link className="pregled-brand text-decoration-none" to="/">Natalia Charter</Link>
               <div className="d-flex align-items-center gap-4 ms-auto">
-                <Link to="/#vrste" className="nav-link">Vrste plovila</Link>
+                <Link to="/#vrste" className="nav-link">Kategorije plovila</Link>
                 <Link to="/#luke" className="nav-link">Luke polaska</Link>
                 <Link to="/#kako-radi" className="nav-link">Kako rezervirati?</Link>
               </div>
-              {loggedUser.uloga === "KORISNIK" && <Link to="/prijava" className="ms-4 btn btn-prijava">Prijava</Link>}
+              {loggedUser.uloga === "korisnik" && <Link to="/prijava" className="ms-4 btn btn-prijava">Prijava</Link>}
             </div>
           </nav>
         </div>
@@ -128,7 +128,7 @@ export default function ShipDetailsPage() {
               <div><span className="ship-price big">{eur(ship.basics.cijena_dan)}</span> <span className="ship-price-day">po danu</span></div>
               <p className="small text-muted mt-1">Najkraći najam je 1 dan. Dodatne usluge naplaćuju se jednokratno.</p>
               <button type="button" className="btn btn-lg pregled-btn w-100 mt-3" onClick={rezerviraj}>Rezerviraj</button>
-              {!(loggedUser.uloga !== "KORISNIK") && <p className="small text-muted mt-2 mb-0">Za rezervaciju je potrebna prijava.</p>}
+              {!(loggedUser.uloga !== "korisnik") && <p className="small text-muted mt-2 mb-0">Za rezervaciju je potrebna prijava.</p>}
             </aside>
           </div>
         </div>

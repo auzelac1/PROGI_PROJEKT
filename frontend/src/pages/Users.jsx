@@ -14,13 +14,13 @@ function Users() {
 
     if (!error) {
         users.map((user) => {
-            if (user.uloga == 'KLIJENT') {
+            if (user.uloga == 'klijent') {
                 clients++;
-            } else if (user.uloga == 'ADMIN') {
+            } else if (user.uloga == 'admin') {
                 admins++;
-            } else if (user.uloga == 'DJELATNIK') {
+            } else if (user.uloga == 'djelatnik') {
                 employees++;
-            } else if (user.uloga == 'VODITELJ') {
+            } else if (user.uloga == 'voditelj') {
                 managers++;
             }
         })

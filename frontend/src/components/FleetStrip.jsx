@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ShipImage from './ShipImage';
 import { TYPES } from '../api/plovila';
 
-export default function FleetStrip({ ships, types }) {
+export default function FleetStrip({ ships, categories }) {
   const ref = useRef(null);
 
   const scroll = (dir) => {
@@ -28,16 +28,16 @@ export default function FleetStrip({ ships, types }) {
 
   return (
     <div>
-      <div className="fleet-strip" ref={ref} aria-label="Vrste plovila">
-        {types.map((t) => {
-          const ofType = ships.filter((s) => s.tip === t);
+      <div className="fleet-strip" ref={ref} aria-label="Kategorije plovila">
+        {categories.map((category) => {
+          const ofCategory = ships.filter((s) => s.model.kategorija === category);
           return (
-            <Link key={t} to={`/plovila?tip=${t}`} className="fleet-item">
-              <ShipImage src={ofType[0]?.photos[0].url_foto} alt={t} />
+            <Link key={category} to={`/plovila?category=${category}`} className="fleet-item">
+              <ShipImage src={ofCategory[0]?.photos[0].url_foto} alt={category} />
               <div className="fleet-label">
-                <strong>{t}</strong>
-                <span className="text-muted d-block small">{t /* OPIS */}</span>
-                <span className="small">{ofType.length} u ponudi</span>
+                <strong>{category}</strong>
+                <span className="text-muted d-block small">{category /* OPIS */}</span>
+                <span className="small">{ofCategory.length} u ponudi</span>
               </div>
             </Link>
           );

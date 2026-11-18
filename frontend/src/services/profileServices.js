@@ -22,7 +22,7 @@ export async function getMe() {
     return await response.json();
 }
 
-export async function changePhoneNumber(uuid, phone, ime, prezime, uloga) {
+export async function changePhoneNumber(uuid, phone, ime, prezime) {
     let response;
 
     try {
@@ -34,8 +34,7 @@ export async function changePhoneNumber(uuid, phone, ime, prezime, uloga) {
             body: JSON.stringify({
                 telefon: phone,
                 ime: ime,
-                prezime: prezime,
-                uloga: uloga
+                prezime: prezime
             }),
             credentials: "include"
         });

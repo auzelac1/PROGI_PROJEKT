@@ -6,7 +6,7 @@ function ProtectedRoute({allowedRoles, user}) {
        return <Navigate to="/prijava" replace/> 
     }
 
-    if (!allowedRoles.includes(user.uloga.toUpperCase())) {
+    if (!allowedRoles.includes(user.uloga)) {
         return <Navigate to="/" replace />
     }
 

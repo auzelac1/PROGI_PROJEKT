@@ -4,7 +4,7 @@ function NavBarLinks({user}) {
 
     return (
         <>
-            {user.uloga.toUpperCase() === "VODITELJ" ? <li className="nav-item">
+            {user.uloga === "voditelj" ? <li className="nav-item">
                 <Link to="/statistics" className="nav-link">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 20V10M12 20V4M6 20V14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#012A4A"/>
@@ -12,7 +12,7 @@ function NavBarLinks({user}) {
                     Statistika
                 </Link>
             </li> : ""}
-            {user.uloga.toUpperCase() === "ADMIN" ? <li className="nav-item">
+            {user.uloga === "admin" ? <li className="nav-item">
                 <Link className="nav-link" to="/fleet">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.25 7.25C12.9069 7.25 14.25 5.90685 14.25 4.25C14.25 2.59315 12.9069 1.25 11.25 1.25C9.59315 1.25 8.25 2.59315 8.25 4.25C8.25 5.90685 9.59315 7.25 11.25 7.25ZM11.25 7.25V21.25M11.25 21.25C8.59784 21.25 6.0543 20.1964 4.17893 18.3211C2.30357 16.4457 1.25 13.9022 1.25 11.25H4.25M11.25 21.25C13.9022 21.25 16.4457 20.1964 18.3211 18.3211C20.1964 16.4457 21.25 13.9022 21.25 11.25H18.25" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#012A4A"/>
@@ -20,7 +20,7 @@ function NavBarLinks({user}) {
                     Flota
                 </Link>
             </li> : ""}
-            {user.uloga.toUpperCase() === "ADMIN" ? <li className="nav-item">
+            {user.uloga === "admin" ? <li className="nav-item">
                 <Link to="/users" className="nav-link">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_44_242)">
@@ -35,7 +35,7 @@ function NavBarLinks({user}) {
                     Korisnici
                 </Link>
             </li> : ""}
-            {user.uloga.toUpperCase() === "ADMIN" ? <li className="nav-item">
+            {user.uloga === "admin" ? <li className="nav-item">
                 <Link to="/reservations" className="nav-link">
                     <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.25 19.25L8.25 14.25L1.25 19.25V3.25C1.25 2.71957 1.46071 2.21086 1.83579 1.83579C2.21086 1.46071 2.71957 1.25 3.25 1.25H13.25C13.7804 1.25 14.2891 1.46071 14.6642 1.83579C15.0393 2.21086 15.25 2.71957 15.25 3.25V19.25Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#012A4A"/>
@@ -43,7 +43,7 @@ function NavBarLinks({user}) {
                     Rezervacije
                 </Link>
             </li> : ""}
-            {user.uloga.toUpperCase() === "ADMIN" || user.uloga.toUpperCase() === "DJELATNIK" ? <li className="nav-item">
+            {user.uloga === "admin" || user.uloga === "djelatnik" ? <li className="nav-item">
                 <Link to="/schedule" className="nav-link">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 2V6M8 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#012A4A"/>
@@ -51,7 +51,7 @@ function NavBarLinks({user}) {
                     Preuzimanja
                 </Link>
             </li> : ""}
-            {user.uloga.toUpperCase() === "KLIJENT" ? <li className="nav-item">
+            {user.uloga === "klijent" ? <li className="nav-item">
                 <Link to="/my-reservations" className="nav-link">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 2V6M8 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#012A4A"/>
@@ -59,7 +59,7 @@ function NavBarLinks({user}) {
                     Moje rezervacije
                 </Link>
             </li> : ""}
-            {user.uloga.toUpperCase() !== "KORISNIK" ? <li className="nav-item">
+            {user.uloga !== "korisnik" ? <li className="nav-item">
                 <Link to="/profile" className="nav-link">
                     <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.25 19.25V17.25C17.25 16.1891 16.8286 15.1717 16.0784 14.4216C15.3283 13.6714 14.3109 13.25 13.25 13.25H5.25C4.18913 13.25 3.17172 13.6714 2.42157 14.4216C1.67143 15.1717 1.25 16.1891 1.25 17.25V19.25M13.25 5.25C13.25 7.45914 11.4591 9.25 9.25 9.25C7.04086 9.25 5.25 7.45914 5.25 5.25C5.25 3.04086 7.04086 1.25 9.25 1.25C11.4591 1.25 13.25 3.04086 13.25 5.25Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#012A4A"/>
@@ -67,7 +67,7 @@ function NavBarLinks({user}) {
                     {user.ime} {user.prezime}
                 </Link>
             </li> : ""}
-            {user.uloga.toUpperCase() !== "KORISNIK" ? <li className="nav-item">
+            {user.uloga !== "korisnik" ? <li className="nav-item">
                 <Link to="/logout" className="nav-link">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9M16 7L21 12L16 17M21 12H9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#012A4A"/>
