@@ -2,11 +2,11 @@ import {Navigate, Outlet} from 'react-router-dom'
 
 function ProtectedRoute({allowedRoles, user}) {
 
-    if (!user) {
-       return <Navigate to="/login" replace/> 
+    if (!user || user.uloga?.toLowerCase() === "korisnik") {
+       return <Navigate to="/prijava" replace/> 
     }
 
-    if (!allowedRoles.includes(user.uloga.toUpperCase())) {
+    if (!allowedRoles.some(role => role.toLowerCase() === user.uloga?.toLowerCase())) {
         return <Navigate to="/" replace />
     }
 

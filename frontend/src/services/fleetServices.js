@@ -1,6 +1,6 @@
 let API_URL = import.meta.env.VITE_API_URL;
 if (API_URL === undefined) {
-    API_URL = "http://localhost:8000/api";
+    API_URL = "/api";
 }
 
 export async function getFleet() {
@@ -17,6 +17,63 @@ export async function getFleet() {
 
     if (!response.ok) {
         throw new Error("Trenutno ne možemo dohvatiti podatke o floti.");
+    }
+
+    return await response.json();
+}
+
+export async function getBoat(id) {
+    let response;
+
+    try {
+        response = await fetch(`${API_URL}/boats/${id}`, {
+            method: 'GET',
+            credentials: "include"
+        });
+    } catch {
+        throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
+    }
+
+    if (!response.ok) {
+        throw new Error("Trenutno ne možemo dohvatiti podatke o brodu.");
+    }
+
+    return await response.json();
+}
+
+export async function getPorts() {
+    let response;
+
+    try {
+        response = await fetch(`${API_URL}/ports`, {
+            method: 'GET',
+            credentials: "include"
+        });
+    } catch {
+        throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
+    }
+
+    if (!response.ok) {
+        throw new Error("Trenutno ne možemo dohvatiti podatke o lukama.");
+    }
+
+    return await response.json();
+}
+
+export async function getCategories() {
+    let response;
+
+    try {
+        response = await fetch(`${API_URL}/categories`, {
+            method: 'GET',
+            credentials: "include"
+        });
+    } catch {
+        throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
+    }
+
+    if (!response.ok) {
+        throw new Error("Trenutno ne možemo dohvatiti podatke o kategorijama.");
     }
 
     return await response.json();

@@ -4,19 +4,26 @@ import { useProfileContext } from "../contexts/ProfileContext";
 
 import { logout } from "../services/profileServices";
 
+let URL = import.meta.env.VITE_URL;
+if (URL === undefined) {
+    URL = window.location.origin;
+}
+
 function Logout() {
 
     const {loggedUser, setLoggedUser} = useProfileContext();
 
     useEffect(() => { 
         async function handleLogout() {
+            
+
             try {
                 const data = await logout();
-                setLoggedUser(null);
             } catch (err) {
-                //setLoggedUser(null), obriši kolačić
+                 //
             } finally {
-                //
+                setLoggedUser({uloga: "korisnik"}); // i obriši kolačić
+                window.location.href = `${URL}/`;
             }
         }
 

@@ -31,3 +31,7 @@ U korijenu projekta pokrenite  `pokreni-lokalno.bat` i ostavite oba prozora otvo
 - Vite je na adresi  <http://localhost:5173>.
 - Swagger za backend je na <http://127.0.0.1:8000/api/docs>.
 - Vezu s bazom provjerite na <http://127.0.0.1:8000/api/health/db>.
+
+## Google prijava
+
+Postavljanje Google Cloud projekta, OAuth klijenta, lokalnih i produkcijskih adresa te potrebnih backend ruta opisano je u [uputama za Google OAuth 2.0](oauth2.md).

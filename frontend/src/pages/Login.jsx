@@ -1,19 +1,32 @@
+import { useStyles } from '../useStyles';
+import styleCss from '../style.css?url';
+import '../style.css'
+
+import googleIcon from '../assets/google-icon.png'
+
+let API_URL = import.meta.env.VITE_API_URL;
+if (API_URL === undefined) {
+    API_URL = "/api";
+}
+
 function Login() {
+    useStyles(styleCss);
 
     function LoginUser() {
-        // Ispravljen port na 8000 i točna backend ruta /auth/login/google
-        window.location.href = 'http://localhost:8000/auth/login/google';
+        window.location.href = `${API_URL}/auth/google`;
     }
-    
+
     return (
-        <div className="login-page">
-            <div className="login-container text-center poppins">
-                    <h1 className="syncopate fw-bold">Prijava</h1>
-                    <hr className="divider" />
-                <button className="button button-primary mt-3" onClick={LoginUser}>
-                    <img src="src/assets/google-icon.png" alt="" height="30px" />
-                    Prijavi se s Googleom
-                </button>
+        <div id="styleCss">
+            <div className="login-page">
+                <div className="login-container text-center poppins">
+                        <h1 className="syncopate fw-bold">Prijava</h1>
+                        <hr className="divider" />
+                    <button className="button button-primary mt-3" onClick={LoginUser}>
+                        <img src={googleIcon} alt="" height="30px" />
+                        Prijavi se s Googleom
+                    </button>
+                </div>
             </div>
         </div>
     )

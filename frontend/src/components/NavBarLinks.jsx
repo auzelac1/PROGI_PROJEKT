@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 function NavBarLinks({ user }) {
     // Sigurnosna provjera: ako je user null, uloga će biti null i neće se rušiti
     const uloga = user?.uloga ? user.uloga.toUpperCase() : null;
+    const isLoggedIn = !!uloga && uloga !== "KORISNIK";
 
     return (
         <>
@@ -16,7 +17,7 @@ function NavBarLinks({ user }) {
                     </Link>
                 </li>
             )}
-            
+
             {uloga === "ADMIN" && (
                 <li className="nav-item">
                     <Link className="nav-link" to="/fleet">
@@ -79,18 +80,18 @@ function NavBarLinks({ user }) {
                 </li>
             )}
 
-            {user && (
+            {isLoggedIn && (
                 <li className="nav-item">
                     <Link to="/profile" className="nav-link">
                         <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.25 19.25V17.25C17.25 16.1891 16.8286 15.1717 16.0784 14.4216C15.3283 13.6714 14.3109 13.25 13.25 13.25H5.25C4.18913 13.25 3.17172 13.6714 2.42157 14.4216C1.67143 15.1717 1.25 16.1891 1.25 17.25V19.25M13.25 5.25C13.25 7.45914 11.4591 9.25 9.25 9.25C7.04086 9.25 5.25 7.45914 5.25 5.25C5.25 3.04086 7.04086 1.25 9.25 1.25C11.4591 1.25 13.25 3.04086 13.25 5.25Z" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" stroke="#012A4A"/>
                         </svg>
-                        {user.ime} {user.prezime}
+                        {[user.ime, user.prezime].filter(Boolean).join(' ') || 'Moj profil'}
                     </Link>
                 </li>
             )}
 
-            {user ? (
+            {isLoggedIn ? (
                 <li className="nav-item">
                     <Link to="/logout" className="nav-link">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +102,7 @@ function NavBarLinks({ user }) {
                 </li>
             ) : (
                 <li className="nav-item">
-                    <Link to="/login" className="nav-link">
+                    <Link to="/prijava" className="nav-link">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15M10 7L15 12L10 17M15 12H3" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" stroke="#012A4A"/>
                         </svg>

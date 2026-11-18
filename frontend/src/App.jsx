@@ -1,69 +1,71 @@
-import './style.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Profile from './pages/Profile';
-/* import Home from './pages/Home'; */
 import Error404 from './pages/Error404';
 import Users from './pages/Users'
 import Login from './pages/Login'
-import Fleet from './pages/Fleet'
 import Logout from './pages/Logout'
+
+import HomePage from './pages/HomePage';
+import ShipDetailsPage from './pages/ShipDetailsPage';
+
+import { PretragaStranica, RezervacijaStranica } from './privremeno/Stranice';
+
+import Ucitavanje from './components/Ucitavanje';
 
 import ProtectedRoute from './ProtectedRoute';
 import Layout from './Layout'
 
 import { useProfileContext } from './contexts/ProfileContext';
 import { UsersProvider } from './contexts/UsersContext';
-import { FleetProvider } from './contexts/FleetContext';
 
 function App() {
 
-  const { loggedUser, setLoggedUser, loadingProfile } = useProfileContext();
+  const { loggedUser, loadingProfile } = useProfileContext();
 
   if (loadingProfile) {
-    return <h1>Učitavanje profila...</h1>
+    return <Ucitavanje />
   }
 
-  let user = null; // Ispravljeno: ako korisnik nije prijavljen, inicijalno je null da ProtectedRoute zna blokirati zaštićene rute!
-
-  if (loggedUser !== null) {
-    user = loggedUser;
-  }
+  let user = loggedUser;
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* /login JE SADA JAVNA RUTA - Pristupa joj se slobodno bez provjere uloge */}
-        <Route path='/login' element={<Login />} />
 
-        <Route element={<Layout user={user} />}>
-          {/* <Route path='/' element={<Home />} /> */}
-          <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
-            <Route path='/profile' element={<Profile user={user} />} />
-          </Route>
-          <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
-            <Route path='/users' element={
-              <UsersProvider>
-                <Users />
-              </UsersProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/prijava' element={<Login />} />
+          <Route path='/login' element={<Login />} />
+          <Route element={<Layout user={user} />}>
+            <Route element={<ProtectedRoute allowedRoles={["klijent", "admin", "djelatnik", "voditelj"]} user={user} />}>
+              <Route path='/profile' element={<Profile user={user} />} />
+            </Route>
+            <Route element={<ProtectedRoute allowedRoles={["admin"]} user={user} />}>
+              <Route path='/users' element={
+                <UsersProvider>
+                  <Users />
+                </UsersProvider>
+                } />
+            </Route>
+            {/* <Route element={<ProtectedRoute allowedRoles={["admin"]} user={user} />}>
+              <Route path='/fleet' element={
+                <FleetProvider>
+                  <Fleet />
+                </FleetProvider>
               } />
+            </Route> */}
+            <Route element={<ProtectedRoute allowedRoles={["klijent", "admin", "djelatnik", "voditelj"]} user={user} />}>
+              <Route path='/logout' element={<Logout />} />
+            </Route>
+            <Route path='*' element={<Error404 />} />
           </Route>
-          <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} user={user} />}>
-            <Route path='/fleet' element={
-              <FleetProvider>
-                <Fleet />
-              </FleetProvider>
-            } />
-          </Route>
-          <Route element={<ProtectedRoute allowedRoles={["KLIJENT", "ADMIN", "DJELATNIK", "VODITELJ"]} user={user} />}>
-            <Route path='/logout' element={<Logout />} />
-          </Route>
-          <Route path='*' element={<Error404 />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+          <Route path="/" element={<HomePage />} />
+          <Route path="/plovila/:id" element={<ShipDetailsPage />} />
+          <Route path="/plovila" element={<PretragaStranica />} />
+          <Route path="/rezervacija/:id" element={<RezervacijaStranica />} />
+        </Routes>
+      </BrowserRouter>
+  );
 }
 
 export default App

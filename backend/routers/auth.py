@@ -26,15 +26,17 @@ oauth.register(
 )
 
 
+@router.get("/api/auth/google")
 @router.get("/auth/login/google")
 async def google_login(request: Request):
     redirect_uri = os.getenv(
-        "GOOGLE_REDIRECT_URI", "http://localhost:8000/auth/google/callback"
+        "GOOGLE_REDIRECT_URI", str(request.url_for("google_callback"))
     )
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 
-@router.get("/auth/google/callback")
+@router.get("/auth/google/callback", name="google_callback_legacy")
+@router.get("/api/auth/google/callback")
 async def google_callback(request: Request):
     try:
         token = await oauth.google.authorize_access_token(request)
@@ -68,7 +70,10 @@ async def google_callback(request: Request):
 def _profil(trenutni_korisnik):
     return {
         "id": trenutni_korisnik["uuid"],
+        "uuid": trenutni_korisnik["uuid"],
         "ime": trenutni_korisnik["ime"],
+        "prezime": trenutni_korisnik["prezime"],
+        "telefon": trenutni_korisnik["telefon"],
         "email": trenutni_korisnik["email"],
         "uloga": trenutni_korisnik["uloga"],
     }

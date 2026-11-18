@@ -6,11 +6,8 @@ import { saveUser } from '../services/userServices';
 import Alert from './Alert';
 
 import { useUsersContext } from '../contexts/UsersContext';
-import { useProfileContext } from '../contexts/ProfileContext';
 
 function EditUserModal({activeUser}) {
-
-    const {loggedUser, setLoggedUser} = useProfileContext();
 
     const [phoneNumber, setPhoneNumber] = useState(activeUser.telefon);
     const [role, setRole] = useState(activeUser.uloga);
@@ -31,7 +28,7 @@ function EditUserModal({activeUser}) {
         setPhoneError(false);
 
         const formattedPhone = phoneNumber.replace(/[\s()-]/g, "");
-        const phoneRegex = /^\+[1-9]\d{7,14}$/;
+        const phoneRegex = /^(\+[1-9]\d{7,14})?$/;
         if (!phoneRegex.test(formattedPhone)) {
             setPhoneError(true);
             setLoading(false);
@@ -53,18 +50,6 @@ function EditUserModal({activeUser}) {
                     behavior: 'smooth',
                 });
             }, 150);
-
-            if (loggedUser.uuid === activeUser.uuid) {
-                const editedUser = {
-                    uuid: loggedUser.uuid,
-                    ime: loggedUser.ime,
-                    prezime: loggedUser.prezime,
-                    email: loggedUser.email,
-                    telefon: phoneNumber,
-                    uloga: role
-                }
-                setLoggedUser(editedUser);
-            }
 
             setUsers(prevUsers =>
                 prevUsers.map(user =>
@@ -109,10 +94,10 @@ function EditUserModal({activeUser}) {
                                     <input type="text" className="form-control fw-bold" name="prezime" id="prezime" value={activeUser.prezime} disabled />
                                     <label htmlFor="uloga" className="ms-2 mb-2">Uloga:</label>
                                     <select name="uloga" id="uloga" className="form-control fw-bold" onChange={(e) => {e.target.blur(); setRole(e.target.value);}} disabled={loading}>
-                                        <option value="KLIJENT" selected={activeUser.uloga.toLowerCase() === "klijent"}>Klijent</option>
-                                        <option value="ADMIN" selected={activeUser.uloga.toLowerCase() === "admin"}>Administrator</option>
-                                        <option value="DJELATNIK" selected={activeUser.uloga.toLowerCase() === "djelatnik"}>Djelatnik</option>
-                                        <option value="VODITELJ" selected={activeUser.uloga.toLowerCase() === "voditelj"}>Voditelj</option>
+                                        <option value="klijent" selected={activeUser.uloga.toLowerCase() === "klijent"}>Klijent</option>
+                                        <option value="admin" selected={activeUser.uloga.toLowerCase() === "admin"}>Administrator</option>
+                                        <option value="djelatnik" selected={activeUser.uloga.toLowerCase() === "djelatnik"}>Djelatnik</option>
+                                        <option value="voditelj" selected={activeUser.uloga.toLowerCase() === "voditelj"}>Voditelj</option>
                                     </select>
                                 </div>
                                 <div className="col-md-6 ps-0">

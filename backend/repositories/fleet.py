@@ -67,13 +67,17 @@ def get_boat_busy_dates(id_boat, date_from, date_to):
         """, params).fetchall()
 
 
-def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, category=None):
+def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, category=None,
+                 max_price=None, min_cabins=None, equipment=None, services=None):
     params = {"od": date_from, "do": date_to, "br_osoba": num_of_people,
-              "luka": port, "kategorija": category}
+              "luka": port, "kategorija": category,
+              "max_cijena": max_price, "min_kabina": min_cabins,
+              "oprema": list(set(equipment)) if equipment else None,
+              "usluge": list(set(services)) if services else None}
     with get_connection() as conn:
-        return conn.execute("""
+        rows = conn.execute("""
             select b.id_brod, b.naziv, b.cijena_dan, b.godina_proizvodnje,
-                   m.kategorija, m.proizvodjac, m.model, m.kapacitet, m.broj_kabina,
+                   m.kategorija, m.tip, m.proizvodjac, m.model, m.kapacitet, m.broj_kabina,
                    l.id_luka, l.ime_luka,
                    (select f.url_foto from fotografija f
                      where f.id_brod = b.id_brod order by f.redoslijed limit 1) as naslovna_foto
@@ -84,6 +88,20 @@ def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, ca
               and (%(kategorija)s::text is null or m.kategorija = %(kategorija)s)
               and (%(luka)s::bigint is null or b.id_luka = %(luka)s)
               and (%(br_osoba)s::int is null or m.kapacitet >= %(br_osoba)s)
+              and (%(max_cijena)s::numeric is null or b.cijena_dan <= %(max_cijena)s)
+              and (%(min_kabina)s::int is null or m.broj_kabina >= %(min_kabina)s)
+              and (%(oprema)s::bigint[] is null or b.id_model in(
+                  select id_model from model_oprema
+                  where id_opreme = any(%(oprema)s::bigint[])
+                  group by id_model
+                  having count(*) = cardinality(%(oprema)s::bigint[])
+              ))
+              and (%(usluge)s::bigint[] is null or b.id_model in(
+                  select id_model from model_usluge
+                  where id_dodatne_usluge = any(%(usluge)s::bigint[])
+                  group by id_model
+                  having count(*) = cardinality(%(usluge)s::bigint[])
+              ))
               and (%(od)s::date is null or not exists (
                     select 1 from rezervacija r
                     where r.id_brod = b.id_brod
@@ -97,6 +115,18 @@ def search_boats(date_from=None, date_to=None, num_of_people=None, port=None, ca
                       and n.datum_pocetak <= %(do)s and n.datum_kraj >= %(od)s))
             order by b.cijena_dan
         """, params).fetchall()
+
+    boats = []
+    for row in rows:
+        boats.append({
+            "basics": {"id_brod": row["id_brod"], "naziv": row["naziv"],
+                       "cijena_dan": row["cijena_dan"], "godina_proizvodnje": row["godina_proizvodnje"]},
+            "model":  {"kategorija": row["kategorija"], "tip": row["tip"], "proizvodjac": row["proizvodjac"],
+                       "model": row["model"], "kapacitet": row["kapacitet"], "broj_kabina": row["broj_kabina"]},
+            "port":   {"id_luka": row["id_luka"], "ime_luka": row["ime_luka"]},
+            "photos": [{"url_foto": row["naslovna_foto"]}] if row["naslovna_foto"] else [],
+        })
+    return boats
 
 def get_categories():
     return ["jedrilica", "motorni brod", "katamaran", "ostalo"]

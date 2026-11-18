@@ -1,14 +1,10 @@
 import { useState } from 'react';
-import { Modal } from 'bootstrap';
 
 import EditUserModal from "./EditUserModal"
-import DeleteModal from './DeleteModal';
 import Alert from './Alert';
 
 import { useUsersContext } from '../contexts/UsersContext';
 import { useProfileContext } from '../contexts/ProfileContext';
-
-import { removeUser } from '../services/userServices';
 
 function UsersTable() {
     const {loggedUser} = useProfileContext();
@@ -24,27 +20,6 @@ function UsersTable() {
         telefon: ""
     });
 
-    async function handleRemoveUser(uuid) {
-        try {
-            //setLoading(true);
-            setError("");
-            setSuccess("");
-            const data = await removeUser(uuid);
-            setUsers(prevUsers =>
-                prevUsers.filter(user => user.uuid !== uuid)
-            );
-            setSuccess("Korisnik je uspješno izbrisan.");
-            const modalElement = document.getElementById("DeleteModal");
-            const modalInstance = Modal.getInstance(modalElement);
-            modalInstance?.hide();
-            window.scroll({top: 0, left: 0, behavior: 'smooth'});
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            //setLoading(false);
-        }
-    }
-
     const [searchName, setSearchName] = useState("");
     const [searchEmail, setSearchEmail] = useState("");
     const [searchPhone, setSearchPhone] = useState("");
@@ -52,12 +27,12 @@ function UsersTable() {
 
     const filteredUsers = users.filter(user => {
 
-        const fullName = `${user.ime} ${user.prezime}`;
+        const fullName = `${user.ime ?? ""} ${user.prezime ?? ""}`;
 
         return (
             fullName.toLowerCase().includes(searchName.toLowerCase().trim()) &&
             user.email.toLowerCase().includes(searchEmail.toLowerCase().trim()) &&
-            user.telefon.toLowerCase().includes(searchPhone.toLowerCase().trim()) &&
+            (user.telefon ?? "").toLowerCase().includes(searchPhone.toLowerCase().trim()) &&
             user.uloga.toLowerCase().includes(searchRole.toLowerCase())
         );
     });
@@ -113,9 +88,6 @@ function UsersTable() {
                                     <button onClick={() => setActiveUser(user)} className="button-tertiary button-tertiary-primary" data-bs-toggle="modal" data-bs-target="#EditUserModal">
                                         Uredi
                                     </button>
-                                    <button onClick={() => setActiveUser(user)} className="button-tertiary button-tertiary-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal">
-                                        Ukloni
-                                    </button>
                                 </td> : <td></td>}
                             </tr>
                         ))}
@@ -131,7 +103,6 @@ function UsersTable() {
                 </table>
             </div>
             <EditUserModal activeUser={activeUser} />
-            <DeleteModal title="Uklanjanje korisnika" text={["Jeste li sigurni da želite izbrisati korisnika ", <strong>{activeUser.ime} {activeUser.prezime} ({activeUser.uloga})</strong>, " s email adresom ", <strong>{activeUser.email}</strong>, "?"]} onConfirm={() => handleRemoveUser(activeUser.uuid)}/>
         </div>
     )
 

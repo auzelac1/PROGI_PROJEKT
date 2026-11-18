@@ -1,6 +1,6 @@
 let API_URL = import.meta.env.VITE_API_URL;
 if (API_URL === undefined) {
-    API_URL = "http://localhost:8000/api";
+    API_URL = "/api";
 }
 
 export async function getMe() {
@@ -25,7 +25,7 @@ export async function getMe() {
     return await response.json();
 }
 
-export async function changePhoneNumber(uuid, phone) {
+export async function changePhoneNumber(uuid, phone, ime, prezime) {
     let response;
     const token = localStorage.getItem('jwt_token');
 
@@ -37,8 +37,11 @@ export async function changePhoneNumber(uuid, phone) {
                 'Authorization': `Bearer ${token}` // I ovdje nam treba token za autorizaciju
             },
             body: JSON.stringify({
-                telefon: phone
-            })
+                telefon: phone,
+                ime: ime,
+                prezime: prezime
+            }),
+            credentials: "include"
         });
     } catch {
         throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
@@ -55,7 +58,7 @@ export async function logout() {
     // Budući da se radi o JWT tokenima, odjava se najčešće obavlja na frontendu brisanjem tokena.
     // Ako imate backend rutu za logout, šaljemo i tu token.
     const token = localStorage.getItem('jwt_token');
-    
+
     try {
         await fetch(`${API_URL}/logout`, {
             method: 'GET',
@@ -69,6 +72,6 @@ export async function logout() {
 
     // Uvijek očisti token iz lokalne memorije preglednika kod odjave
     localStorage.removeItem('jwt_token');
-    
+
     return { success: true };
 }
