@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import FleetStrip from '../components/FleetStrip';
 import ShipCard from '../components/ShipCard';
 import PortsMap from '../components/PortsMap';
+import SearchBar from '../components/SearchBar';
 import Ucitavanje from '../components/Ucitavanje';
 
 import { useStyles } from '../useStyles';
@@ -26,7 +27,6 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [ships, setShips] = useState(null);
   const [error, setError] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('');
   const [categories, setCategories] = useState([]);
 
   const [portsError, setPortsError] = useState(false);
@@ -53,12 +53,6 @@ export default function HomePage() {
     }
   }, [hash]);
 
-  const handleSearch = () => {
-    if (selectedCategory) {
-      navigate(`/plovila?category=${selectedCategory}`);
-    }
-  };
-
   const sadrzaj = (render) => {
     if (error) return <p className="text-danger">Plovila se trenutno ne mogu učitati. Osvježite stranicu ili pokušajte kasnije.</p>;
     if (!ships) return <Ucitavanje />;
@@ -75,64 +69,8 @@ export default function HomePage() {
             <h1 className="hero-title">Iznajmite plovilo na Jadranu</h1>
             <p className="hero-sub">Pregled cijena, opreme, slobodnih termina te rezervacija plovila uz prethodnu prijavu.</p>
 
-            <div className="bg-white p-4 rounded-4 shadow-lg" style={{ maxWidth: '1600px' }}>
-              <div className="row g-3 align-items-end">
-                <div className="col-md">
-                  <label className="form-label small text-muted fw-bold text-start d-block mb-1">Kategorija</label>
-                  <div className="input-group border rounded-3 p-1 bg-light">
-                    <span className="input-group-text bg-transparent border-0 text-muted ps-2">⛵</span>
-                    <select
-                      className="form-select border-0 bg-transparent shadow-none px-1"
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                    >
-                      <option value="">Sve kategorije</option>
-                      {categories.map((category) => (
-                        <option key={category} value={category}>{category}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-md">
-                  <label className="form-label small text-muted fw-bold text-start d-block mb-1">Datum</label>
-                  <div className="input-group border rounded-3 p-1 bg-light">
-                    <span className="input-group-text bg-transparent border-0 text-muted ps-2">📅</span>
-                    <input type="text" className="form-control border-0 bg-transparent shadow-none px-1" readOnly value="Stu 7, 2026" />
-                  </div>
-                </div>
-                <div className="col-md">
-                  <label className="form-label small text-muted fw-bold text-start d-block mb-1">Trajanje</label>
-                  <div className="input-group border rounded-3 p-1 bg-light">
-                    <span className="input-group-text bg-transparent border-0 text-muted ps-2">🌙</span>
-                    <input type="text" className="form-control border-0 bg-transparent shadow-none px-1" readOnly value="1 tjedan" />
-                  </div>
-                </div>
-                <div className="col-md">
-                  <label className="form-label small text-muted fw-bold text-start d-block mb-1">Gosti</label>
-                  <div className="input-group border rounded-3 p-1 bg-light">
-                    <span className="input-group-text bg-transparent border-0 text-muted ps-2">👥</span>
-                    <input type="text" className="form-control border-0 bg-transparent shadow-none px-1" readOnly value="8 osoba" />
-                  </div>
-                </div>
-                <div className="col-md">
-                  <label className="form-label small text-muted fw-bold text-start d-block mb-1">Luka</label>
-                  <div className="input-group border rounded-3 p-1 bg-light">
-                    <span className="input-group-text bg-transparent border-0 text-muted ps-2">⚓</span>
-                    <input type="text" className="form-control border-0 bg-transparent shadow-none px-1" readOnly value="Sve luke" />
-                  </div>
-                </div>
-                <div className="col-md-auto">
-                  <button
-                    type="button"
-                    onClick={handleSearch}
-                    className="btn pregled-btn w-100 py-2 px-4 d-flex align-items-center justify-content-center"
-                    style={{ height: '48px', fontSize: '1.05rem' }}
-                  >
-                    Pretraži
-                  </button>
-                </div>
-              </div>
-              <div className="text-muted small mt-2 text-start ps-1">💡 Vizija napredne pretrage (vrsta, datumi, trajanje, broj osoba i luka za kolegu)</div>
+            <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
+              <SearchBar />
             </div>
           </div>
         </section>
