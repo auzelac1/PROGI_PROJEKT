@@ -36,9 +36,9 @@ Pravila na backendu:
 
 ### Frontend: potrebno popraviti — Ian Vrbaslija
 
-- [ ] **`UsersTable.jsx` se ruši za korisnika bez telefona.** `user.telefon.toLowerCase()` puca kad je telefon `null`, a takav je svaki novi korisnik. Popravak: `(user.telefon ?? "")`. Isto za `ime` i `prezime`, inače se u filtru pojavljuje `"null null"`.
-- [ ] **Krivi link za prijavu.** U `NavBarLinks.jsx` link „Prijava” vodi na `/login`, a ruta je `/prijava`.
-- [ ] **Ikona Googlea.** `src="src/assets/google-icon.png"` u `Login.jsx` radi samo lokalno. Sliku importati (`import googleIcon from '../assets/google-icon.png'`).
+- [x] **`UsersTable.jsx` se ruši za korisnika bez telefona.** `user.telefon.toLowerCase()` puca kad je telefon `null`, a takav je svaki novi korisnik. Popravak: `(user.telefon ?? "")`. Isto za `ime` i `prezime`, inače se u filtru pojavljuje `"null null"`.
+- [x] **Krivi link za prijavu.** U `NavBarLinks.jsx` link „Prijava” vodi na `/login`, a ruta je `/prijava`.
+- [x] **Ikona Googlea.** `src="src/assets/google-icon.png"` u `Login.jsx` radi samo lokalno. Sliku importati (`import googleIcon from '../assets/google-icon.png'`).
 - [ ] **Adresa API-ja.** *(Tonko Buncuga)* Zamjenske adrese se razlikuju: `https://progiprojekt.vercel.app/api` u servisima i `Login.jsx`, a `http://localhost:8000/api` u `Logout.jsx`. Lokalno se tako zove produkcijski backend. Svugdje staviti `/api`:
   - na Vercelu radi jer su frontend i backend na istoj domeni
   - lokalno radi jer `vite.config.js` već prosljeđuje `/api` na `127.0.0.1:8000`
@@ -56,8 +56,8 @@ Frontend je napravljen (`/profile`): prikaz imena, e-maila, telefona i uloge, up
 
 ### Frontend: potrebno popraviti — Ian Vrbaslija
 
-- [ ] **`ProfileInfo.jsx` se ruši kad nema imena.** `user.ime.charAt(0)` puca jer baza dopušta `ime` i `prezime` bez vrijednosti. Popravak: `user.ime?.charAt(0) ?? ""`.
-- [ ] **Natpisi u prozoru za uređivanje profila.** Prozor (`PhoneNumberModal.jsx`) i gumb na profilu (`ProfileInfo.jsx`) zovu se „Uredi broj telefona”, a uređuju se ime, prezime i telefon; preimenovati npr. u „Uredi podatke”. Natpis iznad polja za prezime (`PhoneNumberModal.jsx`, redak 79) glasi „Ime:”, treba „Prezime:”.
+- [x] **`ProfileInfo.jsx` se ruši kad nema imena.** `user.ime.charAt(0)` puca jer baza dopušta `ime` i `prezime` bez vrijednosti. Popravak: `user.ime?.charAt(0) ?? ""`.
+- [x] **Natpisi u prozoru za uređivanje profila.** Prozor (`PhoneNumberModal.jsx`) i gumb na profilu (`ProfileInfo.jsx`) zovu se „Uredi broj telefona”, a uređuju se ime, prezime i telefon; preimenovati npr. u „Uredi podatke”. Natpis iznad polja za prezime (`PhoneNumberModal.jsx`, redak 79) glasi „Ime:”, treba „Prezime:”.
 - [ ] **Adresa API-ja.** *(Tonko Buncuga)* Zamjenska adresa u `profileServices.js` je produkcijska (`https://progiprojekt.vercel.app/api`), pa lokalni profil zove produkcijski backend. Promijeniti u `/api` (vidi zadnju stavku u odjeljku *Upravljanje korisnicima*).
 
 ---
@@ -206,7 +206,7 @@ Primjer adrese: `/plovila?category=jedrilica&date_from=2027-06-01&date_to=2027-0
   - Backend `equipment` i `services` čita iz ponovljenog parametra: `?equipment=2&equipment=5` → `[2, 5]`. Ako se popis upiše jednom naredbom (`params.set("equipment", [2, 5])`), u adresi nastaje `equipment=2,5`, backend to ne razumije i vraća `422`.
   - Ispravno je svaku stavku dodati zasebno (`params.append("equipment", id)`), a pri čitanju iz adrese koristiti `searchParams.getAll("equipment")` (`get` vraća samo prvu vrijednost).
   - Jedna mogućnost: budući da adresa stranice i backend koriste ista imena parametara, funkcija može samo proslijediti dio adrese iza `?` (``fetch(`${API_URL}/boats?${searchParams}`)``), pa ponovljeni parametri stignu do backenda nepromijenjeni.
-- [ ] **Zajedničko javno zaglavlje `components/PublicHeader.jsx`** *(Ian Vrbaslija; napraviti prije nove stranice, dogovoriti redoslijed s Anom Bartulović jer oboje mijenjaju `HomePage.jsx`)*. Zaglavlje javnih stranica sada je kopirano u `HomePage.jsx` i `ShipDetailsPage.jsx`. Raspored ostaje kakav jest:
+- [x] **Zajedničko javno zaglavlje `components/PublicHeader.jsx`** *(Ian Vrbaslija; napraviti prije nove stranice, dogovoriti redoslijed s Anom Bartulović jer oboje mijenjaju `HomePage.jsx`)*. Zaglavlje javnih stranica sada je kopirano u `HomePage.jsx` i `ShipDetailsPage.jsx`. Raspored ostaje kakav jest:
   - prijavljenom korisniku gore se prikazuje `NavBar` s `brand={false}` (linkovi ovisno o ulozi, ime, odjava)
   - ispod je javno zaglavlje: „Natalia Charter”, „Kategorije plovila”, „Luke polaska”, „Kako rezervirati?” te „Prijava” samo za neprijavljene
   - „Natalia Charter” piše samo jednom
@@ -231,7 +231,7 @@ Primjer adrese: `/plovila?category=jedrilica&date_from=2027-06-01&date_to=2027-0
 NF-02 traži da sučelje radi na računalu, tabletu i mobitelu. Za prvu predaju ne radi se posebna prilagodba, nego samo provjera i popravak onoga što je očito pokvareno. Većina stranica već koristi Bootstrapovu mrežu (`col-md`, `col-lg`, `row-cols-…`), pa se na uskom ekranu sama slaže u jedan stupac.
 
 - [ ] **Provjeriti glavne stranice na uskom ekranu.** U pregledniku F12 → prikaz za uređaje (Ctrl+Shift+M), širine npr. 375 px (mobitel) i 768 px (tablet). Stranice: početna, detalji plovila, pregled plovila (nova stranica), profil, korisnici. Tražiti: vodoravno pomicanje stranice, sadržaj koji izlazi iz ekrana, preklapanje teksta.
-- [ ] **Javno zaglavlje se ne sklapa na mobitelu.** *(Ian Vrbaslija, uz `PublicHeader.jsx`)* Linkovi „Kategorije plovila”, „Luke polaska”, „Kako rezervirati?” i gumb „Prijava” uvijek su u jednom retku, pa se na uskom ekranu stisnu. Napraviti uz `PublicHeader.jsx` (vidi *Pregled plovila*): dodati gumb ☰ (`navbar-toggler`) i `collapse`, kao što već ima `NavBar.jsx`.
+- [x] **Javno zaglavlje se ne sklapa na mobitelu.** *(Ian Vrbaslija, uz `PublicHeader.jsx`)* Linkovi „Kategorije plovila”, „Luke polaska”, „Kako rezervirati?” i gumb „Prijava” uvijek su u jednom retku, pa se na uskom ekranu stisnu. Napraviti uz `PublicHeader.jsx` (vidi *Pregled plovila*): dodati gumb ☰ (`navbar-toggler`) i `collapse`, kao što već ima `NavBar.jsx`.
 - [ ] **Nova stranica s popisom plovila** neka za kartice koristi istu mrežu kao istaknuta plovila na početnoj (`row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4`).
 
 ---
