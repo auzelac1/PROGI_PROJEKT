@@ -2,6 +2,22 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import ShipImage from './ShipImage';
 
+const categoryImages = Object.fromEntries(
+  Object.entries(import.meta.glob('../assets/*.{jpg,jpeg,png,webp,avif,svg}', {
+    eager: true,
+    query: '?url',
+    import: 'default',
+  })).map(([path, url]) => [path.slice(path.lastIndexOf('/') + 1, path.lastIndexOf('.')), url]),
+);
+
+const categoryImageNames = {
+  jedrilica: 'jedrilica',
+  'motorni brod': 'motorni-brod',
+  katamaran: 'katamaran',
+  gumenjak: 'gumenjak',
+  ostalo: 'ostalo',
+};
+
 export default function FleetStrip({ ships, categories }) {
   const ref = useRef(null);
 
@@ -32,7 +48,7 @@ export default function FleetStrip({ ships, categories }) {
           const ofCategory = ships.filter((s) => s.model.kategorija === category);
           return (
             <Link key={category} to={`/plovila?category=${category}`} className="fleet-item">
-              <ShipImage src={ofCategory[0]?.photos[0]?.url_foto} alt={category} />
+              <ShipImage src={categoryImages[categoryImageNames[category]]} alt={category} />
               <div className="fleet-label">
                 <strong>{category}</strong>
                 <span className="text-muted d-block small">{category}</span>
