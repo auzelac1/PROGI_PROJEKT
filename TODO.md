@@ -93,8 +93,8 @@ Frontend je napravljen (odjeljak „Istaknuta plovila” na početnoj stranici),
 
 ### Frontend: potrebno popraviti — Ana Bartulović
 
-- [ ] **Krivi ključ u popisu istaknutih plovila.** U `HomePage.jsx` je `key={ship.id}`, a plovilo nema polje `id`, pa je ključ za sve kartice `undefined` i React u konzoli javlja upozorenje. Treba `key={ship.basics.id_brod}`.
-- [ ] **Nedostaje pozadinska slika na vrhu početne.** `styles/index.css` (redak 252) za pozadinu odjeljka „Iznajmite plovilo na Jadranu” koristi `url('/img/hero.jpg')`, a datoteke `frontend/public/img/hero.jpg` nema, pa se prikazuje samo zamjenska tamnoplava boja. Provjeriti s autoricom početne je li slika trebala biti dodana; ako da, staviti je u `frontend/public/img/hero.jpg`.
+- [x] **Krivi ključ u popisu istaknutih plovila.** U `HomePage.jsx` je `key={ship.id}`, a plovilo nema polje `id`, pa je ključ za sve kartice `undefined` i React u konzoli javlja upozorenje. Treba `key={ship.basics.id_brod}`.
+- [x] **Nedostaje pozadinska slika na vrhu početne.** `styles/index.css` (redak 252) za pozadinu odjeljka „Iznajmite plovilo na Jadranu” koristi `url('/img/hero.jpg')`, a datoteke `frontend/public/img/hero.jpg` nema, pa se prikazuje samo zamjenska tamnoplava boja. Provjeriti s autoricom početne je li slika trebala biti dodana; ako da, staviti je u `frontend/public/img/hero.jpg`.
 
 ---
 
@@ -104,15 +104,15 @@ Frontend je napravljen (`ShipDetailsPage.jsx`, `/plovila/{id}`), ali podatke uzi
 
 ### Frontend: potrebno popraviti — Ana Bartulović
 
-- [ ] **Gumb „Rezerviraj” vodi na `/rezervacija/undefined`.** U `ShipDetailsPage.jsx` (redak 49) koristi se `ship.id_brod`, a mora biti `ship.basics.id_brod`. Rezervacija nije dio prve predaje, ali ispraviti kad se bude radila. *(Kasnije, uz rezervaciju.)*
-- [ ] **Kriva poruka za nepostojeće plovilo.** Za nepostojeće ili neaktivno plovilo backend vraća `404`, a `getBoat` u `fleetServices.js` tada baca grešku, pa stranica prikazuje „Plovilo se trenutno ne može učitati” umjesto „Plovilo nije pronađeno”. Za `404` `getBoat` treba vratiti `null` (`if (response.status === 404) return null;` prije provjere `response.ok`).
-- [ ] **Galerija ne mijenja sliku.** Klik na sličicu mijenja stanje `active`, ali velika slika u `ShipDetailsPage.jsx` (redak 86) uvijek prikazuje `ship.photos[0]`. Treba `ship.photos[active]`.
-- [ ] **„Povratak na pretragu” uvijek vodi na prazan popis.** Link u `ShipDetailsPage.jsx` (redak 80) vodi na `/plovila` bez filtara koje je korisnik zadao, a korisnika koji je došao s početne (istaknuta plovila) vodi na stranicu na kojoj nije bio. Zamijeniti gumbom „Natrag” koji poziva `navigate(-1)` i vraća korisnika točno odakle je došao, zajedno s filtrima.
-- [ ] **Mrtvi kod u `ShipDetailsPage.jsx`.** Ostaci iz vremena prije spajanja s backendom; ništa ne rade, pa ih obrisati:
+- [x] **Gumb „Rezerviraj” vodi na `/rezervacija/undefined`.** U `ShipDetailsPage.jsx` (redak 49) koristi se `ship.id_brod`, a mora biti `ship.basics.id_brod`. Rezervacija nije dio prve predaje, ali ispraviti kad se bude radila. *(Kasnije, uz rezervaciju.)*
+- [x] **Kriva poruka za nepostojeće plovilo.** Za nepostojeće ili neaktivno plovilo backend vraća `404`, a `getBoat` u `fleetServices.js` tada baca grešku, pa stranica prikazuje „Plovilo se trenutno ne može učitati” umjesto „Plovilo nije pronađeno”. Za `404` `getBoat` treba vratiti `null` (`if (response.status === 404) return null;` prije provjere `response.ok`).
+- [x] **Galerija ne mijenja sliku.** Klik na sličicu mijenja stanje `active`, ali velika slika u `ShipDetailsPage.jsx` (redak 86) uvijek prikazuje `ship.photos[0]`. Treba `ship.photos[active]`.
+- [x] **„Povratak na pretragu” uvijek vodi na prazan popis.** Link u `ShipDetailsPage.jsx` (redak 80) vodi na `/plovila` bez filtara koje je korisnik zadao, a korisnika koji je došao s početne (istaknuta plovila) vodi na stranicu na kojoj nije bio. Zamijeniti gumbom „Natrag” koji poziva `navigate(-1)` i vraća korisnika točno odakle je došao, zajedno s filtrima.
+- [x] **Mrtvi kod u `ShipDetailsPage.jsx`.** Ostaci iz vremena prije spajanja s backendom; ništa ne rade, pa ih obrisati:
   - redak 7 i 24: `useKorisnik` iz `privremeno/useKorisnik.js`
   - retci 47–48: `luka` i `tip`, koji traže po izmišljenim `PORTS` i `TYPES` iz `api/plovila.js`
   - redak 137: `onPrijava={() => prijava(pathname)}`, jer ga `PrijavaModal` ne koristi
-- [ ] **Netočna rečenica u prozoru za prijavu.** `PrijavaModal.jsx` (prozor koji neprijavljeni korisnik dobije klikom na „Rezerviraj”) kaže „Nakon prijave vraćate se na ovo plovilo.”, ali prijava ne pamti s kojeg je plovila korisnik došao. Maknuti tu rečenicu.
+- [x] **Netočna rečenica u prozoru za prijavu.** `PrijavaModal.jsx` (prozor koji neprijavljeni korisnik dobije klikom na „Rezerviraj”) kaže „Nakon prijave vraćate se na ovo plovilo.”, ali prijava ne pamti s kojeg je plovila korisnik došao. Maknuti tu rečenicu.
 
 ---
 
@@ -120,21 +120,21 @@ Frontend je napravljen (`ShipDetailsPage.jsx`, `/plovila/{id}`), ali podatke uzi
 
 `frontend/src/api/plovila.js` sadrži izmišljene podatke napravljene prije backenda (`SHIPS`, `PORTS`, `TYPES`, `dohvatiPlovila`, `dohvatiPlovilo`, `fmtDate`). Stranice već uzimaju stvarne podatke s backenda (`services/fleetServices.js`), pa se izmišljeni podaci više ne prikazuju, ali ih pet datoteka još importa. Jedini pravi kod u datoteci je `eur` (oblikovanje cijene u eurima). Ako se datoteka samo obriše, aplikacija se neće pokrenuti, pa ići ovim redom:
 
-- [ ] **1. Premjestiti `eur`** u novu datoteku `frontend/src/utils/format.js` i u `ShipCard.jsx` i `ShipDetailsPage.jsx` promijeniti import na nju.
-- [ ] **2. Zamijeniti početnu vrijednost kategorije** u `HomePage.jsx` (ili u `SearchBar.jsx`, ako je tražilica već izdvojena, vidi *Pregled plovila*): `useState(TYPES[0].id || '')` → `useState('')` (opcija „Sve kategorije” u tražilici).
-- [ ] **3. Obrisati mrtvi kod u `ShipDetailsPage.jsx`** (vidi *Detalji plovila*): retci 47–48 koriste `PORTS` i `TYPES`.
-- [ ] **4. Maknuti importe iz `api/plovila.js`:**
+- [x] **1. Premjestiti `eur`** u novu datoteku `frontend/src/utils/format.js` i u `ShipCard.jsx` i `ShipDetailsPage.jsx` promijeniti import na nju.
+- [x] **2. Zamijeniti početnu vrijednost kategorije** u `HomePage.jsx` (ili u `SearchBar.jsx`, ako je tražilica već izdvojena, vidi *Pregled plovila*): `useState(TYPES[0].id || '')` → `useState('')` (opcija „Sve kategorije” u tražilici).
+- [x] **3. Obrisati mrtvi kod u `ShipDetailsPage.jsx`** (vidi *Detalji plovila*): retci 47–48 koriste `PORTS` i `TYPES`.
+- [x] **4. Maknuti importe iz `api/plovila.js`:**
   - `HomePage.jsx`: `dohvatiPlovila`, `PORTS`, `TYPES`
   - `PortsMap.jsx`: `PORTS`
   - `FleetStrip.jsx`: `TYPES`
   - `ShipDetailsPage.jsx`: `PORTS`, `TYPES` (a `eur` već ide iz `utils/format.js`)
-- [ ] **5. Obrisati `api/plovila.js`** i praznu mapu `api/`.
+- [x] **5. Obrisati `api/plovila.js`** i praznu mapu `api/`.
 
 Mapa `frontend/src/privremeno/` sadrži privremene zamjene; briše se postupno:
 
-- [ ] `Zaglavlje.jsx`: ne koristi se nigdje, obrisati odmah.
-- [ ] `useKorisnik.js`: koristi ga samo mrtvi kod u `ShipDetailsPage.jsx`; obrisati zajedno s njim.
-- [ ] `Stranice.jsx`: `PretragaStranica` otpada kad se napravi nova stranica s popisom plovila (vidi *Pregled plovila*); `RezervacijaStranica` ostaje dok se ne napravi rezervacija, jer gumb „Rezerviraj” vodi na nju.
+- [x] `Zaglavlje.jsx`: ne koristi se nigdje, obrisati odmah.
+- [x] `useKorisnik.js`: koristi ga samo mrtvi kod u `ShipDetailsPage.jsx`; obrisati zajedno s njim.
+- [x] `Stranice.jsx`: `PretragaStranica` otpada kad se napravi nova stranica s popisom plovila (vidi *Pregled plovila*); `RezervacijaStranica` ostaje dok se ne napravi rezervacija, jer gumb „Rezerviraj” vodi na nju.
 
 ---
 
