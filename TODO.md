@@ -168,7 +168,7 @@ Primjer adrese: `/plovila?category=jedrilica&date_from=2027-06-01&date_to=2027-0
 
 ### Backend: potrebno napraviti — Nikolina Žderić
 
-- [ ] **Proširiti `search_boats` i rutu `GET /api/boats` s četiri nova neobavezna filtra.** Svaki se dodaje samo ako je zadan.
+- [x] **Proširiti `search_boats` i rutu `GET /api/boats` s četiri nova neobavezna filtra.** Svaki se dodaje samo ako je zadan.
   - `max_price`: `b.cijena_dan <= %s`
   - `min_cabins`: `m.broj_kabina >= %s`
   - `equipment` (popis id-jeva opreme): model mora imati svu odabranu opremu
