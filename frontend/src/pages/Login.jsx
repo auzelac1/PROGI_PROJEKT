@@ -15,7 +15,7 @@ function Login() {
     function LoginUser() {
         window.location.href = `${API_URL}/auth/google`;
     }
-    
+
     return (
         <div id="styleCss">
             <div className="login-page">
