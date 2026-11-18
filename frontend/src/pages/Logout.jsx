@@ -4,14 +4,9 @@ import { useProfileContext } from "../contexts/ProfileContext";
 
 import { logout } from "../services/profileServices";
 
-let API_URL = import.meta.env.VITE_API_URL;
-if (API_URL === undefined) {
-    API_URL = "https://progiprojekt.vercel.app/api";
-}
-
 let URL = import.meta.env.VITE_URL;
 if (URL === undefined) {
-    URL = "https://progiprojekt.vercel.app";
+    URL = window.location.origin;
 }
 
 function Logout() {

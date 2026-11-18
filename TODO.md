@@ -39,7 +39,7 @@ Pravila na backendu:
 - [x] **`UsersTable.jsx` se ruši za korisnika bez telefona.** `user.telefon.toLowerCase()` puca kad je telefon `null`, a takav je svaki novi korisnik. Popravak: `(user.telefon ?? "")`. Isto za `ime` i `prezime`, inače se u filtru pojavljuje `"null null"`.
 - [x] **Krivi link za prijavu.** U `NavBarLinks.jsx` link „Prijava” vodi na `/login`, a ruta je `/prijava`.
 - [x] **Ikona Googlea.** `src="src/assets/google-icon.png"` u `Login.jsx` radi samo lokalno. Sliku importati (`import googleIcon from '../assets/google-icon.png'`).
-- [ ] **Adresa API-ja.** *(Tonko Buncuga)* Zamjenske adrese se razlikuju: `https://progiprojekt.vercel.app/api` u servisima i `Login.jsx`, a `http://localhost:8000/api` u `Logout.jsx`. Lokalno se tako zove produkcijski backend. Svugdje staviti `/api`:
+- [x] **Adresa API-ja.** *(Tonko Buncuga)* Svi servisi i `Login.jsx` koriste `/api` kao zamjensku adresu. `Logout.jsx` koristi odjavu iz `profileServices.js`, a povratak na početnu zadano ostaje na trenutnoj domeni:
   - na Vercelu radi jer su frontend i backend na istoj domeni
   - lokalno radi jer `vite.config.js` već prosljeđuje `/api` na `127.0.0.1:8000`
   - kolačići sesije onda rade bez CORS postavki
@@ -58,7 +58,7 @@ Frontend je napravljen (`/profile`): prikaz imena, e-maila, telefona i uloge, up
 
 - [x] **`ProfileInfo.jsx` se ruši kad nema imena.** `user.ime.charAt(0)` puca jer baza dopušta `ime` i `prezime` bez vrijednosti. Popravak: `user.ime?.charAt(0) ?? ""`.
 - [x] **Natpisi u prozoru za uređivanje profila.** Prozor (`PhoneNumberModal.jsx`) i gumb na profilu (`ProfileInfo.jsx`) zovu se „Uredi broj telefona”, a uređuju se ime, prezime i telefon; preimenovati npr. u „Uredi podatke”. Natpis iznad polja za prezime (`PhoneNumberModal.jsx`, redak 79) glasi „Ime:”, treba „Prezime:”.
-- [ ] **Adresa API-ja.** *(Tonko Buncuga)* Zamjenska adresa u `profileServices.js` je produkcijska (`https://progiprojekt.vercel.app/api`), pa lokalni profil zove produkcijski backend. Promijeniti u `/api` (vidi zadnju stavku u odjeljku *Upravljanje korisnicima*).
+- [x] **Adresa API-ja.** *(Tonko Buncuga)* Zamjenska adresa u `profileServices.js` promijenjena je u `/api`, pa lokalni profil koristi lokalni backend preko Vite proxyja (vidi zadnju stavku u odjeljku *Upravljanje korisnicima*).
 
 ---
 

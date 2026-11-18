@@ -6,7 +6,7 @@ import googleIcon from '../assets/google-icon.png'
 
 let API_URL = import.meta.env.VITE_API_URL;
 if (API_URL === undefined) {
-    API_URL = "https://progiprojekt.vercel.app/api";
+    API_URL = "/api";
 }
 
 function Login() {
