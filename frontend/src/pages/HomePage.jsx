@@ -18,6 +18,15 @@ const STEPS = [
   { t: 'Preuzmite plovilo', d: 'Potvrdu rezervacije dobivate e-poštom, a plovilo preuzimate u odabranoj luci.' },
 ];
 
+function pickFeaturedShips(ships) {
+  const shuffled = [...ships];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, 6);
+}
+
 export default function HomePage() {
   useStyles(indexCss);
 
@@ -26,6 +35,7 @@ export default function HomePage() {
   const { hash } = useLocation();
   const navigate = useNavigate();
   const [ships, setShips] = useState(null);
+  const [featuredShips, setFeaturedShips] = useState([]);
   const [error, setError] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -33,7 +43,10 @@ export default function HomePage() {
   const [ports, setPorts] = useState([]);
 
   useEffect(() => {
-    getFleet().then(setShips).catch(() => setError(true));
+    getFleet().then((fleet) => {
+      setShips(fleet);
+      setFeaturedShips(pickFeaturedShips(fleet));
+    }).catch(() => setError(true));
   }, []);
 
   useEffect(() => {
@@ -86,14 +99,14 @@ export default function HomePage() {
         <section className="section section-alt">
           <div className="container">
             <div className="mb-4">
-              <h2 className="mb-1">Istaknuta plovila</h2>
-              <p className="section-lead mb-0">Prikazane cijene odnose se na dnevni najam plovila bez dodatnih usluga.</p>
-            </div>
-            {sadrzaj((s) => (
-              <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {s.slice(0, 6).map((ship) => <div className="col" key={ship.basics.id_brod}><ShipCard ship={ship} /></div>)}
-              </div>
-            ))}
+            <h2 className="mb-1">Istaknuta plovila</h2>
+            <p className="section-lead mb-0">Prikazane cijene odnose se na dnevni najam plovila bez dodatnih usluga.</p>
+          </div>
+              {sadrzaj(() => (
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                  {featuredShips.map((ship) => <div className="col" key={ship.basics.id_brod}><ShipCard ship={ship} /></div>)}
+                </div>
+              ))}
           </div>
         </section>
 

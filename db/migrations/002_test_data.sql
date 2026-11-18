@@ -11,7 +11,7 @@ begin;
 
 insert into luka (ime_luka, lat, lng) values
     ('ACI marina Split',         43.503600, 16.433900),
-    ('Marina Kaštela',           43.546900, 16.393000),
+    ('Luka Jelsa',               43.162000, 16.693000),
     ('Marina Mandalina, Šibenik', 43.721500, 15.904800),
     ('ACI marina Dubrovnik',     42.671000, 18.126500),
     ('Marina Punat',             45.019000, 14.628000);
@@ -103,9 +103,9 @@ insert into brod (id_model, naziv, godina_proizvodnje, id_luka, cijena_dan, vrij
 select model.id_model, b.naziv, b.godina, luka.id_luka, b.cijena, b.preuzimanje, b.povratak, b.aktivan
 from (values
     ('Bavaria',         'Cruiser 46',        'Adriana',      2019, 'ACI marina Split',          320.00, time '09:00', time '17:00', true),
-    ('Bavaria',         'Cruiser 46',        'Bura',         2021, 'Marina Kaštela',            360.00, time '09:00', time '17:00', true),
+    ('Bavaria',         'Cruiser 46',        'Bura',         2021, 'Luka Jelsa',                360.00, time '09:00', time '17:00', true),
     ('Bavaria',         'Cruiser 46',        'Galeb',        2017, 'Marina Punat',              290.00, time '10:00', time '18:00', true),
-    ('Bavaria',         'Cruiser 46',        'Neptun',       2012, 'Marina Kaštela',            200.00, time '09:00', time '17:00', false),
+    ('Bavaria',         'Cruiser 46',        'Neptun',       2012, 'Luka Jelsa',                200.00, time '09:00', time '17:00', false),
     ('Jeanneau',        'Sun Odyssey 410',   'Maestral',     2022, 'ACI marina Split',          300.00, time '09:00', time '17:00', true),
     ('Jeanneau',        'Sun Odyssey 410',   'Lavanda',      2020, 'Marina Mandalina, Šibenik', 280.00, time '10:00', time '18:00', true),
     ('Beneteau',        'Oceanis 46.1',      'Tramontana',   2021, 'ACI marina Dubrovnik',      380.00, time '09:00', time '17:00', true),
@@ -113,7 +113,7 @@ from (values
     ('Dufour',          '390 Grand Large',   'Vila Velebita',2019, 'Marina Punat',              250.00, time '10:00', time '18:00', true),
     ('Lagoon',          '42',                'Dupin',        2020, 'ACI marina Split',          650.00, time '09:00', time '17:00', true),
     ('Lagoon',          '42',                'Sirena',       2022, 'ACI marina Dubrovnik',      720.00, time '09:00', time '17:00', true),
-    ('Fountaine Pajot', 'Isla 40',           'Mirna',        2021, 'Marina Kaštela',            600.00, time '09:00', time '17:00', true),
+    ('Fountaine Pajot', 'Isla 40',           'Mirna',        2021, 'Luka Jelsa',                600.00, time '09:00', time '17:00', true),
     ('Jeanneau',        'Merry Fisher 1095', 'Jugo',         2021, 'ACI marina Split',          450.00, time '08:00', time '18:00', true),
     ('Beneteau',        'Antares 9',         'Lastavica',    2020, 'Marina Punat',              280.00, time '08:00', time '18:00', true),
     ('Zodiac',          'Medline 7.5',       'Strijela',     2023, 'ACI marina Split',          220.00, time '08:00', time '20:00', true)

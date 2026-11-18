@@ -2,10 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Profile from './pages/Profile';
 import Error404 from './pages/Error404';
-import Users from './pages/Users';
-import Login from './pages/Login';
-import Fleet from './pages/Fleet';
-import Logout from './pages/Logout';
+import Users from './pages/Users'
+import Login from './pages/Login'
+import Logout from './pages/Logout'
 
 import HomePage from './pages/HomePage';
 import ShipDetailsPage from './pages/ShipDetailsPage';
@@ -20,10 +19,10 @@ import Layout from './Layout';
 
 import { useProfileContext } from './contexts/ProfileContext';
 import { UsersProvider } from './contexts/UsersContext';
-import { FleetProvider } from './contexts/FleetContext';
 
 function App() {
-  const { loggedUser, setLoggedUser, loadingProfile } = useProfileContext();
+
+  const { loggedUser, loadingProfile } = useProfileContext();
 
   if (loadingProfile) {
     return <Ucitavanje />;

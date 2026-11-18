@@ -5,7 +5,7 @@ import { eur } from '../utils/format';
 export default function ShipCard({ ship }) {
   return (
     <Link to={`/plovila/${ship.basics.id_brod}`} className="card ship-card h-100 text-decoration-none">
-      <ShipImage src={ship.photos[0].url_foto} alt={ship.basics.naziv} />
+      <ShipImage src={ship.photos[0]?.url_foto} alt={ship.basics.naziv} />
       <div className="card-body d-flex flex-column">
         <div className="text-muted small">{ship.model.tip}, {ship.port.ime_luka}</div>
         <h3 className="h5 mt-1">{ship.basics.naziv}</h3>

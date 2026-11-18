@@ -1,16 +1,28 @@
+import { useState } from "react";
 import PhoneNumberModal from "./PhoneNumberModal"
 
 function ProfileInfo({user}) {
+    const [failedPicture, setFailedPicture] = useState(null);
+    const showPicture = user.picture && user.picture !== failedPicture;
 
     return (
         <div className="container profile poppins">
             <div className="row">
                 <div className="col-md-4">
                     <div className="profile-picture">
-                        <p className="m-0">
-                            {user.ime?.charAt(0).toUpperCase() ?? ""}
-                            {user.prezime?.charAt(0).toUpperCase() ?? ""}
-                        </p>
+                        {showPicture ? (
+                            <img
+                                src={user.picture}
+                                alt="Profilna slika"
+                                referrerPolicy="no-referrer"
+                                onError={() => setFailedPicture(user.picture)}
+                            />
+                        ) : (
+                            <p className="m-0">
+                                {user.ime?.charAt(0).toUpperCase() ?? ""}
+                                {user.prezime?.charAt(0).toUpperCase() ?? ""}
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div className="col-md-8 profile-info">

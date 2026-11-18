@@ -1,36 +1,29 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useProfileContext } from "../contexts/ProfileContext";
+import Ucitavanje from "../components/Ucitavanje";
 
 import { logout } from "../services/profileServices";
 
-let URL = import.meta.env.VITE_URL;
-if (URL === undefined) {
-    URL = window.location.origin;
-}
-
 function Logout() {
-
-    const {loggedUser, setLoggedUser} = useProfileContext();
+    const {setLoggedUser} = useProfileContext();
+    const navigate = useNavigate();
 
     useEffect(() => { 
         async function handleLogout() {
-            
-
             try {
-                const data = await logout();
-            } catch (err) {
-                 //
+                await logout();
             } finally {
-                setLoggedUser({uloga: "korisnik"}); // i obriši kolačić
-                window.location.href = `${URL}/`;
+                setLoggedUser({uloga: "korisnik"});
+                navigate("/", {replace: true});
             }
         }
 
         handleLogout();
-    }, []);
+    }, [setLoggedUser, navigate]);
 
-
+    return <Ucitavanje />;
 }
 
 export default Logout
