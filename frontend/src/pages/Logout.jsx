@@ -6,12 +6,12 @@ import { logout } from "../services/profileServices";
 
 let API_URL = import.meta.env.VITE_API_URL;
 if (API_URL === undefined) {
-    API_URL = "http://localhost:8000/api";
+    API_URL = "https://progiprojekt.vercel.app/api";
 }
 
 let URL = import.meta.env.VITE_URL;
 if (URL === undefined) {
-    URL = "http://localhost:5173";
+    URL = "https://progiprojekt.vercel.app";
 }
 
 function Logout() {

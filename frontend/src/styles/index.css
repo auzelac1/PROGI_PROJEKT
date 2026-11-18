@@ -613,16 +613,20 @@ p {
 
 /* Style.css NavBar */
 
-#styleCss .navbar-brand {
+#additionalNavigation nav {
+  padding: 10px 0;
+}
+
+#additionalNavigation .navbar-brand {
     color: var(--pr-navy) !important;
     font-size: 24px;
 }
 
-#styleCss .nav-item {
+#additionalNavigation .nav-item {
     padding: 0 10px;
 }
 
-#styleCss .nav-item .nav-link {
+#additionalNavigation .nav-item .nav-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -631,21 +635,29 @@ p {
     font-weight: 600;*/
 }
 
-#styleCss .nav-link:hover {
+#additionalNavigation .nav-link:hover {
     color: var(--pr-teal-hover);
 }
 
-#styleCss .nav-link:hover svg path {
+#additionalNavigation .nav-link:hover svg path {
     stroke: var(--pr-teal-hover);
 }
 
-#styleCss .nav-item svg {
+#additionalNavigation .nav-item svg, .nav-item svg {
     margin-right: 7px;
 }
 
-#styleCss .nav-item svg path {
+#additionalNavigation .nav-item svg path {
     transition: .3s;
 }
 
+@media (min-width: 992px) {
+    #publicNavBar {
+        display: none !important;
+    }
+}
+
 /* Style.css NavBar */
+
+
 

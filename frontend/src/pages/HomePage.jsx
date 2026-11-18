@@ -11,6 +11,7 @@ import indexCss from '../styles/index.css?url';
 import NavBar from '../components/NavBar';
 import { useProfileContext } from '../contexts/ProfileContext';
 import { getCategories, getFleet, getPorts } from '../services/fleetServices';
+import PublicHeader from '../components/PublicHeader';
 
 const STEPS = [
   { t: 'Odaberite plovilo', d: 'Pregledajte cijene, opremu i slobodne termine bez prijave.' },
@@ -68,25 +69,11 @@ export default function HomePage() {
 
   return (
     <>
-      {loggedUser.uloga !== "korisnik" && <div id="styleCss" className='py-1'>
+      {/* {loggedUser.uloga !== "korisnik" && <div id="styleCss" className='py-1'>
         <NavBar user={loggedUser} brand={false}/>
-      </div>}
+      </div>} */}
       <main className="pregled">
-        <header className="pregled-header sticky-top">
-          <div className="container">
-            <nav className="navbar navbar-expand-lg py-3">
-              <div className="container-fluid px-0">
-                <Link className="pregled-brand text-decoration-none" to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Natalia Charter</Link>
-                <div className="d-flex align-items-center gap-4 ms-auto">
-                  <Link to="/#vrste" className="nav-link">Kategorije plovila</Link>
-                  <Link to="/#luke" className="nav-link">Luke polaska</Link>
-                  <Link to="/#kako-radi" className="nav-link">Kako rezervirati?</Link>
-                </div>
-                {loggedUser.uloga === "korisnik" && <Link to="/prijava" className=" ms-4 btn btn-prijava">Prijava</Link>}
-              </div>
-            </nav>
-          </div>
-        </header>
+        <PublicHeader/>
 
         <section className="hero">
           <div className="container">

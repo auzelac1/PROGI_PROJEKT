@@ -69,14 +69,14 @@ function PhoneNumberModal({uuid}) {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h1 className="modal-title fs-4" id="PhoneNumberModal">Uredi broj telefona</h1>
+                        <h1 className="modal-title fs-4" id="PhoneNumberModal">Uredi profil</h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
                         {phoneError && <Alert alertType="danger" alertText={["Broj telefona mora biti u obliku ", <strong>+1234567890</strong>, " i ne smije biti dulji od ", <strong>15</strong>, " znamenki."]} onClose={() => setPhoneError(false)} />}
                         <label htmlFor="ime" className="ms-2 mb-2">Ime:</label>
                         <input type="text" className="form-control fw-bold" name="ime" id="ime" placeholder="Vaše ime" value={ime} onChange={(e) => setIme(e.target.value)} disabled={savingPhone}/>
-                        <label htmlFor="prezime" className="ms-2 mb-2">Ime:</label>
+                        <label htmlFor="prezime" className="ms-2 mb-2">Prezime:</label>
                         <input type="text" className="form-control fw-bold" name="prezime" id="prezime" placeholder="Vaše prezime" value={prezime} onChange={(e) => setPrezime(e.target.value)} disabled={savingPhone}/>
                         <label htmlFor="phone-number" className="ms-2 mb-2">Broj telefona:</label>
                         <input type="text" className="form-control fw-bold" name="phoneNumber" id="phone-number" placeholder="npr. +385 12 345 6789" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} disabled={savingPhone}/>

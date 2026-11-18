@@ -27,12 +27,12 @@ function UsersTable() {
 
     const filteredUsers = users.filter(user => {
 
-        const fullName = `${user.ime} ${user.prezime}`;
+        const fullName = `${user.ime ?? ""} ${user.prezime ?? ""}`;
 
         return (
             fullName.toLowerCase().includes(searchName.toLowerCase().trim()) &&
             user.email.toLowerCase().includes(searchEmail.toLowerCase().trim()) &&
-            user.telefon.toLowerCase().includes(searchPhone.toLowerCase().trim()) &&
+            (user.telefon ?? "").toLowerCase().includes(searchPhone.toLowerCase().trim()) &&
             user.uloga.toLowerCase().includes(searchRole.toLowerCase())
         );
     });
