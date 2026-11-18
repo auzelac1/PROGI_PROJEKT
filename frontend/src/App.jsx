@@ -5,7 +5,6 @@ import Profile from './pages/Profile';
 import Error404 from './pages/Error404';
 import Users from './pages/Users'
 import Login from './pages/Login'
-import Fleet from './pages/Fleet'
 import Logout from './pages/Logout'
 
 import HomePage from './pages/HomePage';
@@ -20,11 +19,10 @@ import Layout from './Layout'
 
 import { useProfileContext } from './contexts/ProfileContext';
 import { UsersProvider } from './contexts/UsersContext';
-import { FleetProvider } from './contexts/FleetContext';
 
 function App() {
 
-  const { loggedUser, setLoggedUser, loadingProfile } = useProfileContext();
+  const { loggedUser, loadingProfile } = useProfileContext();
 
   if (loadingProfile) {
     return <Ucitavanje />
@@ -33,12 +31,11 @@ function App() {
   let user = loggedUser;
 
   return (
-    
+
       <BrowserRouter>
         <Routes>
-          <Route element={<ProtectedRoute allowedRoles={["korisnik"]} user={user} />}>
-            <Route path='/prijava' element={<Login />} />
-          </Route>
+          <Route path='/prijava' element={<Login />} />
+          <Route path='/login' element={<Login />} />
           <Route element={<Layout user={user} />}>
             <Route element={<ProtectedRoute allowedRoles={["klijent", "admin", "djelatnik", "voditelj"]} user={user} />}>
               <Route path='/profile' element={<Profile user={user} />} />
@@ -68,8 +65,7 @@ function App() {
           <Route path="/rezervacija/:id" element={<RezervacijaStranica />} />
         </Routes>
       </BrowserRouter>
-    
-  )
+  );
 }
 
 export default App
