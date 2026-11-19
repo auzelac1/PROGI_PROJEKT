@@ -7,6 +7,7 @@ import SearchBar from '../components/SearchBar';
 import { useStyles } from '../useStyles';
 import indexCss from '../styles/index.css?url';
 import { getFleet } from '../services/fleetServices';
+import DodatniFilteri from '../components/DodatniFilteri';
 
 export default function PlovilaPage() {
     useStyles(indexCss);
@@ -20,9 +21,7 @@ export default function PlovilaPage() {
         setLoading(true);
         setError(false);
 
-        const params = Object.fromEntries(searchParams.entries());
-
-        getFleet(params)
+        getFleet(searchParams)
             .then((data) => {
                 setShips(data);
                 setLoading(false);
@@ -32,6 +31,14 @@ export default function PlovilaPage() {
                 setLoading(false);
             });
     }, [searchParams]);
+
+    const dateFrom = searchParams.get('date_from');
+    const dateTo = searchParams.get('date_to');
+    let days = null;
+    if (dateFrom && dateTo) {
+        const diff = (new Date(dateTo) - new Date(dateFrom)) / (1000 * 60 * 60 * 24);
+        days = Math.round(diff) + 1;
+    }
 
     return (
         <main className="pregled">
@@ -49,6 +56,8 @@ export default function PlovilaPage() {
                     <SearchBar />
                 </div>
 
+                <DodatniFilteri />
+
                 {error && <p className="text-danger">Plovila se trenutno ne mogu učitati. Pokušajte ponovno kasnije.</p>}
                 {loading && <Ucitavanje />}
 
@@ -63,7 +72,7 @@ export default function PlovilaPage() {
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                         {ships.map((ship) => (
                             <div className="col" key={ship.basics.id_brod}>
-                                <ShipCard ship={ship} />
+                                 <ShipCard ship={ship} days={days} />
                             </div>
                         ))}
                     </div>

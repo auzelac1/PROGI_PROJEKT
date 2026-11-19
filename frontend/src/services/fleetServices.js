@@ -164,3 +164,41 @@ export async function cancelAllReservations(id) {
 
     return await response.json();
 }
+
+export async function getEquipment() {
+    let response;
+
+    try {
+        response = await fetch(`${API_URL}/equipment`, {
+            method: 'GET',
+            credentials: "include"
+        });
+    } catch {
+        throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
+    }
+
+    if (!response.ok) {
+        throw new Error("Trenutno ne možemo dohvatiti popis opreme.");
+    }
+
+    return await response.json();
+}
+
+export async function getServices() {
+    let response;
+
+    try {
+        response = await fetch(`${API_URL}/services`, {
+            method: 'GET',
+            credentials: "include"
+        });
+    } catch {
+        throw new Error("Trenutno ne možemo pristupiti poslužitelju.");
+    }
+
+    if (!response.ok) {
+        throw new Error("Trenutno ne možemo dohvatiti popis usluga.");
+    }
+
+    return await response.json();
+}
