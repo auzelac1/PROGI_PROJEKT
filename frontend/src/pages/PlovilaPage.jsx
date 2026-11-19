@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, useLocation, Link } from 'react-router-dom';
 import ShipCard from '../components/ShipCard';
 import Ucitavanje from '../components/Ucitavanje';
 import PublicHeader from '../components/PublicHeader';
@@ -13,6 +13,7 @@ export default function PlovilaPage() {
     useStyles(indexCss);
 
     const [searchParams] = useSearchParams();
+    const { key: locationKey } = useLocation();
     const [ships, setShips] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -31,6 +32,13 @@ export default function PlovilaPage() {
                 setLoading(false);
             });
     }, [searchParams]);
+
+    useEffect(() => {
+        if (loading) return;
+        const filters = document.getElementById('dodatni-filtri');
+        filters.style.scrollMarginTop = `${document.querySelector('.pregled-header')?.offsetHeight || 0}px`;
+        filters.scrollIntoView({ behavior: 'smooth' });
+    }, [loading, locationKey]);
 
     const minPrice = !loading && !error && ships.length > 0
         ? Math.min(...ships.map((ship) => Number(ship.basics.cijena_dan)))

@@ -42,7 +42,7 @@ export default function DodatniFilteri({ minPrice, minCabins }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-4 shadow-sm mb-4">
+    <div id="dodatni-filtri" className="bg-white p-4 rounded-4 shadow-sm mb-4">
       <h2 className="h5 mb-3">Dodatni filtri</h2>
       <div className="row g-4">
         <div className="col-md-6 col-lg-3">
