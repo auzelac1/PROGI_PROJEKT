@@ -1,0 +1,5 @@
+POTREBNO NAPRAVITI/DODATI:
+
+routers/users.py (rute za korisnike): get/users (cijela tablica korisnika), delete/users/id, fetch/users/id
+routers/boats.py: get/boats 
+repositories/users.py: alter_user 

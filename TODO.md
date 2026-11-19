@@ -31,7 +31,7 @@ Pravila na backendu:
 
 - [ ] Svaka ruta provjerava prijavu (preko provjere iz Google prijave): `401` ako korisnik nije prijavljen, `403` ako nema odgovarajuću ulogu.
 - [ ] `PATCH /api/users/{uuid}`: korisnik koji nije admin smije mijenjati samo svoj profil, i to `telefon`, `ime` i `prezime`. Polje `uloga` koje pošalje backend tiho ignorira, inače bi si svatko mogao dodijeliti ulogu admina.
-- [ ] Uloge su svugdje malim slovima, kao u bazi: `klijent`, `admin`, `djelatnik`, `voditelj`. Backend ih tako sprema i tako vraća (`/me`, `/users`), bez pretvaranja u velika slova.
+- [x] Uloge su svugdje malim slovima, kao u bazi: `klijent`, `admin`, `djelatnik`, `voditelj`. Backend ih tako sprema i tako vraća (`/me`, `/users`), bez pretvaranja u velika slova.
 - [ ] **Admin ne smije sam sebi promijeniti ulogu.** `PATCH /api/users/{uuid}` mora izričito odbiti zahtjev (`403`) kad je `uuid` isti kao kod prijavljenog admina, a tijelo sadrži `uloga`. Frontend to već sprječava (tablica nema gumb „Uredi” za vlastiti redak), ali zahtjev se može poslati i mimo sučelja (Swagger, `curl`), pa zabrana mora biti na backendu. Inače bi admin mogao sam sebi oduzeti ovlasti, a ako je jedini admin, aplikacija ostaje bez ikoga tko dodjeljuje uloge.
 
 ### Frontend: potrebno popraviti — Ian Vrbaslija
@@ -183,7 +183,7 @@ Primjer adrese: `/plovila?category=jedrilica&date_from=2027-06-01&date_to=2027-0
 
 ### Frontend: potrebno napraviti — Luka Martinić
 
-- [ ] **Tražilica kao komponenta `components/SearchBar.jsx`.** *(Ana Bartulović; napraviti prije nove stranice)* Sada je tražilica napisana izravno u `HomePage.jsx` i od polja radi samo „Kategorija”; „Datum”, „Trajanje”, „Gosti” i „Luka” su fiksni tekst (`readOnly`). Tražilicu izdvojiti u `SearchBar.jsx` i u njoj napraviti prava polja; „Pretraži” u adresu stavlja sve ispunjene filtre (prazne ne šalje).
+- [x] **Tražilica kao komponenta `components/SearchBar.jsx`.** *(Ana Bartulović; napraviti prije nove stranice)* Sada je tražilica napisana izravno u `HomePage.jsx` i od polja radi samo „Kategorija”; „Datum”, „Trajanje”, „Gosti” i „Luka” su fiksni tekst (`readOnly`). Tražilicu izdvojiti u `SearchBar.jsx` i u njoj napraviti prava polja; „Pretraži” u adresu stavlja sve ispunjene filtre (prazne ne šalje).
   - **Napomena: `SearchBar` se koristi na dva različita mjesta,** na početnoj (`HomePage.jsx`) i na novoj stranici s pregledom plovila. Na početnoj je prazna; na pregledu plovila polja popunjava vrijednostima iz adrese (`useSearchParams`), pa korisnik vidi i mijenja ono što je tražio. U oba slučaja „Pretraži” vodi na `/plovila?…`; na pregledu plovila ostaje se na istoj stranici, mijenja se adresa i iscrtavaju se novi rezultati.
   - „Pretraži” mijenja samo svoja polja u adresi, a dodatne filtre s pregleda plovila (oprema, usluge, cijena, kabine) zadržava:
     ```jsx
@@ -202,7 +202,7 @@ Primjer adrese: `/plovila?category=jedrilica&date_from=2027-06-01&date_to=2027-0
   - Datumi: polja „Datum” i „Trajanje” zamijeniti s dva polja `<input type="date">`, „Datum od” i „Datum do”, koja se šalju kao `date_from` i `date_to` (datumi su uključivi).
   - Prije slanja provjeriti da su zadana oba datuma ili nijedan, da „Datum od” nije u prošlosti i da nije nakon „Datum do” (inače backend vraća `400`).
   - Maknuti napomenu „💡 Vizija napredne pretrage…”.
-- [ ] **Funkcija u `fleetServices.js` koja šalje filtre** na `/api/boats` (postojeći `getFleet()` ne prima parametre). Način izvedbe odlučuje osoba koja to radi; napomena za popise:
+- [x] **Funkcija u `fleetServices.js` koja šalje filtre** na `/api/boats` (postojeći `getFleet()` ne prima parametre). Način izvedbe odlučuje osoba koja to radi; napomena za popise:
   - Backend `equipment` i `services` čita iz ponovljenog parametra: `?equipment=2&equipment=5` → `[2, 5]`. Ako se popis upiše jednom naredbom (`params.set("equipment", [2, 5])`), u adresi nastaje `equipment=2,5`, backend to ne razumije i vraća `422`.
   - Ispravno je svaku stavku dodati zasebno (`params.append("equipment", id)`), a pri čitanju iz adrese koristiti `searchParams.getAll("equipment")` (`get` vraća samo prvu vrijednost).
   - Jedna mogućnost: budući da adresa stranice i backend koriste ista imena parametara, funkcija može samo proslijediti dio adrese iza `?` (``fetch(`${API_URL}/boats?${searchParams}`)``), pa ponovljeni parametri stignu do backenda nepromijenjeni.
@@ -212,17 +212,16 @@ Primjer adrese: `/plovila?category=jedrilica&date_from=2027-06-01&date_to=2027-0
   - „Natalia Charter” piše samo jednom
 
   Oba dijela premjestiti u `PublicHeader.jsx` i na početnoj, detaljima plovila i novoj stranici koristiti `<PublicHeader />`. (Na početnoj klik na „Natalia Charter” pomiče stranicu na vrh; to zadržati.)
-- [ ] **Nova stranica `pages/BoatList.jsx`**: na vrhu `<SearchBar />`, uz rezultate dodatni filtri; čita filtre iz adrese (`useSearchParams`), poziva backend, prikazuje rezultate kao mrežu `ShipCard` kartica (`key={ship.basics.id_brod}`) te poruke za učitavanje, grešku i „nema rezultata”.
-- [ ] **Ukupna cijena na kartici kad su zadani datumi** (UC-007, korak 3). Nova stranica izračuna broj dana iz `date_from` i `date_to` u adresi (datumi su uključivi: `do − od + 1`, npr. od 1. do 7. lipnja je 7 dana) i preda ga `ShipCard`-u. Kartica ispod „… po danu” tada iscrta i „… za N dana” (`cijena_dan × N`); bez datuma se taj redak ne iscrtava (`{days && …}`), pa istaknuta plovila na početnoj ostaju kakva jesu. Ukupna cijena obuhvaća samo najam plovila, bez dodatnih usluga. Na stranici s detaljima plovila ukupna cijena se ne prikazuje.
-- [ ] **Dodatni filtri na novoj stranici.**
+- [x] **Nova stranica `pages/BoatList.jsx`**: na vrhu `<SearchBar />`, uz rezultate dodatni filtri; čita filtre iz adrese (`useSearchParams`), poziva backend, prikazuje rezultate kao mrežu `ShipCard` kartica (`key={ship.basics.id_brod}`) te poruke za učitavanje, grešku i „nema rezultata”. *(Napravljena kao `pages/PlovilaPage.jsx`; dodatni filtri su zasebna stavka niže.)*
+- [x] **Ukupna cijena na kartici kad su zadani datumi** (UC-007, korak 3). Nova stranica izračuna broj dana iz `date_from` i `date_to` u adresi (datumi su uključivi: `do − od + 1`, npr. od 1. do 7. lipnja je 7 dana) i preda ga `ShipCard`-u. Kartica ispod „… po danu” tada iscrta i „… za N dana” (`cijena_dan × N`); bez datuma se taj redak ne iscrtava (`{days && …}`), pa istaknuta plovila na početnoj ostaju kakva jesu. Ukupna cijena obuhvaća samo najam plovila, bez dodatnih usluga. Na stranici s detaljima plovila ukupna cijena se ne prikazuje.
+- [x] **Dodatni filtri na novoj stranici.**
   - Oprema: kućice, popis dohvatiti s `/api/equipment`; svaka označena stavka ide u adresu kao `equipment=<id_opreme>`.
   - Dodatne usluge: kućice, popis dohvatiti s `/api/services`; svaka označena stavka ide u adresu kao `services=<id_dodatne_usluge>`.
   - Najveća cijena po danu: polje `<input type="number" min="0">` (u eurima), u adresi `max_price`.
   - Najmanji broj kabina: polje `<input type="number" min="0">`, u adresi `min_cabins` (0 je dopušteno, npr. gumenjak nema kabina).
   - Prazno polje ili neoznačene kućice znače da se filtar ne primjenjuje i ne šalje u adresu.
   - Za upis i čitanje označenih kućica u adresi vidi napomenu o popisima uz funkciju u `fleetServices.js` (`append` / `getAll`).
-  - Promjena filtra ažurira adresu (`setSearchParams`), a stranica ponovno poziva `/api/boats` sa svim filtrima (iz tražilice i dodatnima). Filtre čitati iz adrese, da ostanu nakon osvježavanja i povratka s detalja plovila.
-- [ ] **U `App.jsx` zamijeniti `PretragaStranica` novom stranicom.**
+  - Promjena filtra ažurira adresu (`setSearchParams`), a stranica ponovno poziva `/api/boats` sa svim filtrima (iz tražilice i dodatnima). Filtre čitati iz adrese, da ostanu nakon osvježavanja i povratka s detalja plovila.- [x] **U `App.jsx` zamijeniti `PretragaStranica` novom stranicom.**
 
 ---
 
@@ -232,7 +231,7 @@ NF-02 traži da sučelje radi na računalu, tabletu i mobitelu. Za prvu predaju 
 
 - [ ] **Provjeriti glavne stranice na uskom ekranu.** U pregledniku F12 → prikaz za uređaje (Ctrl+Shift+M), širine npr. 375 px (mobitel) i 768 px (tablet). Stranice: početna, detalji plovila, pregled plovila (nova stranica), profil, korisnici. Tražiti: vodoravno pomicanje stranice, sadržaj koji izlazi iz ekrana, preklapanje teksta.
 - [x] **Javno zaglavlje se ne sklapa na mobitelu.** *(Ian Vrbaslija, uz `PublicHeader.jsx`)* Linkovi „Kategorije plovila”, „Luke polaska”, „Kako rezervirati?” i gumb „Prijava” uvijek su u jednom retku, pa se na uskom ekranu stisnu. Napraviti uz `PublicHeader.jsx` (vidi *Pregled plovila*): dodati gumb ☰ (`navbar-toggler`) i `collapse`, kao što već ima `NavBar.jsx`.
-- [ ] **Nova stranica s popisom plovila** neka za kartice koristi istu mrežu kao istaknuta plovila na početnoj (`row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4`).
+- [x] **Nova stranica s popisom plovila** neka za kartice koristi istu mrežu kao istaknuta plovila na početnoj (`row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4`).
 
 ---
 
@@ -278,8 +277,8 @@ Tjedan 7 traži osnovna ispitivanja. Za prvu predaju testovi samo čitaju podatk
 | Odjeljak u `TODO.md` | Stavke | Tko |
 | :--- | :--- | :--- |
 | [x] Pregled plovila: backend | proširenje `search_boats` i `/api/boats` (oprema, usluge, cijena, kabine) | **Nikolina Žderić** (plovila, backend) | [x]
-| Pregled plovila: frontend | tražilica `SearchBar.jsx` (radi se prije nove stranice) | **Ana Bartulović** (izrada početne) |
-| | funkcija u `fleetServices.js`, nova stranica `BoatList.jsx`, dodatni filtri, ukupna cijena, zamjena u `App.jsx` | **Luka Martinić** (pretraga, frontend) |
-| | zajedničko zaglavlje `PublicHeader.jsx` (radi se prije nove stranice), uključujući sklapanje na mobitelu | **Ian Vrbaslija** (izrada `NavBar.jsx`, `Layout.jsx`) |
+| Pregled plovila: frontend | [x] tražilica `SearchBar.jsx` (radi se prije nove stranice) | **Ana Bartulović** (izrada početne) |
+| | [x] funkcija u `fleetServices.js`, nova stranica `BoatList.jsx`, dodatni filtri, ukupna cijena, zamjena u `App.jsx` | **Luka Martinić** (pretraga, frontend) |
+| | [x] zajedničko zaglavlje `PublicHeader.jsx` (radi se prije nove stranice), uključujući sklapanje na mobitelu | **Ian Vrbaslija** (izrada `NavBar.jsx`, `Layout.jsx`) |
 | Responzivnost | provjera stranica, mreža kartica na novoj stranici (sklapanje zaglavlja ide uz `PublicHeader.jsx`) | **Luka Martinić** (pretraga, frontend; prilagodba za mobitel) |
 | Ispitivanje | testovi backenda (`pytest`), ručni scenariji za frontend, `5-Ispitivanje.md`, stupac „Ispitivanje ili provjera” u tablici sljedivosti | **Tonko Buncuga** (setup/devops) |
