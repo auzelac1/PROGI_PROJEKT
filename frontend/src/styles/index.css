@@ -451,7 +451,16 @@ p {
   font-weight: 600;
   color: var(--pr-navy);
   text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.pregled .port-item-link:hover {
+  border-color: var(--pr-teal);
+  background-color: var(--pr-foam);
+  color: var(--pr-navy);
+  transform: translateX(3px);
 }
 
 .pregled .step-num {
@@ -617,6 +626,16 @@ p {
     padding: 3rem 0;
   }
 }
+
+.pregled .accordion-button {
+    box-shadow: none;
+    border: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: white;
+}
+
 
 /* Style.css NavBar */
 

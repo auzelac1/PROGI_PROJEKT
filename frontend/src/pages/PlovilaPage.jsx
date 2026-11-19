@@ -61,11 +61,13 @@ export default function PlovilaPage() {
             <PublicHeader />
 
             <div className="container py-5">
-                <div className="d-flex justify-content-between align-items-center mb-4">
-                    <h1 className="mb-0">Katalog plovila</h1>
-                    <Link to="/" className="btn btn-outline-secondary">
-                        &lt; Natrag na početnu
+                <nav aria-label="Navigacija" className="mb-3">
+                    <Link to="/" className="btn btn-sm btn-outline-secondary back-link">
+                        <span className="me-1">&lsaquo;&nbsp;</span> Natrag na početnu
                     </Link>
+                </nav>
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                    <h1 className="my-0">Katalog plovila</h1>
                 </div>
 
                 <div className="mb-4">
