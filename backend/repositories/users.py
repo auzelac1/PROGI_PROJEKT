@@ -61,6 +61,11 @@ def stvori_token(podaci: dict):
     return jwt.encode(skopirani_podaci, TAJNI_KLJUC, algorithm=ALGORITAM)
 
 
+
+
+
+
+
 def dohvati_trenutnog_korisnika(token: str = Depends(shema_tokena)):
     greska_autorizacije = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -82,6 +87,51 @@ def dohvati_trenutnog_korisnika(token: str = Depends(shema_tokena)):
     #slika dolazi iz Google podacih spremljeni u JWT.
     korisnik["picture"] = sadrzaj.get("picture")
     return korisnik
+
+
+
+
+
+
+def dohvati_sve_korisnike():
+    with get_connection() as poveznica:
+        with poveznica.cursor() as kursor:
+            kursor.execute("SELECT uuid, ime, prezime, email, telefon, uloga FROM korisnik;")
+            return kursor.fetchall()
+
+
+def alter_user(uuid: str, telefon: str = None, ime: str = None, prezime: str = None, uloga: str = None):
+    """Dinamički mijenja podatke korisnika u bazi (mijenja samo polja koja nisu None)"""
+    polja = []
+    vrijednosti = []
+    
+    if telefon is not None:
+        polja.append("telefon = %s")
+        vrijednosti.append(telefon)
+    if ime is not None:
+        polja.append("ime = %s")
+        vrijednosti.append(ime)
+    if prezime is not None:
+        polja.append("prezime = %s")
+        vrijednosti.append(prezime)
+    if uloga is not None:
+        polja.append("uloga = %s")
+        vrijednosti.append(uloga)
+        
+    if not polja:
+        return None  
+        
+    vrijednosti.append(uuid)
+    upit = f"UPDATE korisnik SET {', '.join(polja)} WHERE uuid = %s RETURNING uuid, ime, prezime, email, telefon, uloga;"
+    
+    with get_connection() as poveznica:
+        with poveznica.cursor() as kursor:
+            kursor.execute(upit, tuple(vrijednosti))
+            azurirani_korisnik = kursor.fetchone()
+            poveznica.commit()
+            return azurirani_korisnik
+
+
 
 
 def provjeri_ulogu(trazena_uloga: str):
