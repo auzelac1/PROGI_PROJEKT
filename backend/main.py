@@ -11,7 +11,7 @@ from starlette.middleware.sessions import SessionMiddleware
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
 # 2. Tek onda uvozimo routere
-from routers import auth, boats
+from routers import auth, boats, users
 
 # 3. Stvaramo FastAPI aplikaciju
 app = FastAPI(
@@ -39,6 +39,7 @@ app.add_middleware(
 # 6. Registracija routera
 app.include_router(boats.router)
 app.include_router(auth.router)
+app.include_router(users.router)
 
 
 @app.get("/api/health")
