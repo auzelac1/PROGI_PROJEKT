@@ -24,7 +24,8 @@ function PublicHeader() {
                             <Link to="/#kako-radi" className="nav-link">Kako rezervirati?</Link>
                         </div>
                         {loggedUser.uloga === "korisnik" && <Link to="/prijava" className="d-none d-lg-block ms-4 btn btn-prijava">Prijava</Link>}
-                        <div className="collapse navbar-collapse" id="publicNavBar">
+                        {/* Tonko: skrivanje izbornika na velikim ekranima odmah */}
+                        <div className="collapse navbar-collapse d-lg-none" id="publicNavBar">
                             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <Link to="/#vrste" className="nav-link">Kategorije plovila</Link>
                                 <Link to="/#luke" className="nav-link">Luke polaska</Link>
