@@ -7,6 +7,7 @@ import SearchBar from '../components/SearchBar';
 import { useStyles } from '../useStyles';
 import indexCss from '../styles/index.css?url';
 import { getFleet } from '../services/fleetServices';
+import DodatniFilteri from '../components/DodatniFilteri';
 
 export default function PlovilaPage() {
     useStyles(indexCss);
@@ -46,6 +47,8 @@ export default function PlovilaPage() {
                 <div className="mb-4">
                     <SearchBar />
                 </div>
+
+                <DodatniFilteri />
 
                 {error && <p className="text-danger">Plovila se trenutno ne mogu učitati. Pokušajte ponovno kasnije.</p>}
                 {loading && <Ucitavanje />}
