@@ -32,6 +32,13 @@ export default function PlovilaPage() {
             });
     }, [searchParams]);
 
+    const minPrice = !loading && !error && ships.length > 0
+        ? Math.min(...ships.map((ship) => Number(ship.basics.cijena_dan)))
+        : null;
+    const minCabins = !loading && !error && ships.length > 0
+        ? Math.min(...ships.map((ship) => Number(ship.model.broj_kabina)))
+        : null;
+
     const dateFrom = searchParams.get('date_from');
     const dateTo = searchParams.get('date_to');
     let days = null;
@@ -56,7 +63,7 @@ export default function PlovilaPage() {
                     <SearchBar />
                 </div>
 
-                <DodatniFilteri />
+                <DodatniFilteri minPrice={minPrice} minCabins={minCabins} />
 
                 {error && <p className="text-danger">Plovila se trenutno ne mogu učitati. Pokušajte ponovno kasnije.</p>}
                 {loading && <Ucitavanje />}

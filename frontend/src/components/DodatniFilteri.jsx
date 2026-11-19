@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getEquipment, getServices } from '../services/fleetServices';
 
-export default function DodatniFilteri() {
+export default function DodatniFilteri({ minPrice, minCabins }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [equipment, setEquipment] = useState([]);
   const [services, setServices] = useState([]);
@@ -55,6 +55,7 @@ export default function DodatniFilteri() {
             min="0"
             className="form-control"
             value={searchParams.get('max_price') || ''}
+            placeholder={minPrice != null ? `Min ${minPrice}€` : ''}
             onChange={(e) => setNumber('max_price', e.target.value)}
           />
         </div>
@@ -69,6 +70,7 @@ export default function DodatniFilteri() {
             min="0"
             className="form-control"
             value={searchParams.get('min_cabins') || ''}
+            placeholder={minCabins != null ? `Min ${minCabins}` : ''}
             onChange={(e) => setNumber('min_cabins', e.target.value)}
           />
         </div>
