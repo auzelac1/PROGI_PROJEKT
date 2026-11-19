@@ -124,7 +124,7 @@ export default function HomePage() {
               <div className="col-lg-4">
                 <div className="port-list">
                   {ports.map((p, index) => (
-                    <div key={p.id_luka} className='port-item-link'>
+                    <Link key={p.id_luka} to={`/plovila?port=${p.id_luka}`} className='port-item-link'>
                       <div className="d-flex align-items-center gap-3">
                         <span
                           className="badge rounded-circle text-white d-inline-flex align-items-center justify-content-center"
@@ -134,7 +134,7 @@ export default function HomePage() {
                         </span>
                         <span className="fw-bold">{p.ime_luka}</span>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>

@@ -20,7 +20,7 @@ export default function PortsMap({ ports, zoom = 7, height = 420 }) {
         return (
           <Marker key={p.id_luka} position={[p.lat, p.lng]} icon={customIcon}>
             <Popup>
-              <strong>{globalIndex}. {p.ime_luka}</strong>
+              <Link to={`/plovila?port=${p.id_luka}`}><strong>{globalIndex}. {p.ime_luka}</strong></Link>
             </Popup>
           </Marker>
         );
