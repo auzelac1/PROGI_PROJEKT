@@ -8,6 +8,7 @@ import { useStyles } from '../useStyles';
 import indexCss from '../styles/index.css?url';
 import { getFleet } from '../services/fleetServices';
 import DodatniFilteri from '../components/DodatniFilteri';
+import PublicFooter from '../components/PublicFooter';
 
 export default function PlovilaPage() {
     useStyles(indexCss);
@@ -93,6 +94,7 @@ export default function PlovilaPage() {
                     </div>
                 )}
             </div>
+            <PublicFooter/>
         </main>
     );
 }

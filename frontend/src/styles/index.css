@@ -575,12 +575,12 @@ p {
     margin-right: 10px;
 }
 
-.pregled .site-footer .footer-location {
+.pregled .site-footer .footer-location, .pregled .site-footer .social-media-footer {
     display: flex;
     align-items: center;
 }
 
-.pregled .site-footer .footer-location, .pregled .site-footer  .footer-phone, .pregled .site-footer  .footer-mail {
+.pregled .site-footer .footer-location, .pregled .site-footer .footer-phone, .pregled .site-footer .footer-mail {
     margin-bottom: 15px;
 }
 
