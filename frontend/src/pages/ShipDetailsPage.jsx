@@ -80,12 +80,12 @@ export default function ShipDetailsPage() {
               <dl className="specs mb-0">{specs.map(([k, v]) => (<div key={k}><dt>{k}</dt><dd>{v}</dd></div>))}</dl>
             </div>
 
-            <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
+            {ship.equipment.length > 0 && <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
               <h2 className="h4 mb-3">Oprema</h2>
               <ul className="equip mb-0">{ship.equipment.map((o) => <li key={o.id_opreme}>{o.naziv}</li>)}</ul>
-            </div>
+            </div>}
 
-            <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
+            {ship.services.length > 0 && <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
               <h2 className="h4 mb-3">Dodatne usluge</h2>
               <div className="table-responsive">
                 <table className="table align-middle mb-0">
@@ -93,7 +93,7 @@ export default function ShipDetailsPage() {
                   <tbody>{ship.services.map((u) => <tr key={u.id_dodatne_usluge}><td>{u.naziv}</td><td className="text-end fw-bold">{eur(u.cijena)}</td></tr>)}</tbody>
                 </table>
               </div>
-            </div>
+            </div>}
 
             <div className="p-4 border rounded-4 bg-white shadow-sm mt-4">
               <h2 className="h4 mb-3">Lokacija preuzimanja</h2>
