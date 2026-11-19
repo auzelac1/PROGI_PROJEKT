@@ -132,12 +132,14 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 
 **Cilj:** Osigurati dvosmjernu sljedivost — povezati zahtjeve s opisanim ponašanjem, dijelovima sustava koji ih ostvaruju te ispitivanjem ili drugom provjerom.
 
+ID-ovi ispitivanja odnose se na [projektne slučajeve u poglavlju 5.2](5-Ispitivanje.md#52-ispitni-slučajevi). Povezivanje ne znači da je zahtjev potpuno ispitan; ishodi su navedeni uz svaki slučaj.
+
 | ID zahtjeva | Obrazac uporabe / modul        | Arhitekturna realizacija | Ispitivanje ili provjera |
 | ----------- | ------------------------------ | ------------------------ | ------------------------ |
-| F-1.1       | Prijava i ovlasti              |                          |                          |
-| F-2.1       | Pretraga i pregled plovila     |                          |                          |
-| F-2.2       | Pretraga i pregled plovila     |                          |                          |
-| F-3.1       | Izrada rezervacije             |                          |                          |
+| F-1.1       | Prijava i ovlasti              |                          | ST-01 |
+| F-2.1       | Pretraga i pregled plovila     |                          | ST-02 i ST-03: Prošlo. CT-01 i CT-02: Nije pokrenuto. |
+| F-2.2       | Pretraga i pregled plovila     |                          | ST-04 (nepostojeći ID; djelomična provjera). |
+| F-3.1       | Izrada rezervacije             |                          | ST-05, NF-02 (nisu pokrenuti). |
 | F-3.2       | Izrada rezervacije             |                          |                          |
 | F-4.1       | Potvrda i pregled rezervacija  |                          |                          |
 | F-4.2       | Potvrda i pregled rezervacija  |                          |                          |
@@ -145,14 +147,14 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 | F-6.1       | Upravljanje rezervacijama      |                          |                          |
 | F-7.1       | Upravljanje flotom             |                          |                          |
 | F-7.2       | Upravljanje flotom             |                          |                          |
-| F-8.1       | Upravljanje korisnicima        |                          |                          |
+| F-8.1       | Upravljanje korisnicima        |                          | ST-06, ST-07 (pristup; djelomična provjera; ST-07 nije pokrenut). |
 | F-9.1       | Statistika i izvoz             |                          |                          |
 | F-9.2       | Statistika i izvoz             |                          |                          |
 | F-10.1      | Vanjske usluge                 |                          |                          |
 | F-10.2      | Vanjske usluge                 |                          |                          |
-| NF-01       |                                |                          |                          |
-| NF-02       |                                |                          |                          |
-| NF-03       |                                |                          |                          |
+| NF-01       | UC-001 / Izrada rezervacije     |                          | NF-02 (nije pokrenut). |
+| NF-02       | UC-007 / Pretraga i pregled plovila |                       | NF-01 (početna stranica i katalog). |
+| NF-03       | UC-010 / Prijava korisnika      |                          | ST-01 (vanjski pružatelj; djelomična provjera). |
 | NF-04       |                                |                          |                          |
 
 ## 2.7 Pregled zahtjeva
