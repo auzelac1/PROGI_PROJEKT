@@ -20,9 +20,7 @@ export default function PlovilaPage() {
         setLoading(true);
         setError(false);
 
-        const params = Object.fromEntries(searchParams.entries());
-
-        getFleet(params)
+        getFleet(searchParams)
             .then((data) => {
                 setShips(data);
                 setLoading(false);
