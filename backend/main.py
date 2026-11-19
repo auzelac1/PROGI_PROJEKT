@@ -33,7 +33,8 @@ app.add_middleware(
 # Koristimo SESSION_SECRET iz .env datoteke koju smo maloprije definirali
 app.add_middleware(
     SessionMiddleware,
-    secret_key=os.getenv("SESSION_SECRET", "tajnaa"),
+    #tonko: session secret bio tu, treba biti u .env, ne hardkodiran
+    secret_key=os.getenv("SESSION_SECRET"),
 )
 
 # 6. Registracija routera
