@@ -11,6 +11,7 @@ import { useStyles } from '../useStyles';
 import indexCss from '../styles/index.css?url';
 import { getBoat } from '../services/fleetServices';
 import PublicHeader from '../components/PublicHeader';
+import PublicFooter from '../components/PublicFooter';
 
 export default function ShipDetailsPage() {
   useStyles(indexCss);
@@ -112,6 +113,7 @@ export default function ShipDetailsPage() {
       </div>
 
       <PrijavaModal show={pitajPrijavu} onClose={() => setPitajPrijavu(false)} />
+      <PublicFooter />
     </main>
   );
 }
