@@ -61,9 +61,14 @@ export default function HomePage() {
     if (hash) {
       const el = document.querySelector(hash);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollTo(0, 0);
     }
+
+    // Tonko: popis ovisnosti koji se trebaju prvo ucitat prije skroljanja, 
+    // inace bi skrollalo na krivi dio jer se ostatak nije ucito jos
+  }, [hash, ships, categories, ports, error]);
+
+  useEffect(() => {
+    if (!hash) window.scrollTo(0, 0);
   }, [hash]);
 
   const sadrzaj = (render) => {
