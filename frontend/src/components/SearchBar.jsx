@@ -5,6 +5,7 @@ import { getCategories, getPorts } from '../services/fleetServices';
 export default function SearchBar() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [today] = useState(() => new Date().toLocaleDateString('en-CA'));
 
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [dateFrom, setDateFrom] = useState(searchParams.get('date_from') || '');
@@ -33,7 +34,9 @@ export default function SearchBar() {
     }
 
     if (dateFrom && dateTo) {
-      const today = new Date().toISOString().split('T')[0];
+      //Tonko: today je definirana u cijeloj funkciji searchbar umjesto samo ovdje,
+      // u izborniku datuma je stavljena provjera
+      //ovo vec ne treba, al nek ostane
       if (dateFrom < today) {
         alert('Datum od ne može biti u prošlosti.');
         return;
@@ -83,6 +86,9 @@ export default function SearchBar() {
                 type="date"
                 className="form-control border-0 bg-transparent shadow-none px-1"
                 value={dateFrom}
+                //Tonko: odmah se tu provjerava logika za najmanji/najveci datum
+                min={today}
+                max={dateTo || null}
                 onChange={(e) => setDateFrom(e.target.value)}
               />
             </div>
@@ -95,6 +101,8 @@ export default function SearchBar() {
                 type="date"
                 className="form-control border-0 bg-transparent shadow-none px-1"
                 value={dateTo}
+                //Tonko: tu se samo min gleda, max moze bit kad bilo
+                min={dateFrom || today}
                 onChange={(e) => setDateTo(e.target.value)}
               />
             </div>
