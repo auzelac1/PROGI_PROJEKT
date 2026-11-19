@@ -32,6 +32,14 @@ export default function PlovilaPage() {
             });
     }, [searchParams]);
 
+    const dateFrom = searchParams.get('date_from');
+    const dateTo = searchParams.get('date_to');
+    let days = null;
+    if (dateFrom && dateTo) {
+        const diff = (new Date(dateTo) - new Date(dateFrom)) / (1000 * 60 * 60 * 24);
+        days = Math.round(diff) + 1;
+    }
+
     return (
         <main className="pregled">
             <PublicHeader />
@@ -64,7 +72,7 @@ export default function PlovilaPage() {
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                         {ships.map((ship) => (
                             <div className="col" key={ship.basics.id_brod}>
-                                <ShipCard ship={ship} />
+                                 <ShipCard ship={ship} days={days} />
                             </div>
                         ))}
                     </div>

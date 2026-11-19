@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import ShipImage from './ShipImage';
 import { eur } from '../utils/format';
 
-export default function ShipCard({ ship }) {
+export default function ShipCard({ ship, days }) {
   return (
     <Link to={`/plovila/${ship.basics.id_brod}`} className="card ship-card h-100 text-decoration-none">
       <ShipImage src={ship.photos[0]?.url_foto} alt={ship.basics.naziv} />
@@ -17,6 +17,11 @@ export default function ShipCard({ ship }) {
         <div className="mt-auto pt-2">
           <span className="ship-price">{eur(ship.basics.cijena_dan)}</span>
           <span className="text-muted"> po danu</span>
+          {days && (
+            <div className="text-muted small">
+              {eur(ship.basics.cijena_dan * days)} za {days} {days === 1 ? 'dan' : 'dana'}
+            </div>
+          )}
         </div>
       </div>
     </Link>
