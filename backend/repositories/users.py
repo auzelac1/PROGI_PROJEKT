@@ -5,8 +5,10 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from db import get_connection
 
-TAJNI_KLJUC = os.getenv("JWT_SECRET", "tajna")
-ALGORITAM = os.getenv("JWT_ALGORITHM", "HS256")
+#Tonko: opet hardkodirana .env varijabla :(
+TAJNI_KLJUC = os.getenv("JWT_SECRET")
+# ne treba za algoritam .env
+ALGORITAM = "HS256"
 FIRST_ADMIN_EMAIL = os.getenv("FIRST_ADMIN_EMAIL", "").lower()
 
 shema_tokena = OAuth2PasswordBearer(tokenUrl="auth/prijava")
@@ -52,18 +54,16 @@ def get_or_create_google_user(google_data: dict):
 
     return user
 
+
 def stvori_token(podaci: dict):
     skopirani_podaci = podaci.copy()
     istek = datetime.utcnow() + timedelta(
-        minutes=int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
+        #Tonko: ne treba nam ovo kao .env
+        #minutes=int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
+        minutes=int(60)
     )
     skopirani_podaci.update({"exp": istek})
     return jwt.encode(skopirani_podaci, TAJNI_KLJUC, algorithm=ALGORITAM)
-
-
-
-
-
 
 
 def dohvati_trenutnog_korisnika(token: str = Depends(shema_tokena)):
@@ -87,10 +87,6 @@ def dohvati_trenutnog_korisnika(token: str = Depends(shema_tokena)):
     #slika dolazi iz Google podacih spremljeni u JWT.
     korisnik["picture"] = sadrzaj.get("picture")
     return korisnik
-
-
-
-
 
 
 def dohvati_sve_korisnike():
@@ -130,8 +126,6 @@ def alter_user(uuid: str, telefon: str = None, ime: str = None, prezime: str = N
             azurirani_korisnik = kursor.fetchone()
             poveznica.commit()
             return azurirani_korisnik
-
-
 
 
 def provjeri_ulogu(trazena_uloga: str):
