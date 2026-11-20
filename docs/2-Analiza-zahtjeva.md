@@ -139,7 +139,7 @@ ID-ovi ispitivanja odnose se na [projektne slučajeve u poglavlju 5.2](5-Ispitiv
 | ID zahtjeva | Obrazac uporabe / modul        | Arhitekturna realizacija | Ispitivanje ili provjera |
 | ----------- | ------------------------------ | ------------------------ | ------------------------ |
 | F-1.1       | UC-010 / Prijava i ovlasti | `backend/routers/auth.py` (Google OIDC), `pages/Login.jsx` | ST-01 |
-| F-2.1       | UC-007 / Pretraga i pregled plovila | `GET /api/boats` (`routers/boats.py`, `repositories/fleet.py`), `pages/PlovilaPage.jsx`, `SearchBar.jsx`, `DodatniFilteri.jsx` | ST-02 i ST-03: Prošlo. CT-01 i CT-02: Nije pokrenuto. |
+| F-2.1       | UC-007 / Pretraga i pregled plovila | `GET /api/boats` (`routers/boats.py`, `repositories/fleet.py`), `pages/PlovilaPage.jsx`, `SearchBar.jsx`, `DodatniFilteri.jsx` | ST-02 i ST-03: Prošlo. CT-01 i CT-02: Prošlo /backend/tests/test_boats.py |
 | F-2.2       | UC-007 / Pretraga i pregled plovila | `GET /api/boats/{id}`, `pages/ShipDetailsPage.jsx` | ST-04 (nepostojeći ID; djelomična provjera). |
 | F-3.1       | UC-001 / Izrada rezervacije |                          | ST-05, NF-T-02 (nisu pokrenuti). |
 | F-3.2       | UC-001 / Izrada rezervacije |                          |                          |
@@ -148,7 +148,7 @@ ID-ovi ispitivanja odnose se na [projektne slučajeve u poglavlju 5.2](5-Ispitiv
 | F-5.1       | UC-006 / Raspored preuzimanja i povrata |                          |                          |
 | F-6.1       | UC-002, UC-003, UC-004 / Upravljanje rezervacijama |                          |                          |
 | F-7.1       | UC-005, UC-008 / Upravljanje flotom |                          |                          |
-| F-8.1       | UC-011 / Upravljanje korisnicima | `routers/users.py`, `backend/models.py`, `pages/Users.jsx`, `EditUserModal.jsx` | ST-06, ST-07 (pristup; djelomična provjera; ST-07 nije pokrenut). |
+| F-8.1       | UC-011 / Upravljanje korisnicima | `routers/users.py`, `backend/models.py`, `pages/Users.jsx`, `EditUserModal.jsx` | ST-06, ST-07 |
 | F-9.1       | UC-009 / Statistika i izvoz |                          |                          |
 | F-9.2       | UC-009 / Statistika i izvoz |                          |                          |
 | F-10.1      | UC-001 / Vanjske usluge |                          |                          |
