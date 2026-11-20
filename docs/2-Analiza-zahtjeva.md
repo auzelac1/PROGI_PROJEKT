@@ -128,6 +128,7 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 
 | Datum | ID zahtjeva | Promjena i razlog | Dogovoreno s / dokaz |
 | ----- | ----------- | ----------------- | -------------------- |
+| 16.11.2026. | F-8.1 | Kriterij prihvaćanja promijenjen je s „Nova uloga vrijedi od sljedeće prijave korisnika” na „Nova uloga vrijedi od sljedećeg učitavanja aplikacije”. Razlog: uloga se čita iz baze pri svakom zahtjevu. | Tim; commit `279030b` |
 
 ## 2.6 Sljedivost zahtjeva
 
@@ -137,23 +138,23 @@ ID-ovi ispitivanja odnose se na [projektne slučajeve u poglavlju 5.2](5-Ispitiv
 
 | ID zahtjeva | Obrazac uporabe / modul        | Arhitekturna realizacija | Ispitivanje ili provjera |
 | ----------- | ------------------------------ | ------------------------ | ------------------------ |
-| F-1.1       | Prijava i ovlasti              | `backend/routers/auth.py` (Google OIDC), `pages/Login.jsx` | ST-01 |
-| F-2.1       | Pretraga i pregled plovila     | `GET /api/boats` (`routers/boats.py`, `repositories/fleet.py`), `pages/PlovilaPage.jsx`, `SearchBar.jsx`, `DodatniFilteri.jsx` | ST-02 i ST-03: Prošlo. CT-01 i CT-02: Nije pokrenuto. |
-| F-2.2       | Pretraga i pregled plovila     | `GET /api/boats/{id}`, `pages/ShipDetailsPage.jsx` | ST-04 (nepostojeći ID; djelomična provjera). |
-| F-3.1       | Izrada rezervacije             |                          | ST-05, NF-02 (nisu pokrenuti). |
-| F-3.2       | Izrada rezervacije             |                          |                          |
+| F-1.1       | UC-010 / Prijava i ovlasti | `backend/routers/auth.py` (Google OIDC), `pages/Login.jsx` | ST-01 |
+| F-2.1       | UC-007 / Pretraga i pregled plovila | `GET /api/boats` (`routers/boats.py`, `repositories/fleet.py`), `pages/PlovilaPage.jsx`, `SearchBar.jsx`, `DodatniFilteri.jsx` | ST-02 i ST-03: Prošlo. CT-01 i CT-02: Nije pokrenuto. |
+| F-2.2       | UC-007 / Pretraga i pregled plovila | `GET /api/boats/{id}`, `pages/ShipDetailsPage.jsx` | ST-04 (nepostojeći ID; djelomična provjera). |
+| F-3.1       | UC-001 / Izrada rezervacije |                          | ST-05, NF-T-02 (nisu pokrenuti). |
+| F-3.2       | UC-001 / Izrada rezervacije |                          |                          |
 | F-4.1       | Potvrda i pregled rezervacija  |                          |                          |
-| F-4.2       | Potvrda i pregled rezervacija  |                          |                          |
-| F-5.1       | Raspored preuzimanja i povrata |                          |                          |
-| F-6.1       | Upravljanje rezervacijama      |                          |                          |
-| F-7.1       | Upravljanje flotom             |                          |                          |
+| F-4.2       | UC-001 / Potvrda i pregled rezervacija |                          |                          |
+| F-5.1       | UC-006 / Raspored preuzimanja i povrata |                          |                          |
+| F-6.1       | UC-002, UC-003, UC-004 / Upravljanje rezervacijama |                          |                          |
+| F-7.1       | UC-005, UC-008 / Upravljanje flotom |                          |                          |
 | F-8.1       | UC-011 / Upravljanje korisnicima | `routers/users.py`, `backend/models.py`, `pages/Users.jsx`, `EditUserModal.jsx` | ST-06, ST-07 (pristup; djelomična provjera; ST-07 nije pokrenut). |
-| F-9.1       | Statistika i izvoz             |                          |                          |
-| F-9.2       | Statistika i izvoz             |                          |                          |
-| F-10.1      | Vanjske usluge                 |                          |                          |
-| F-10.2      | Vanjske usluge                 | `components/PortsMap.jsx` (OpenStreetMap) |                          |
-| NF-01       | UC-001 / Izrada rezervacije     |                          | NF-02 (nije pokrenut). |
-| NF-02       | UC-007 / Pretraga i pregled plovila | Bootstrap responzivna mreža (frontend) | NF-01 (početna stranica i katalog). |
+| F-9.1       | UC-009 / Statistika i izvoz |                          |                          |
+| F-9.2       | UC-009 / Statistika i izvoz |                          |                          |
+| F-10.1      | UC-001 / Vanjske usluge |                          |                          |
+| F-10.2      | UC-007 / Vanjske usluge | `components/PortsMap.jsx` (OpenStreetMap) |                          |
+| NF-01       | UC-001 / Izrada rezervacije     |                          | NF-T-02 (nije pokrenut). |
+| NF-02       | UC-007 / Pretraga i pregled plovila | Bootstrap responzivna mreža (frontend) | NF-T-01 (početna stranica i katalog). |
 | NF-03       | UC-010 / Prijava korisnika      | `routers/auth.py`: prijava isključivo preko Googlea, bez lozinki | ST-01 (vanjski pružatelj; djelomična provjera). |
 | NF-04       |                                | Vercel (HTTPS) |                          |
 

@@ -1,30 +1,31 @@
-# [Naziv aplikacije] — Projektna dokumentacija
+# Natalia Charter — Projektna dokumentacija
 
 **Kolegij:** [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz), Fakultet elektrotehnike i računarstva Sveučilišta u Zagrebu  
-**Akademska godina:** [20XX./20XX.]  
-**Tim:** [Oznaka i naziv tima]  
-**Nastavnik:** Vlado Sruk  
-**Asistent / demonstrator:** [Ime i uloga u ovom izvođenju kolegija]
+**Akademska godina:** 2026./2027.
+**Tim:** Natalia
+**Nastavnik:** Vlado Sruk
+**Asistent / demonstrator:** Miljenko Krhen, Ivo Gabud
 
 ## Pregled projekta
 
 **Cilj:** Omogućiti čitatelju koji prvi put vidi projekt da u dvije ili tri rečenice prepozna aplikaciju, njezine ciljane korisnike i glavnu svrhu.
 
-[Opis projekta.]
+Natalia Charter je web aplikacija za charter tvrtku koja iznajmljuje plovila na Jadranu. Klijenti u njoj pretražuju plovila prema datumu, luci, kategoriji i cijeni, pregledavaju njihove podatke i rezerviraju slobodno plovilo s dodatnim uslugama. Djelatnici, voditelj i administrator na jednom mjestu vode raspored preuzimanja i povrata, flotu, rezervacije, korisnike i statistiku poslovanja, umjesto ručno i u odvojenim tablicama.
 
-<details>
-<summary><strong>Sažet pregled projekta</strong></summary>
-
-Za projekt na temu CrisisMap sažet pregled može navesti građane kojima trebaju informacije o kriznim događajima povezane s njihovom lokacijom te cilj aplikacije da prijave kriznih događaja prikaže na karti. Funkcionalnost spomenite samo ako pripada odobrenom zadatku tima; bez dokaza nemojte tvrditi da aplikacija poboljšava odgovor hitnih službi. Ovo je primjer informativnog pregleda, a ne tekst za prepisivanje niti dokaz da je funkcionalnost ostvarena.
-
-</details>
-
-**Aplikacija i osnovno postavljanje:** [README repozitorija](../README_PREDLOZAK.md#quick-start)  
-**Javno dostupna aplikacija:** pogledajte [README – Postavljanje](../README_PREDLOZAK.md#deployment)
+**Aplikacija i osnovno postavljanje:** [upute za lokalno pokretanje](upute.md)  
+**Javno dostupna aplikacija:** <https://progiprojekt.vercel.app>
 
 ## Članovi tima i uloge
 
-Ažurirani popis članova, njihovih GitHub profila i glavnih uloga ili doprinosa nalazi se u [README-u repozitoriju](../README_PREDLOZAK.md#team-members).
+| Član | Uloga |
+| --- | --- |
+| Ana Uzelac | Voditeljica tima, baza podataka i dokumentacija |
+| Nikolina Žderić | Backend i dokumentacija |
+| Tonko Bunčuga | DevOps |
+| Antonija Gudelj | Backend |
+| Ian-Karol Vrbaslija | Frontend |
+| Ana Bartulović | Frontend |
+| Luka Martinić | Frontend |
 
 ## Kazalo dokumentacije
 
@@ -35,30 +36,29 @@ Ažurirani popis članova, njihovih GitHub profila i glavnih uloga ili doprinosa
 | [3. Obrasci uporabe](3-Obrasci-uporabe.md) | Akteri i reprezentativne interakcije korisnika |
 | [4. Arhitektura i oblikovanje](4-Arhitektura-i-oblikovanje.md) | Glavne odluke oblikovanja, struktura, podaci i ponašanje |
 | [5. Ispitivanje](5-Ispitivanje.md) | Pristup ispitivanju, stvarni rezultati i poznati nedostaci |
-| [6. Postavljanje, instalacija i konfiguracija](6-Postavljanje-instalacija-i-konfiguracija.md) | Lokalna instalacija, konfiguracija, javno postavljanje i administracija |
-| [7. Zaključak i budući rad](7-Zakljucak-i-buduci-rad.md) | Zaključak i moguća daljnja poboljšanja |
-| [A. Pregled aktivnosti grupe](A-Pregled-aktivnosti-grupe.md) | Aktivnosti tima, doprinosi i izazovi |
+| 6. Postavljanje, instalacija i konfiguracija *(u izradi)* | Lokalna instalacija, konfiguracija, javno postavljanje i administracija |
+| 7. Zaključak i budući rad *(u izradi)* | Zaključak i moguća daljnja poboljšanja |
+| A. Pregled aktivnosti grupe *(u izradi)* | Aktivnosti tima, doprinosi i izazovi |
 
 ## Ključne točke projekta
 
 | Kontrolna točka | Demonstracija | Video |
 | --- | --- | --- |
-| Iteracija 1 | [Poveznica na demonstraciju ili inačicu projekta] | [Poveznica na video Demo 1, ako je snimljen] |
+| Iteracija 1 | <https://progiprojekt.vercel.app> | [Poveznica na video Demo 1, ako je snimljen] |
 | Završni pregled | [Poveznica na završnu inačicu projekta] | [Poveznica na video završne demonstracije, ako je snimljen] |
 
 Dokumentacija se kontinuirano ažurira kako se aplikacija razvija.
 
 ## Organizacija projekta i razvojni proces
 
-**Način rada:** [Stvarni način rada i trajanje iteracije, ako je relevantno.]  
-**Praćenje trenutačnih zadataka i nedostataka:** [Poveznica na GitHub Issues ili stvarno korištenu ploču zadataka.]
+**Način rada:** Tim se sastaje jednom do dvaput tjedno, uživo ili na Teamsu. Zadaci se dijele po članovima i područjima (frontend, backend, baza, dokumentacija), a svaka funkcionalnost razvija se u zasebnoj grani i spaja u main.  
+**Praćenje trenutačnih zadataka i nedostataka:** [GitHub Issues](https://github.com/auzelac1/PROGI_PROJEKT/issues) i [TODO.md](../TODO.md)
 
 <details>
 <summary><strong>Opis načina rada tima</strong></summary>
 
-**Primjer — CrisisMap:**
 
-Navedite pristup koji tim stvarno koristi. Tim koji razvija CrisisMap može organizirati prijave, rad na karti i provjere kao GitHub Issues, jednom tjedno raspraviti prioritete i iznad postaviti poveznicu na svoju aktivnu ploču zadataka. Takav je konkretan opis procesa informativniji od tvrdnje da tim koristi „Scrum” ako zapravo ne primjenjuje njegove prakse. Stvarni tim treba navesti vlastiti ritam rada i odgovornosti; dokumentacija ne treba duplicirati ploču zadataka. Primjer opisuje mogući tijek rada (engl. workflow), a ne tvrdi da je objavljeni tim CrisisMapa radio upravo tako.
+Tim se sastaje jednom do dvaput tjedno, uživo ili na Teams sastanku. Na sastanku svaki član ukratko kaže što je napravio od prošlog sastanka i gdje je zapeo. Voditeljica tima zatim dodjeljuje nove zadatke. Zadaci se zapisuju u TODO.md s imenom zaduženog člana ili u GitHub Issues, a riješeni se označavaju kvačicom. Bilješke sa sastanaka nalaze se u mapi meeting-notes. Svaka veća funkcionalnost razvija se u zasebnoj grani. Kad je gotova i lokalno provjerena, spaja se u main, a odande se aplikacija postavlja na Vercel.
 
 </details>
 
@@ -77,25 +77,37 @@ Za obrazac uporabe podnošenja prijave kriznog događaja u CrisisMapu tim može 
 
 ## Akademski integritet, ponašanje i licenciranje
 
-README repozitorija sadrži projektnu [izjavu o uporabi umjetne inteligencije](../README_PREDLOZAK.md#ai-usage), [informacije o kodeksu ponašanja i podršci](../README_PREDLOZAK.md#code-of-conduct-and-support) te [status licence ili ponovne uporabe](../README_PREDLOZAK.md#license). Pristupni podaci i druge tajne nikada se ne objavljuju u dokumentaciji niti dijele u običnim porukama.
+Izjava o uporabi umjetne inteligencije nalazi se u [odjeljku ispod](#izjava-o-uporabi-umjetne-inteligencije). Pristupni podaci i druge tajne nikada se ne objavljuju u dokumentaciji niti dijele u običnim porukama.
 
 ## Izjava o uporabi umjetne inteligencije
 
 <!-- UPUTA: Ovo je detaljan zapis uporabe umjetne inteligencije; README sadrži kratak sažetak i poveznicu na ovaj odjeljak. Unesite samo ono što se stvarno dogodilo i uklonite neupotrijebljene retke. Ako nije korišten nijedan alat generativne umjetne inteligencije, zamijenite cijeli odjeljak jednom rečenicom koja to jasno navodi. Svaki redak mora upućivati na stranicu, datoteku, zahtjev za uključivanje promjena (PR) ili zadatak. Nikada ne unosite pristupne podatke, osobne podatke ni tuđi zaštićeni sadržaj u alate umjetne inteligencije. -->
 
-Kratak sažetak: [README – Uporaba umjetne inteligencije](../README_PREDLOZAK.md#ai-usage). Ovaj odjeljak bilježi koji su alati korišteni, za koju dokumentaciju ili kod te kako je tim provjerio rezultat. Slijedi FER-ova [pravila o primjerenoj uporabi umjetne inteligencije](https://www.fer.unizg.hr/_download/repository/Policy%20on%20the%20appropriate%20use%20of%20artificial%20intelligence%20at%20the%20faculty%20of%20electrical%20engineering%20and%20computing%5B1%5D.pdf).
+Ovaj odjeljak bilježi koji su alati korišteni, za koju dokumentaciju ili kod te kako je tim provjerio rezultat. Slijedi FER-ova [pravila o primjerenoj uporabi umjetne inteligencije](https://www.fer.unizg.hr/_download/repository/Policy%20on%20the%20appropriate%20use%20of%20artificial%20intelligence%20at%20the%20faculty%20of%20electrical%20engineering%20and%20computing%5B1%5D.pdf).
 
 ### Korišteni alati
 
 | Alat | Inačica ili model | Koristio/la | Glavna svrha |
 | --- | --- | --- | --- |
-| [Naziv alata] | [Inačica ili model, ako je poznat] | [Član/članovi tima] | [npr. izrada nacrta dokumentacije, generiranje izvora dijagrama] |
+| Claude (Anthropic) | Claude Opus 5.5 | Ana Uzelac | Provjera pravopisa i dosljednosti među dokumentima |
+| Claude (Anthropic) | Claude Opus 5.5 | Nikolina Žderić | Uređivanje dokumentacije |
+| Nije zabilježeno | Nije zabilježeno | Tonko Bunčuga, Antonija Gudelj, Ian-Karol Vrbaslija, Ana Bartulović, Luka Martinić | Izrada PlantUML dijagrama ([izvori dijagrama](puml/)) |
 
 ### Opseg doprinosa umjetne inteligencije
 
 | Stranica, datoteka ili artefakt | Vrsta pomoći | Što je alat proizveo | Što je tim zadao i promijenio | Lokacija |
 | --- | --- | --- | --- | --- |
-| [npr. 3. Obrasci uporabe, UC-002] | [Izrada nacrta / preoblikovanje / prijevod / izvor dijagrama / sažimanje] | [Kratak opis] | [Ulaz zadan alatu; dodane, ispravljene ili uklonjene činjenice] | [Stranica dokumentacije, `.puml` datoteka, PR] |
+| Cijela dokumentacija (poglavlja 1–5 i Home) | Provjera pravopisa | Popis pravopisnih i gramatičkih pogrešaka s prijedlozima ispravaka | Provjeru pravopisa. | [`docs/`](./) |
+| Cijela dokumentacija (poglavlja 1–5 i Home) | Provjera dosljednosti | Popis nesklada među dokumentima (nazivi, ID-ovi zahtjeva i obrazaca uporabe, dijagrami) | Provjeru dosljednosti među dokumentima. | [`docs/`](./) |
+| [1. Opseg projekta](1-Projekt.md) (1.1, 1.2) | Uređivanje | Formatiranje teksta. | Nikolina Žderić zadala je točan popis izmjena i pregledala  | [`1-Projekt.md`](1-Projekt.md) |
+| [2. Analiza zahtjeva](2-Analiza-zahtjeva.md) (2.5, 2.6) | Uređivanje | UC ID-ovi u tablici slijedivosti | Nikolina Žderić zadala je dodavanje  UC ID-ova i promijenila netražene izmjene | [`2-Analiza-zahtjeva.md`](2-Analiza-zahtjeva.md) |
+| Home | Uređivanje | Popravak mrtvih poveznica, umetanje poveznica na GitHub Issues i ostalu dokumentaciju | Nikolina Žderić zadala je sadržaj (članove i uloge, alate i njihovu svrhu) i odobrila svaku izmjenu | [`Home.md`](Home.md) |
+| [3.1 Dijagram obrazaca uporabe](3-Obrasci-uporabe.md#31-dijagram-obrazaca-uporabe) | Izvor dijagrama | Nacrt PlantUML koda dijagrama obrazaca uporabe | Ulaz: akteri i obrasci uporabe iz poglavlja 3.  | [`3-1-UC.puml`](puml/3-1-UC.puml) |
+| [4.2 Dijagram komponenata](4-Arhitektura-i-oblikovanje.md#42-gradivni-blokovi-i-uml-dijagram-komponenata) | Izvor dijagrama | Nacrt PlantUML koda dijagrama komponenata | Ulaz: struktura frontenda, backenda i vanjskih servisa. | [`4-2-dijagram-komponenata.puml`](puml/4-2-dijagram-komponenata.puml) |
+| [4.3.1 ER dijagram](4-Arhitektura-i-oblikovanje.md#431-er-dijagram-i-model-podataka) | Izvor dijagrama | Nacrt PlantUML koda ER dijagrama | Ulaz: tablice baze podataka.  | [`4-2-charter-data-ERD.puml`](puml/4-2-charter-data-ERD.puml) |
+| [4.3.2 Dijagram razreda](4-Arhitektura-i-oblikovanje.md#432-reprezentativni-uml-dijagram-razreda) | Izvor dijagrama | Nacrt PlantUML koda dijagrama razreda | Ulaz: razredi i moduli backenda.  | [`4.3.2-UMLrazreda.puml`](puml/4.3.2-UMLrazreda.puml) |
+| [4.4.1 Sekvencijski dijagram](4-Arhitektura-i-oblikovanje.md#441-reprezentativni-uml-sekvencijski-dijagram) | Izvor dijagrama | Nacrt PlantUML koda sekvencijskog dijagrama izrade rezervacije | Ulaz: tijek UC-001 Izrada rezervacije.  | [`4-4-1-izrada-rezervacije.puml`](puml/4-4-1-izrada-rezervacije.puml) |
+| [4.4.2 Dijagram stanja](4-Arhitektura-i-oblikovanje.md#442-reprezentativni-uml-dijagram-stanja) | Izvor dijagrama | Nacrt PlantUML koda dijagrama stanja rezervacije | Ulaz: stanja rezervacije.  | [`4-4-2-stanja-rezervacije.puml`](puml/4-4-2-stanja-rezervacije.puml) |
 
 Stranice i artefakti koji nisu navedeni iznad izrađeni su bez pomoći generativne umjetne inteligencije. [Po želji: kao dodatne retke navedite kod ili ispitivanja izrađena uz pomoć umjetne inteligencije.]
 
@@ -103,7 +115,7 @@ Stranice i artefakti koji nisu navedeni iznad izrađeni su bez pomoći generativ
 
 | Provjera | Kako je provedena | Dokaz |
 | --- | --- | --- |
-| Činjenična točnost | [Svaka tvrdnja o funkcionalnostima, ponašanju ili arhitekturi uspoređena je s pokrenutom aplikacijom i kodom] | [Imena pregledavatelja; poveznice na zahtjev za uključivanje promjena (PR) ili zadatak] |
+| Činjenična točnost |  | [Imena pregledavatelja; poveznice na zahtjev za uključivanje promjena (PR) ili zadatak] |
 | Nema tvrdnji o neostvarenim funkcionalnostima | [Provjereno je da opisane funkcionalnosti, ispitivanja i rezultati stvarno postoje; planirani rad označen je kao planiran] | [Usporedba s odjeljkom 5.4 (Ispitivanje) i odjeljkom 7.1 (Zaključak)] |
 | Dosljednost s drugim stranicama | [Nazivi, ID-ovi i dijagrami provjereni su prema Analizi zahtjeva, Obrascima uporabe, Arhitekturi i oblikovanju te Ispitivanju] | [Kontrolni popis ili bilješka pregleda] |
 | Izvori dijagrama | [Generirani PlantUML je iscrtan, ispravljen i odgovara implementiranom sustavu] | [`.puml` datoteka i izrađena slika] |

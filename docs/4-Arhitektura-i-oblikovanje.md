@@ -66,6 +66,8 @@
 
 **Slika 4.3. UML dijagram razreda sustava Charter poslovanje**
 
+Razredi `Korisnik` i `korisnikIzmjena` te enum `Uloga` implementirani su u [backend/models.py](../backend/models.py). Razredi označeni s `<<planirano>>` dio su oblikovanja i implementirat će se u sljedećem ciklusu.
+
 **PlantUML izvor:** [izvor](./puml/4.3.2-UMLrazreda.puml)  
 **Referenca na kod pri završnom pregledu:** [backend/models.py](../backend/models.py)
 
@@ -76,6 +78,8 @@
 ### 4.4.1 Reprezentativni UML sekvencijski dijagram
 
 **Cilj:** Prikazati redoslijed poruka za jedan reprezentativni scenarij i odgovore na važnu alternativu.
+
+**Napomena:** Dijagram opisuje oblikovanje postupka rezervacije. Rezervacije još nisu implementirane, pa dijagram ne prikazuje postojeće ponašanje aplikacije.
 
 **Scenarij:** UC-001: Izrada rezervacije
 
@@ -102,6 +106,8 @@ istekne prije potvrde rezervacije.
 **Cilj:** Prikazati važna stanja jednog domenskog objekta ili
 eksplicitno upravljanog načina rada sustava te događaje ili uvjete
 koji ih mijenjaju.
+
+**Napomena:** Dijagram opisuje oblikovanje postupka rezervacije. Rezervacije još nisu implementirane, pa dijagram ne prikazuje postojeće ponašanje aplikacije.
 
 **Vlasnik stanja i razlog odabira:** Rezervacija. Njezino stanje
 određuju status, vrijeme nastanka i vrijeme povrata plovila.
@@ -131,15 +137,15 @@ radi statistike.
 
 **Cilj:** Sačuvati razloge i obrazložiti odabrane važne arhitekturne odluke kada tablica u odjelku 4.1 nije dovoljna za očuvanje konteksta, razmatranih alternativa i prihvaćenih kompromisa.
 
-### ADR-[ID]: [Naslov odluke]
+### ADR-01: Privremena blokada termina na 10 minuta pri izradi rezervacije
 
-| Polje                  | Zapis odluke                                                                            |
-| ---------------------- | --------------------------------------------------------------------------------------- |
-| Kontekst i cilj        | [Koji je arhitekturni problem učinio ovu odluku potrebnom?]                             |
-| Kriteriji odluke       | [Što je timu stvarno bilo važno?]                                                       |
-| Razmatrane alternative | [Realne mogućnosti koje je tim razmotrio, ukratko.]                                     |
-| Odluka i obrazloženje  | [Odabrana mogućnost, zašto je odabrana i čega se tim odrekao.]                          |
-| Status                 | [Predloženo, prihvaćeno ili zamijenjeno; ako je primjenjivo, poveznica na novu odluku.] |
+| Polje                  | Zapis odluke |
+| ---------------------- | ------------ |
+| Kontekst i cilj        | Rezervacija se izrađuje u dva koraka: odabir plovila, termina i broja osoba, zatim odabir usluga i potvrda. Između koraka drugi klijent može zauzeti isti termin. |
+| Kriteriji odluke       | Klijent ne smije izgubiti termin dok ispunjava podatke. Termin ne smije ostati zauzet ako klijent odustane. |
+| Razmatrane alternative | 1. Termin dobiva onaj tko prvi potvrdi. 2. Rezervacija je odmah potvrđena, a usluge se dodaju naknadno. |
+| Odluka i obrazloženje  | Klikom na „Nastavi” nastaje rezervacija „u tijeku” koja blokira termin na 10 minuta. Potvrdom u roku postaje „potvrđena”, a inače se briše. Kompromis: termin može do 10 minuta biti blokiran za klijenta koji ne rezervira. |
+| Status                 | Prihvaćeno, još nije implementirano. Povezano: F-3.1, F-3.2, O-09, UC-001, 4.4.1, 4.4.2. |
 
 ## 4.6 Zajednička pravila oblikovanja (engl. Cross-cutting concerns)
 
@@ -149,7 +155,13 @@ radi statistike.
 
 | Aspekt | Mehanizam | Pravilo | Mjesto primjene |
 | ------ | --------- | ------- | --------------- |
-|        |           |         |                 |
+| Autentifikacija | Google OIDC (Authlib) i vlastiti JWT (HS256, istek 60 min) | Nakon Google prijave backend izdaje JWT. Frontend ga sprema u `localStorage` i šalje u zaglavlju `Authorization: Bearer`. | `routers/auth.py`, `repositories/users.py` (`stvori_token`, `dohvati_trenutnog_korisnika`), `ProfileContext.jsx` |
+| Autorizacija | Provjera uloge na backendu | Uloga se čita iz baze pri svakom zahtjevu. Bez prijave `401`, bez ovlasti `403`. | `provjeri_ulogu`, `routers/users.py` |
+| Validacija ulaza | Pydantic modeli i provjere u rutama | Uloga je enum, a nevaljani parametri (datumi, cijena, broj osoba) vraćaju `400` s porukom. | `models.py`, `routers/boats.py` |
+| Pristup bazi | Parametrizirani SQL (psycopg, bez ORM-a) | Vrijednosti se uvijek šalju kao parametri (`%s`). Dinamički `UPDATE` slaže samo nazive stupaca iz fiksnog popisa. | `repositories/fleet.py`, `repositories/users.py` |
+| Veza s bazom | Nova veza po zahtjevu | Veza ima `sslmode=require` i istek od 5 s te koristi Supabase transaction pooler. | `db.py` |
+| Konfiguracija i tajne | Varijable okruženja | Tajne su u `.env` (lokalno) ili u postavkama Vercela, a `.env.example` ne sadrži tajne. | `db.py`, `main.py`, `.env.example` |
+| Praćenje rada | Rute za provjeru stanja | `/api/health` i `/api/health/db` vraćaju `503` kad baza nije dostupna. | `main.py` |
 
 ## 4.7 Arhitekturni rizici i tehnički dug
 
@@ -159,13 +171,17 @@ radi statistike.
 
 | Rizik ili kompromis | Posljedica | Odgovor na rizik |
 | ------------------- | ---------- | ---------------- |
-|                     |            |                  |
+| Istodobne rezervacije istog termina (NF-01) | Dva klijenta mogu istodobno proći provjeru i zauzeti isti termin | Blokada termina je oblikovana (ADR-01). Atomska provjera pri spremanju još nije odlučena. |
+| JWT u `localStorage` i u URL-u nakon prijave | Token se može ukrasti XSS napadom i ostaje u povijesti preglednika | Prihvaćeno za opseg projekta |
+| Nema automatiziranih testova | Regresije se otkrivaju tek ručno | Vidi [5.4](5-Ispitivanje.md#54-poznati-nedostaci-i-ograničenja-ispitivanja) |
+| Nova veza s bazom za svaki zahtjev | Sporiji odgovori pod opterećenjem | Prihvaćeno; pooler ublažava problem |
 
 **Poslovni ili domenski rizici, ako su značajni**
 
 | Rizik | Posljedica | Odgovor na rizik |
 | ----- | ---------- | ---------------- |
-|       |            |                  |
+| Servis za e-poštu nije odabran | F-4.2 i obavijesti iz F-7.1 nisu ostvarivi | Odabrati pružatelja prije implementacije rezervacija |
+| Nedostupnost vanjskih servisa | Bez Googlea nema prijave, bez karte i prognoze stranica je nepotpuna | Bez karte se prikazuje samo naziv luke, a bez prognoze napomena (F-10.1, F-10.2) |
 
 ---
 

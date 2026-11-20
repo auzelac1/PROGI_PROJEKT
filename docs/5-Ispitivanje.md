@@ -2,7 +2,6 @@
 
 **Cilj:** Prikazati kako tim provjerava važno ponašanje aplikacije, što je stvarno ispitano, što rezultati pokazuju i koji poznati nedostaci ostaju. Planirano ispitivanje nije dokaz uspješnog izvođenja.
 
-Proširivi primjeri CrisisMapa prikazuju oblikovanje ispitivanja i izvještavanje o rezultatima. Povezivanje zahtjev → obrazac uporabe → ispitivanje održavajte u [tablici sljedivosti zahtjeva](2-Analiza-zahtjeva.md); specifikacije ispitivanja i dokaze izvođenja zabilježite ovdje ili povežite s ispitivanjima u repozitoriju.
 
 ## 5.1 Pristup ispitivanju
 
@@ -36,8 +35,8 @@ Odaberite normalne slučajeve, granične vrijednosti i neuspjehe koji otkrivaju 
 | ST-05 | Sustav: izrada rezervacije (F-3.1; UC-001) | Klijent radi rezervaciju s izabranim brodom, lukom i uslugama. | Rezervacija je potvrđena; prikazan je ukupni iznos i rezervacija se može ponovno dohvatiti. | Nije pokrenuto; rezervacijski postupak je u izradi. | Nije pokrenuto | Nakon implementacije provjeriti raspoloživost i cijenu; prijaviti klijenta; rezervirati navedeno plovilo; provjeriti iznos i spremljenu rezervaciju. |
 | ST-06 | Sustav: pristup bez prijave (F-8.1, djelomično) | `GET /api/users` bez tokena prijave. | Zahtjev je odbijen porukom `Not authenticated`. | Zahtjev poslan preko Swagger UI-ja bez tokena vratio je `{"detail":"Not authenticated"}`. | Prošlo | Bez zaglavlja `Authorization` poslati `GET https://progiprojekt.vercel.app/api/users`; provjeriti poruku odbijanja. |
 | ST-07 | Sustav: ovlasti prijavljenog klijenta (F-8.1, djelomično) | Valjan token klijenta bez administratorske uloge. | `GET /api/users` vraća HTTP 403. | Nije pokrenuto. | Nije pokrenuto | Poslati zahtjev s `Authorization: Bearer <token klijenta>`; provjeriti status 403 i da popis korisnika nije vraćen. |
-| NF-01 | Responzivnost (NF-02) | Širine 375, 768 i 1440 px. | Navigacija, pretraga i filtri dostupni su bez vodoravnog prelijevanja stranice. | Pokrenuto, pregled s manjih uređaja radi. | Prošlo | Otvoriti početnu i katalog na svakoj širini; provjeriti raspored i kontrole. |
-| NF-02 | Istodobne rezervacije (NF-01; UC-001) | Dva klijenta bez rezervacija odabiru isto plovilo i isti slobodan termin. | Samo jedan klijent dobiva termin; nema dviju potvrđenih rezervacija koje se preklapaju. | Nije pokrenuto; rezervacijski postupak je u izradi. | Nije pokrenuto | Nakon implementacije provjeriti da termin nije zauzet testom ST-05; istodobno poslati dva zahtjeva; dovršiti prihvaćeni postupak; provjeriti odgovore i stanje baze. |
+| NF-T-01 | Responzivnost (NF-02) | Širine 375, 768 i 1440 px. | Navigacija, pretraga i filtri dostupni su bez vodoravnog prelijevanja stranice. | Pokrenuto, pregled s manjih uređaja radi. | Prošlo | Otvoriti početnu i katalog na svakoj širini; provjeriti raspored i kontrole. |
+| NF-T-02 | Istodobne rezervacije (NF-01; UC-001) | Dva klijenta bez rezervacija odabiru isto plovilo i isti slobodan termin. | Samo jedan klijent dobiva termin; nema dviju potvrđenih rezervacija koje se preklapaju. | Nije pokrenuto; rezervacijski postupak je u izradi. | Nije pokrenuto | Nakon implementacije provjeriti da termin nije zauzet testom ST-05; istodobno poslati dva zahtjeva; dovršiti prihvaćeni postupak; provjeriti odgovore i stanje baze. |
 | QA-01 | Izgradnja frontenda | Trenutačni izvorni kod i instalirane ovisnosti. | `npm run build` završava kodom 0. | Kod 0; izgrađen frontend; upozorenje za JS paket veći od 500 kB. | Prošlo | U folderu `frontend` pokrenuti `npm run build`. |
 | QA-02 | Statička provjera koda | Trenutačni izvorni kod. | `npm run lint` završava kodom 0; upozorenja se bilježe. | Kod 0; ostaju upozorenja za neiskorištene varijable, React ključeve i učinke. | Prošlo | U folderu `frontend` pokrenuti `npm run lint`; pregledati izlaz. |
 
@@ -166,7 +165,13 @@ WHERE b.aktivan AND b.id_luka = 1 AND b.cijena_dan <= 400
 ORDER BY b.cijena_dan, b.id_brod;
 ```
 
-Potvrđeno je da ID 19 ne postoji. Treba ponovno provjerti kada se naprave rezervacije
+Potvrđeno je da ID 19 ne postoji. Treba ponovno provjeriti kada se naprave rezervacije
+
+**Izvođenja sustavskih i nefunkcijskih ispitivanja:**
+
+| Ispitivanje | Datum | Revizija | Okruženje |
+| --- | --- | --- | --- |
+| ST-01 do ST-04, ST-06, NF-T-01 | 19. 11. 2026. | [Tonko: kratki hash commita] | Vercel produkcija i lokalno |
 
 
 Stupci **Stvarni rezultat** i **Ishod** iznad mjerodavni su rezultati za pojedinačni slučaj. Nemojte kopirati sve rezultate u drugu obaveznu tablicu. Neuspješna i blokirana izvođenja zabilježite iskreno; pri ponovnom izvođenju zadržite relevantnu povijest umjesto prikazivanja starog uspješnog rezultata kao trenutačnog.
@@ -190,7 +195,7 @@ Stupci **Stvarni rezultat** i **Ishod** iznad mjerodavni su rezultati za pojedin
 
 | Problem ili ograničenje | Korisniku vidljiv učinak ili neprovjereno ponašanje | Dokaz ili poveznica na zadatak |
 | --- | --- | --- |
-| Dio provjera još nije izveden. | Komponentna validacija, ovlasti prijavljenog klijenta i rezervacijski postupci još nisu potvrđeni. | CT-01, CT-02, ST-05, ST-07 i NF-02 u 5.2. |
+| Dio provjera još nije izveden. | Komponentna validacija, ovlasti prijavljenog klijenta i rezervacijski postupci još nisu potvrđeni. | CT-01, CT-02, ST-05, ST-07 i NF-T-02 u 5.2. |
 | Automatizirani funkcionalni testovi nisu napravljeni. | Izgradnja i lint ne zamjenjuju provjeru korisničkih postupaka. | [Frontend skripte](../frontend/package.json); CT-01 i CT-02 tek treba implementirati. |
 | Statička provjera i izgradnja prijavljuju upozorenja. | Posljedice upozorenja na vidljivo ponašanje i brzinu učitavanja nisu posebno ispitane. | QA-01 i QA-02. |
 

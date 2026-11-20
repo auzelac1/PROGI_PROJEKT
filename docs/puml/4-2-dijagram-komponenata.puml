@@ -25,7 +25,7 @@ rectangle "Charter poslovanje" {
     rectangle "Poslužiteljska aplikacija" {
         component "REST API" as API
         component "Usluga za korisnike" as Users
-        component "Usluga za rezervacije" as Reservations
+        component "Usluga za rezervacije" <<planirano>> as Reservations
         component "Usluga za brodove" as Boats
     }
 

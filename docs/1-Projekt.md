@@ -9,7 +9,8 @@
 **Problem:** Poslovanje charter kompanija i dalje se često oslanja na ručne procese, telefonske pozive i neusklađene tablice, što troši znatno vrijeme i povećava rizik od pogrešaka poput dvostrukih rezervacija. Klijentima istovremeno nedostaje brz i jednostavan uvid u raspoloživost, specifikacije i cijene plovila u realnom vremenu, što usporava cjelokupni proces prodaje.
 
 **Cilj projekta:** Razviti web sustav koji modernizira i digitalizira charter poslovanje pružajući klijentima jednostavan uvid u ponudu, pretraživanje i rezervaciju plovila u realnom vremenu. Sustav istovremeno omogućuje zaposlenicima tvrtke centralizirano upravljanje flotom, rezervacijama i korisničkim ulogama, čime se automatiziraju poslovni procesi i smanjuje administrativno opterećenje.
-**Očekivana korist:** Klijenti mogu u bilo kojem trenutku sami provjeriti raspoloživost, cijene i dodatne usluge te odmah rezervirati plovilo i dobiti potvrdu e-poštom, bez čekanja na odgovor tvrtke. Automatsko ažuriranje zauzetosti sprječava dvostruke rezervacije. Djelatnici imaju jasan raspored preuzimanja i povrata plovila, administratori upravljaju flotom i rezervacijama na jednom mjestu, a voditelj dobiva statističke podatke o poslovanju bez ručnog prikupljanja iz više izvora
+
+**Očekivana korist:** Klijenti mogu u bilo kojem trenutku sami provjeriti raspoloživost, cijene i dodatne usluge te odmah rezervirati plovilo i dobiti potvrdu e-poštom, bez čekanja na odgovor tvrtke. Automatsko ažuriranje zauzetosti sprječava dvostruke rezervacije. Djelatnici imaju jasan raspored preuzimanja i povrata plovila, administratori upravljaju flotom i rezervacijama na jednom mjestu, a voditelj dobiva statističke podatke o poslovanju bez ručnog prikupljanja iz više izvora.
 
 ## 1.2 Ciljani korisnici i dionici
 
@@ -22,7 +23,6 @@
 | Djelatnik | Pregledati raspored preuzimanja i povrata plovila te podatke potrebne za realizaciju najma. |
 | Voditelj | Pregledati statističke podatke o poslovanju i izvesti odabrane podatke za daljnju analizu. |
 | Administrator | Upravljati flotom (plovila, oprema, cijene, dodatne usluge, nedostupnost), rezervacijama i korisnicima (dodjela uloga). |
-|  |  |
 
 ## 1.3 Granice projekta
 
