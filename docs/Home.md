@@ -115,17 +115,15 @@ Stranice i artefakti koji nisu navedeni iznad izrađeni su bez pomoći generativ
 
 | Provjera | Kako je provedena | Dokaz |
 | --- | --- | --- |
-| Činjenična točnost |  | [Imena pregledavatelja; poveznice na zahtjev za uključivanje promjena (PR) ili zadatak] |
-| Nema tvrdnji o neostvarenim funkcionalnostima | [Provjereno je da opisane funkcionalnosti, ispitivanja i rezultati stvarno postoje; planirani rad označen je kao planiran] | [Usporedba s odjeljkom 5.4 (Ispitivanje) i odjeljkom 7.1 (Zaključak)] |
-| Dosljednost s drugim stranicama | [Nazivi, ID-ovi i dijagrami provjereni su prema Analizi zahtjeva, Obrascima uporabe, Arhitekturi i oblikovanju te Ispitivanju] | [Kontrolni popis ili bilješka pregleda] |
-| Izvori dijagrama | [Generirani PlantUML je iscrtan, ispravljen i odgovara implementiranom sustavu] | [`.puml` datoteka i izrađena slika] |
-| Povjerljivi sadržaj | [Kako je tim osigurao da u upite ili dokumentaciju nisu unesene tajne, pristupni podaci ni osobni podaci] | [Primijenjeni postupak] |
+| Činjenična točnost | Prilikom  provjere dosljednosti dokumentacije radila se ručna nasumična provjera te svaka bitna stavka je grupno diskutirana. | Sastanci tima; bilješke u [meeting-notes](meeting-notes/) |
+| Nema tvrdnji o neostvarenim funkcionalnostima | Neimplementirano je označeno kao planirano, a neizvedeni testovi kao „Nije pokrenuto”. | 4.3.2, 4.4, 4.5; tablice 5.2 i 5.4 |
+| Dosljednost s drugim stranicama | Ana Uzelac uz pomoć Claudea provjerila je nazive, ID-ove i dijagrame u svim poglavljima. | Tablica sljedivosti 2.6 |
+| Izvori dijagrama | Generirani PlantUML iscrtan je i uspoređen s poglavljima 3 i 4; dijagram komponenata je ispravljen. | [`puml/`](puml/); commit `5ca76dd` |
+| Povjerljivi sadržaj | U upite nisu uneseni pristupni podaci ni sadržaj `.env`; u dokumentaciji su samo nazivi varijabli. | `.env.example`; 4.6 |
 
 ### Pogreške pronađene u izlazu umjetne inteligencije
 
-| Problem | Kako je pronađen | Rješenje |
-| --- | --- | --- |
-| [Netočna, izmišljena ili iz predloška preuzeta tvrdnja] | [Pregled, ispitivanje ili usporedba s aplikacijom] | [Ispravak s poveznicom] |
+Nisu utvrđene.
 
 <!-- UPUTA: Zabilježite stvarne ispravke ili napišite „Nisu utvrđene”. Općenita tvrdnja poput „sav tekst je pregledan” nije dokaz; dokaz su prethodne tablice. Tim mora moći objasniti svaku rečenicu koju objavi. -->
 

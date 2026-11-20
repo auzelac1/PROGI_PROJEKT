@@ -156,10 +156,10 @@ radi statistike.
 | Aspekt | Mehanizam | Pravilo | Mjesto primjene |
 | ------ | --------- | ------- | --------------- |
 | Autentifikacija | Google OIDC (Authlib) i vlastiti JWT (HS256, istek 60 min) | Nakon Google prijave backend izdaje JWT. Frontend ga sprema u `localStorage` i šalje u zaglavlju `Authorization: Bearer`. | `routers/auth.py`, `repositories/users.py` (`stvori_token`, `dohvati_trenutnog_korisnika`), `ProfileContext.jsx` |
-| Autorizacija | Provjera uloge na backendu | Uloga se čita iz baze pri svakom zahtjevu. Bez prijave `401`, bez ovlasti `403`. | `provjeri_ulogu`, `routers/users.py` |
-| Validacija ulaza | Pydantic modeli i provjere u rutama | Uloga je enum, a nevaljani parametri (datumi, cijena, broj osoba) vraćaju `400` s porukom. | `models.py`, `routers/boats.py` |
+| Autorizacija | Provjera uloge na backendu | Uloga se čita iz baze pri svakom zahtjevu. Bez prijave `401`, bez ovlasti `403`. | `repositories/users.py` (`dohvati_trenutnog_korisnika`), `routers/users.py` |
+| Validacija ulaza | Pydantic modeli i provjere u rutama | Nevaljani podaci u tijelu zahtjeva (npr. nepostojeća uloga) vraćaju `422`, a nevaljani parametri pretrage (datumi, cijena, broj osoba) `400` s porukom. | `models.py`, `routers/boats.py` |
 | Pristup bazi | Parametrizirani SQL (psycopg, bez ORM-a) | Vrijednosti se uvijek šalju kao parametri (`%s`). Dinamički `UPDATE` slaže samo nazive stupaca iz fiksnog popisa. | `repositories/fleet.py`, `repositories/users.py` |
-| Veza s bazom | Nova veza po zahtjevu | Veza ima `sslmode=require` i istek od 5 s te koristi Supabase transaction pooler. | `db.py` |
+| Veza s bazom | Nova veza po zahtjevu | Veza ima `sslmode=require` i istek od 5 s; pripremljene naredbe su isključene (`prepare_threshold=None`) radi rada sa Supabase transaction poolerom. | `db.py` |
 | Konfiguracija i tajne | Varijable okruženja | Tajne su u `.env` (lokalno) ili u postavkama Vercela, a `.env.example` ne sadrži tajne. | `db.py`, `main.py`, `.env.example` |
 | Praćenje rada | Rute za provjeru stanja | `/api/health` i `/api/health/db` vraćaju `503` kad baza nije dostupna. | `main.py` |
 
@@ -171,17 +171,16 @@ radi statistike.
 
 | Rizik ili kompromis | Posljedica | Odgovor na rizik |
 | ------------------- | ---------- | ---------------- |
-| Istodobne rezervacije istog termina (NF-01) | Dva klijenta mogu istodobno proći provjeru i zauzeti isti termin | Blokada termina je oblikovana (ADR-01). Atomska provjera pri spremanju još nije odlučena. |
 | JWT u `localStorage` i u URL-u nakon prijave | Token se može ukrasti XSS napadom i ostaje u povijesti preglednika | Prihvaćeno za opseg projekta |
 | Nema automatiziranih testova | Regresije se otkrivaju tek ručno | Vidi [5.4](5-Ispitivanje.md#54-poznati-nedostaci-i-ograničenja-ispitivanja) |
 | Nova veza s bazom za svaki zahtjev | Sporiji odgovori pod opterećenjem | Prihvaćeno; pooler ublažava problem |
+| Trenutno nije implementirano brisanje prijavljenih korisnika u upravljanju korisnicima | U aplikaciji nije moguće brisati korisnike. | Planirana implementacija |
 
 **Poslovni ili domenski rizici, ako su značajni**
 
 | Rizik | Posljedica | Odgovor na rizik |
 | ----- | ---------- | ---------------- |
-| Servis za e-poštu nije odabran | F-4.2 i obavijesti iz F-7.1 nisu ostvarivi | Odabrati pružatelja prije implementacije rezervacija |
-| Nedostupnost vanjskih servisa | Bez Googlea nema prijave, bez karte i prognoze stranica je nepotpuna | Bez karte se prikazuje samo naziv luke, a bez prognoze napomena (F-10.1, F-10.2) |
+| Nedostupnost vanjskih servisa | Bez Googlea nema prijave, bez karte stranica je nepotpuna | Bez Googla neprijvljeni korisnik može pregledavati i pretraživati plovila, a bez karte se prikazuje samo naziv luke |
 
 ---
 
