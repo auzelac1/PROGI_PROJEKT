@@ -7,15 +7,21 @@ skinparam backgroundColor #FFFFFF
 
 class Korisnik {
   - uuid: String
-  - uloga: UlogaKorisnika
+  - uloga: Uloga
   - ime: String
   - prezime: String
   - email: String
   - telefon: String
-  + prijaviSe(): boolean
 }
 
-class Rezervacija {
+class korisnikIzmjena {
+  - telefon: String
+  - ime: String
+  - prezime: String
+  - uloga: Uloga
+}
+
+class Rezervacija <<planirano>> {
   - idRezervacije: int
   - datumPreuzimanja: Date
   - datumPovratka: Date
@@ -24,11 +30,12 @@ class Rezervacija {
   - cijenaUk: decimal
   - status: StatusRezervacije
   + kreirajRezervaciju(): boolean
+  + izmijeniRezervaciju(): boolean
   + izracunajUkupnuCijenu(): decimal
   + otkaziRezervaciju(): void
 }
 
-class Brod {
+class Brod <<planirano>> {
   - idBrod: int
   - naziv: String
   - godinaProizvodnje: int
@@ -39,7 +46,7 @@ class Brod {
   + provjeriDostupnost(od: Date, do: Date): boolean
 }
 
-class Model {
+class Model <<planirano>> {
   - idModel: int
   - tip: String
   - kategorija: String
@@ -50,34 +57,34 @@ class Model {
   - brojLezajeva: int
 }
 
-class Luka {
+class Luka <<planirano>> {
   - idLuka: int
   - imeLuka: String
   - lat: decimal
   - lng: decimal
 }
 
-class DodatnaUsluga {
+class DodatnaUsluga <<planirano>> {
   - idDodatneUsluge: int
   - naziv: String
 }
 
-class UslugaModela {
+class UslugaModela <<planirano>> {
   - cijena: decimal
 }
 
 
-enum UlogaKorisnika {
-  KLIJENT
-  ADMIN
-  DJELATNIK
-  VODITELJ
+enum Uloga {
+  klijent
+  admin
+  djelatnik
+  voditelj
 }
 
-enum StatusRezervacije {
-  U_TIJEKU
-  POTVRDENA
-  OTKAZANA
+enum StatusRezervacije <<planirano>> {
+  u_tijeku
+  potvrdena
+  otkazana
 }
 
 ' --- VEZE (ASOCIJACIJE) ---
@@ -90,7 +97,8 @@ Brod "0..*" -- "1" Model : primjerak je >
 Brod "0..*" -- "1" Luka : maticna luka >
 Model "0..*" -- "0..*" DodatnaUsluga : nudi >
 (Model, DodatnaUsluga) .. UslugaModela
-Korisnik ..> UlogaKorisnika : koristi >
+Korisnik ..> Uloga : može biti >
+korisnikIzmjena ..> Uloga : koristi >
 Rezervacija ..> StatusRezervacije : koristi >
 
 @enduml

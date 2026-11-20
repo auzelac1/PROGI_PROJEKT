@@ -5,6 +5,7 @@ actor Klijent
 boundary "Web UI" as UI
 control API as API
 database "Baza podataka" as DB
+participant "Servis za e-poštu\n(vanjski)" as Mail
 
 
 Klijent -> UI: Odabire plovilo, termin i broj osoba
@@ -33,7 +34,8 @@ else Rezervacija je moguća
     else Blokada još vrijedi
         API -> API: Izračunaj ukupnu cijenu
         API -> DB: Spremi usluge, cijenu i status „potvrđena“
-        API -> Klijent: Pošalji potvrdu e-poštom
+        API -> Mail: Pošalji potvrdu rezervacije
+        Mail -->> Klijent: E-pošta s potvrdom
         API --> UI: Rezervacija je potvrđena
         UI --> Klijent: Prikaz rezervacije i ukupne cijene
     end

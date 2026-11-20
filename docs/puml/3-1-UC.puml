@@ -31,6 +31,7 @@ actor Admin as "Administrator"
 actor "Vanjski pružatelj identiteta" as idp <<external system>>
 actor "Meteorološki servis" as meteo <<external system>>
 actor "Kartografski servis" as map <<external system>>
+actor "Servis za e-poštu" as mail <<external system>>
 
 ' Specijalizacije
 Klijent -|> Neprijavljeni
@@ -72,6 +73,9 @@ rectangle "Charter poslovanje" as Charter {
         ' Prijava korisnika
         (UC-010:\nPrijava korisnika) as prijava
     }
+
+    ' Upravljanje korisnicima
+    (UC-011:\nUpravljanje korisnicima) as upravljanjeKorisnicima
 }
 
 ' Asocijacije aktera i slučajeva uporabe
@@ -91,12 +95,15 @@ Neprijavljeni -- pregledPlovila
 
 Admin -- upravljanjePlovilima
 
+Admin -- upravljanjeKorisnicima
+
 Voditelj -- statistika
 
 Neprijavljeni -- prijava
 
-' Slanje poruke klijentu da mu je rezervacija otkazana
-otkazivanjeRezervacije --> Klijent
+' Slanje obavijesti e-poštom
+izradaRezervacije -- mail
+otkazivanjeRezervacije -- mail
 
 ' Obavezno ponašanje
 otkazivanjeRezervacije ..> pregledRezervacije : <<include>>
@@ -106,11 +113,12 @@ uredjivanjeRezervacije ..> pregledRezervacije : <<include>>
 izradaRezervacije ..> pregledPlovila : <<extend>>\n[odabrana izrada rezervacije]
 
 ' Interakcije sa sekundarnim akterima
-pregledPlovila -- meteo
+izradaRezervacije -- meteo
 pregledPlovila -- map
 prijava -- idp
 
 meteo -[hidden]left-> map
+map -[hidden]down-> mail
 idp -[hidden]down-> meteo
 
 

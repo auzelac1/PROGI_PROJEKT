@@ -37,6 +37,7 @@ rectangle "Charter poslovanje" {
 component "Meteorološki servis\n(vanjski)" as WeatherAPI
 component "Kartografski servis\n(vanjski)" as Maps
 component "Vanjski pružatelj\nidentiteta (Google)" as OAuth
+component "Servis za e-poštu\n(vanjski)" as Mail
 
 ' Ovisnosti i sučelja
 
@@ -54,5 +55,6 @@ Web --> WeatherAPI : dohvat podataka o vremenu
 Web --> Maps : prikaz luka na karti
 
 Users --> OAuth : provjera identiteta korisnika
+Reservations --> Mail : slanje potvrda i\nobavijesti klijentima
 
 @enduml

@@ -45,7 +45,7 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 
 | ID    | Opis                                                                         | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                                                                                          |
 | ----- | ---------------------------------------------------------------------------- | --------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| F-6.1 | Administrator može pregledati sve rezervacije te ih izmijeniti ili otkazati. | Visok     | Projektni zadatak | Moguće otkazati i izmjeniti samo potvrđene rezervacije, a izmijena podliježe pravilima izrade rezervacije; korisnik koji nije administrator nema tu mogućnost. |
+| F-6.1 | Administrator može pregledati sve rezervacije te ih izmijeniti ili otkazati. | Visok     | Projektni zadatak | Moguće otkazati i izmijeniti samo potvrđene rezervacije, a izmjena podliježe pravilima izrade rezervacije; korisnik koji nije administrator nema tu mogućnost. |
 
 ### 2.1.7 Upravljanje flotom (administrator)
 
@@ -57,7 +57,7 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 
 | ID    | Opis                                                           | Prioritet | Izvor             | Kriteriji prihvaćanja                                                                                             |
 | ----- | -------------------------------------------------------------- | --------- | ----------------- | ----------------------------------------------------------------------------------------------------------------- |
-| F-8.1 | Administrator može pregledati korisnike i dodijeliti im ulogu. | Visok     | Projektni zadatak | Nova uloga vrijedi od sljedeće prijave korisnika; korisnik kojem uloga (još) nije dodijeljena ima ulogu klijenta. |
+| F-8.1 | Administrator može pregledati korisnike i dodijeliti im ulogu. | Visok     | Projektni zadatak | Nova uloga vrijedi od sljedećeg učitavanja aplikacije; korisnik kojem uloga (još) nije dodijeljena ima ulogu klijenta. |
 
 ### 2.1.9 Statistika i izvoz (voditelj)
 
@@ -98,6 +98,7 @@ Zahtjevi su grupirani prema područjima sustava, a svaki opisuje jedno opažljiv
 | A-06 Vanjski pružatelj identiteta | Provodi prijavu korisnika (OpenID Connect / OAuth 2.0).                             | F-1.1, NF-03                                                        |
 | A-07 Meteorološki servis          | Daje podatke o vremenskoj prognozi.                                                 | F-10.1                                                              |
 | A-08 Kartografski servis          | Daje prikaz karte.                                                                  | F-10.2                                                              |
+| A-09 Servis za e-poštu            | Dostavlja klijentima potvrde i obavijesti o rezervacijama e-poštom.                 | F-4.2, F-6.1, F-7.1                                                 |
 
 ## 2.4 Ograničenja i pretpostavke
 
@@ -136,9 +137,9 @@ ID-ovi ispitivanja odnose se na [projektne slučajeve u poglavlju 5.2](5-Ispitiv
 
 | ID zahtjeva | Obrazac uporabe / modul        | Arhitekturna realizacija | Ispitivanje ili provjera |
 | ----------- | ------------------------------ | ------------------------ | ------------------------ |
-| F-1.1       | Prijava i ovlasti              |                          | ST-01 |
-| F-2.1       | Pretraga i pregled plovila     |                          | ST-02 i ST-03: Prošlo. CT-01 i CT-02: Nije pokrenuto. |
-| F-2.2       | Pretraga i pregled plovila     |                          | ST-04 (nepostojeći ID; djelomična provjera). |
+| F-1.1       | Prijava i ovlasti              | `backend/routers/auth.py` (Google OIDC), `pages/Login.jsx` | ST-01 |
+| F-2.1       | Pretraga i pregled plovila     | `GET /api/boats` (`routers/boats.py`, `repositories/fleet.py`), `pages/PlovilaPage.jsx`, `SearchBar.jsx`, `DodatniFilteri.jsx` | ST-02 i ST-03: Prošlo. CT-01 i CT-02: Nije pokrenuto. |
+| F-2.2       | Pretraga i pregled plovila     | `GET /api/boats/{id}`, `pages/ShipDetailsPage.jsx` | ST-04 (nepostojeći ID; djelomična provjera). |
 | F-3.1       | Izrada rezervacije             |                          | ST-05, NF-02 (nisu pokrenuti). |
 | F-3.2       | Izrada rezervacije             |                          |                          |
 | F-4.1       | Potvrda i pregled rezervacija  |                          |                          |
@@ -146,16 +147,15 @@ ID-ovi ispitivanja odnose se na [projektne slučajeve u poglavlju 5.2](5-Ispitiv
 | F-5.1       | Raspored preuzimanja i povrata |                          |                          |
 | F-6.1       | Upravljanje rezervacijama      |                          |                          |
 | F-7.1       | Upravljanje flotom             |                          |                          |
-| F-7.2       | Upravljanje flotom             |                          |                          |
-| F-8.1       | Upravljanje korisnicima        |                          | ST-06, ST-07 (pristup; djelomična provjera; ST-07 nije pokrenut). |
+| F-8.1       | UC-011 / Upravljanje korisnicima | `routers/users.py`, `backend/models.py`, `pages/Users.jsx`, `EditUserModal.jsx` | ST-06, ST-07 (pristup; djelomična provjera; ST-07 nije pokrenut). |
 | F-9.1       | Statistika i izvoz             |                          |                          |
 | F-9.2       | Statistika i izvoz             |                          |                          |
 | F-10.1      | Vanjske usluge                 |                          |                          |
-| F-10.2      | Vanjske usluge                 |                          |                          |
+| F-10.2      | Vanjske usluge                 | `components/PortsMap.jsx` (OpenStreetMap) |                          |
 | NF-01       | UC-001 / Izrada rezervacije     |                          | NF-02 (nije pokrenut). |
-| NF-02       | UC-007 / Pretraga i pregled plovila |                       | NF-01 (početna stranica i katalog). |
-| NF-03       | UC-010 / Prijava korisnika      |                          | ST-01 (vanjski pružatelj; djelomična provjera). |
-| NF-04       |                                |                          |                          |
+| NF-02       | UC-007 / Pretraga i pregled plovila | Bootstrap responzivna mreža (frontend) | NF-01 (početna stranica i katalog). |
+| NF-03       | UC-010 / Prijava korisnika      | `routers/auth.py`: prijava isključivo preko Googlea, bez lozinki | ST-01 (vanjski pružatelj; djelomična provjera). |
+| NF-04       |                                | Vercel (HTTPS) |                          |
 
 ## 2.7 Pregled zahtjeva
 

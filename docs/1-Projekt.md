@@ -51,6 +51,7 @@
 - vanjski pružatelj identiteta (OpenID Connect / OAuth 2.0) – pružatelj: Google
 - meteorološki servis – servis: Open-Meteo API
 - kartografski servis – servis: OpenStreetMap
+- servis za slanje e-pošte – pružatelj: još nije odabran
 
 
 ## 1.4 Postojeći pristupi i opravdanost projekta
