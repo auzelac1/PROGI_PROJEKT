@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
-from typing import Optional
 
+from models import Korisnik, korisnikIzmjena
 from repositories.users import (
     dohvati_sve_korisnike,
     alter_user,
@@ -10,21 +9,15 @@ from repositories.users import (
 
 router = APIRouter(prefix="/api/users", tags=["Korisnici"])
 
-class korisnikIzmjena(BaseModel):
-    telefon: Optional[str] = None
-    ime: Optional[str] = None
-    prezime: Optional[str] = None
-    uloga: Optional[str] = None
 
-
-@router.get("")
+@router.get("", response_model=list[Korisnik])
 def get_users(trenutni_korisnik = Depends(dohvati_trenutnog_korisnika)):
     if not trenutni_korisnik or trenutni_korisnik["uloga"] != "admin":
         raise HTTPException(status_code=403, detail="Pristup odbijen")
     return dohvati_sve_korisnike()
 
 
-@router.patch("/{uuid}")
+@router.patch("/{uuid}", response_model=Korisnik)
 def update_user(
     uuid: str, 
     podaci: korisnikIzmjena, 
