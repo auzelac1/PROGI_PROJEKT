@@ -89,7 +89,7 @@ Ovaj odjeljak bilježi koji su alati korišteni, za koju dokumentaciju ili kod t
 
 | Alat | Inačica ili model | Koristio/la | Glavna svrha |
 | --- | --- | --- | --- |
-| Claude (Anthropic) | Claude Opus 5.5 | Ana Uzelac | Provjera pravopisa i dosljednosti među dokumentima |
+| Claude (Anthropic) | Claude Opus 5.5 | Ana Uzelac | Provjera pravopisa i dosljednosti među dokumentima; generiranje testnih podataka za bazu |
 | Claude (Anthropic) | Claude Opus 5.5 | Nikolina Žderić | Uređivanje dokumentacije |
 | Nije zabilježeno | Nije zabilježeno | Tonko Bunčuga, Antonija Gudelj, Ian-Karol Vrbaslija, Ana Bartulović, Luka Martinić | Izrada PlantUML dijagrama ([izvori dijagrama](puml/)) |
 
@@ -99,6 +99,7 @@ Ovaj odjeljak bilježi koji su alati korišteni, za koju dokumentaciju ili kod t
 | --- | --- | --- | --- | --- |
 | Cijela dokumentacija (poglavlja 1–5 i Home) | Provjera pravopisa | Popis pravopisnih i gramatičkih pogrešaka s prijedlozima ispravaka | Provjeru pravopisa. | [`docs/`](./) |
 | Cijela dokumentacija (poglavlja 1–5 i Home) | Provjera dosljednosti | Popis nesklada među dokumentima (nazivi, ID-ovi zahtjeva i obrazaca uporabe, dijagrami) | Provjeru dosljednosti među dokumentima. | [`docs/`](./) |
+| Testni podaci za bazu | Generiranje podataka | SQL skripta s testnim podacima (luke, modeli, plovila, oprema, usluge, fotografije, nedostupnosti) | Ana Uzelac zadala je shemu baze te je skriptu ručno provjerila  i izmijenila neke stavke. | [`002_test_data.sql`](../db/migrations/002_test_data.sql) |
 | [1. Opseg projekta](1-Projekt.md) (1.1, 1.2) | Uređivanje | Formatiranje teksta. | Nikolina Žderić zadala je točan popis izmjena i pregledala  | [`1-Projekt.md`](1-Projekt.md) |
 | [2. Analiza zahtjeva](2-Analiza-zahtjeva.md) (2.5, 2.6) | Uređivanje | UC ID-ovi u tablici slijedivosti | Nikolina Žderić zadala je dodavanje  UC ID-ova i promijenila netražene izmjene | [`2-Analiza-zahtjeva.md`](2-Analiza-zahtjeva.md) |
 | Home | Uređivanje | Popravak mrtvih poveznica, umetanje poveznica na GitHub Issues i ostalu dokumentaciju | Nikolina Žderić zadala je sadržaj (članove i uloge, alate i njihovu svrhu) i odobrila svaku izmjenu | [`Home.md`](Home.md) |
